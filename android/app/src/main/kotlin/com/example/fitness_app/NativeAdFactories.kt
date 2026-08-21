@@ -10,74 +10,107 @@ import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import io.flutter.plugins.googlemobileads.NativeAdFactory
+import com.example.fitness_app.databinding.AdNativeLargeBinding
+import com.example.fitness_app.databinding.AdNativeMediumBinding
+import com.example.fitness_app.databinding.AdNativeSmallBinding
 
 class SmallNativeAdFactory(private val context: Context) : NativeAdFactory {
     override fun createNativeAd(nativeAd: NativeAd, customOptions: MutableMap<String, Any>?): NativeAdView {
-        val adView = LayoutInflater.from(context).inflate(R.layout.ad_native_small, null) as NativeAdView
-        populateNativeAdView(nativeAd, adView)
-        return adView
+        val binding = AdNativeSmallBinding.inflate(LayoutInflater.from(context), null, false)
+        populateNativeAdView(
+            nativeAd = nativeAd,
+            adView = binding.root,
+            mediaView = null,
+            headlineView = binding.adHeadline,
+            bodyView = binding.adBody,
+            callToActionView = binding.adCallToAction,
+            iconView = binding.adAppIcon
+        )
+        return binding.root
     }
 }
 
 class MediumNativeAdFactory(private val context: Context) : NativeAdFactory {
     override fun createNativeAd(nativeAd: NativeAd, customOptions: MutableMap<String, Any>?): NativeAdView {
-        val adView = LayoutInflater.from(context).inflate(R.layout.ad_native_medium, null) as NativeAdView
-        populateNativeAdView(nativeAd, adView)
-        return adView
+        val binding = AdNativeMediumBinding.inflate(LayoutInflater.from(context), null, false)
+        populateNativeAdView(
+            nativeAd = nativeAd,
+            adView = binding.root,
+            mediaView = binding.adMedia,
+            headlineView = binding.adHeadline,
+            bodyView = binding.adBody,
+            callToActionView = binding.adCallToAction,
+            iconView = binding.adAppIcon
+        )
+        return binding.root
     }
 }
 
 class LargeNativeAdFactory(private val context: Context) : NativeAdFactory {
     override fun createNativeAd(nativeAd: NativeAd, customOptions: MutableMap<String, Any>?): NativeAdView {
-        val adView = LayoutInflater.from(context).inflate(R.layout.ad_native_large, null) as NativeAdView
-        populateNativeAdView(nativeAd, adView)
-        return adView
+        val binding = AdNativeLargeBinding.inflate(LayoutInflater.from(context), null, false)
+        populateNativeAdView(
+            nativeAd = nativeAd,
+            adView = binding.root,
+            mediaView = binding.adMedia,
+            headlineView = binding.adHeadline,
+            bodyView = binding.adBody,
+            callToActionView = binding.adCallToAction,
+            iconView = binding.adAppIcon
+        )
+        return binding.root
     }
 }
 
-fun populateNativeAdView(nativeAd: NativeAd, adView: NativeAdView) {
-    // Set the media view.
-    adView.mediaView = adView.findViewById<MediaView>(R.id.ad_media)
-
-    // Set other ad assets.
-    adView.headlineView = adView.findViewById<TextView>(R.id.ad_headline)
-    adView.bodyView = adView.findViewById<TextView>(R.id.ad_body)
-    adView.callToActionView = adView.findViewById<Button>(R.id.ad_call_to_action)
-    adView.iconView = adView.findViewById<ImageView>(R.id.ad_app_icon)
+fun populateNativeAdView(
+    nativeAd: NativeAd,
+    adView: NativeAdView,
+    mediaView: MediaView?,
+    headlineView: TextView?,
+    bodyView: TextView?,
+    callToActionView: Button?,
+    iconView: ImageView?
+) {
+    // Set the views.
+    adView.mediaView = mediaView
+    adView.headlineView = headlineView
+    adView.bodyView = bodyView
+    adView.callToActionView = callToActionView
+    adView.iconView = iconView
 
     // The headline and media content are guaranteed to be in every UnifiedNativeAd.
-    (adView.headlineView as TextView).text = nativeAd.headline
+    headlineView?.text = nativeAd.headline
 
-    if (adView.mediaView != null) {
+    if (mediaView != null) {
         if (nativeAd.mediaContent != null) {
-            adView.mediaView?.mediaContent = nativeAd.mediaContent
-            adView.mediaView?.visibility = View.VISIBLE
+            mediaView.mediaContent = nativeAd.mediaContent
+            mediaView.visibility = View.VISIBLE
         } else {
-            adView.mediaView?.visibility = View.GONE
+            mediaView.visibility = View.GONE
         }
     }
 
     // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
     // check before trying to display them.
     if (nativeAd.body == null) {
-        adView.bodyView?.visibility = View.INVISIBLE
+        bodyView?.visibility = View.INVISIBLE
     } else {
-        adView.bodyView?.visibility = View.VISIBLE
-        (adView.bodyView as TextView).text = nativeAd.body
+        bodyView?.visibility = View.VISIBLE
+        bodyView?.text = nativeAd.body
     }
 
     if (nativeAd.callToAction == null) {
-        adView.callToActionView?.visibility = View.INVISIBLE
+        callToActionView?.visibility = View.INVISIBLE
     } else {
-        adView.callToActionView?.visibility = View.VISIBLE
-        (adView.callToActionView as Button).text = nativeAd.callToAction
+        callToActionView?.visibility = View.VISIBLE
+        callToActionView?.text = nativeAd.callToAction
     }
 
     if (nativeAd.icon == null) {
-        adView.iconView?.visibility = View.GONE
+        iconView?.visibility = View.GONE
     } else {
-        (adView.iconView as ImageView).setImageDrawable(nativeAd.icon?.drawable)
-        adView.iconView?.visibility = View.VISIBLE
+        iconView?.setImageDrawable(nativeAd.icon?.drawable)
+        iconView?.visibility = View.VISIBLE
     }
 
     // This method tells the Google Mobile Ads SDK that you have finished populating your

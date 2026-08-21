@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../remote/remote_config.dart';
+import '../../core/contants/constants.dart';
 
 class InterstitialAdService {
   static final InterstitialAdService _instance = InterstitialAdService._internal();
@@ -10,6 +11,10 @@ class InterstitialAdService {
 
   int _clickCount = 0;
   InterstitialAd? _delayedAd;
+
+  void resetClickCount() {
+    _clickCount = 0;
+  }
 
   /// Main method to show an interstitial ad dynamically based on click gap and premium status.
   void showInterstitialAd({
@@ -20,6 +25,12 @@ class InterstitialAdService {
   }) {
     // 1. Premium Check
     if (isPremium) {
+      onComplete();
+      return;
+    }
+
+    // 2. Ad State Check
+    if (Constants.isAppOpenAdShowing || Constants.isInterstitialAdShowing) {
       onComplete();
       return;
     }
@@ -44,14 +55,18 @@ class InterstitialAdService {
       final ad = _delayedAd!;
       _delayedAd = null;
 
+      Constants.isInterstitialAdShowing = true;
+
       ad.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           ad.dispose();
+          Constants.isInterstitialAdShowing = false;
           onComplete();
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
           debugPrint('Delayed InterstitialAd failed to show: $error');
           ad.dispose();
+          Constants.isInterstitialAdShowing = false;
           onComplete();
         },
       );
@@ -62,6 +77,7 @@ class InterstitialAdService {
     }
 
     // 3. Show Loading Dialog immediately
+    Constants.isInterstitialAdShowing = true;
     bool isDialogShowing = true;
     showDialog(
       context: context,
@@ -90,6 +106,7 @@ class InterstitialAdService {
           // Reliable way to close the dialog
           Navigator.of(context, rootNavigator: true).pop();
         }
+        Constants.isInterstitialAdShowing = false;
         onComplete();
       }
     }

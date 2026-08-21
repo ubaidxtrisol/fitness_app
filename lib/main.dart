@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'my_app.dart';
 import 'ads/remote/remote_config.dart';
+import 'ads/appopen/app_lifecycle_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Lock the app to portrait mode
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   
   // Initialize Firebase (Assuming firebase_options.dart might be added later if missing,
   // Using try-catch to allow the app to run without crashing if not fully setup yet)
@@ -20,6 +28,9 @@ void main() async {
 
   // Initialize Google Mobile Ads
   await MobileAds.instance.initialize();
+
+  // Initialize App Lifecycle Manager for On-Resume Ads
+  AppLifecycleManager().initialize();
 
   runApp(const MyApp());
 }
