@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="native_ad_bg">#FFFFFF</color>
+    <color name="native_ad_headline">#000000</color>
+    <color name="native_ad_body">#666666</color>
+</resources>
