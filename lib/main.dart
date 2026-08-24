@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'my_app.dart';
-import 'ads/remote/remote_config.dart';
+
 import 'ads/appopen/app_lifecycle_manager.dart';
+import 'ads/remote/remote_config.dart';
 import 'core/utils/shared_prefs_helper.dart';
 import 'features/onboarding/providers/onboarding_provider.dart';
+import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  
+
   // Initialize Firebase (Assuming firebase_options.dart might be added later if missing,
   // Using try-catch to allow the app to run without crashing if not fully setup yet)
   try {
@@ -40,9 +41,7 @@ void main() async {
 
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => OnboardingProvider())],
       child: const MyApp(),
     ),
   );
