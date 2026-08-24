@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 import 'my_app.dart';
 import 'ads/remote/remote_config.dart';
 import 'ads/appopen/app_lifecycle_manager.dart';
+import 'core/utils/shared_prefs_helper.dart';
+import 'features/onboarding/providers/onboarding_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,5 +35,15 @@ void main() async {
   // Initialize App Lifecycle Manager for On-Resume Ads
   AppLifecycleManager().initialize();
 
-  runApp(const MyApp());
+  // Initialize SharedPreferences
+  await SharedPrefsHelper.init();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }

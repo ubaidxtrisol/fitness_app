@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ads/appopen/appopen_service.dart';
 import '../../ads/remote/remote_config.dart';
 import '../onboaridng/onboarding.dart';
@@ -71,27 +72,57 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.fitness_center, size: 80, color: Color(0xFFE45881)),
-            SizedBox(height: 24),
-            Text(
-              'Fitness App',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFFE45881),
-              ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background
+          Image.asset(
+            'assets/images/splash_bg.png',
+            fit: BoxFit.cover,
+          ),
+          // Content
+          SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(flex: 2),
+                Image.asset(
+                  'assets/images/splash_illustration.png',
+                  height: 300.h,
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(height: 40.h),
+                Image.asset(
+                  'assets/images/splash_logo.png',
+                  width: 80.w,
+                  height: 80.h,
+                ),
+                SizedBox(height: 20.h),
+                Text(
+                  'Fitness App',
+                  style: TextStyle(
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF1D1617),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  'Move Better. Feel Stronger',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(0xFF7B6F72),
+                  ),
+                ),
+                const Spacer(flex: 2),
+                const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF92A3FD)),
+                ),
+                SizedBox(height: 40.h),
+              ],
             ),
-            SizedBox(height: 48),
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE45881)),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
