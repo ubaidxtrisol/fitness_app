@@ -1,0 +1,17 @@
+part of 'storage_services.dart';
+
+class PrefsKeys {
+  static const String isFirstTime = 'isFirstTime';
+  static const String languageCode = 'languageCode';
+  static const String rcPremiumScreenEnabled = 'rc_premium_screen';
+  static const String interstitialCount = 'interstitial_count';
+  static const String firstInterstitialShown = 'first_interstitial_shown';
+  static const String appOpenCount = 'app_open_count';
+  static const String urls = 'urls';
+
+  static String cachedGuestUid = 'cached_guest_uid';
+  static const String cachedUserData = 'cached_user_data';
+  static const String outboxQueue = 'outbox_queue';
+
+  static String acceptPrivacyPolicy = 'accept_privacy_policy';
+}

@@ -1,6 +1,9 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
+import 'package:fitness_app/core/constants/app_strings.dart';
+import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/services/user_info_storage.dart';
+import 'package:fitness_app/features/bottom_bar/bottom_bar_screen.dart';
 import 'package:fitness_app/features/user_info_flow/models/user_info_question_model.dart';
 import 'package:fitness_app/features/user_info_flow/widgets/activities_chips_widget.dart';
 import 'package:fitness_app/features/user_info_flow/widgets/age_slider_widget.dart';
@@ -58,9 +61,7 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
       );
     } else {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Saved questions progress!')),
-        );
+        context.pushAndRemoveUntil(BottomBarScreen());
       }
     }
   }
@@ -162,11 +163,11 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
               ),
 
               // Bottom Action Button
-              Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 8),
+              Center(
                 child: ElevatedButton(
                   onPressed: _onNext,
-                  child: const Text('Next'),
+                  style: ButtonStyle().withFixedSize(.maxFinite, 54),
+                  child: Text(AppStrings.next),
                 ),
               ),
 
@@ -301,7 +302,9 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
       case QuestionType.activities:
         return ActivitiesChipsWidget(
           options: question.activitiesOptions,
-          selectedList: List<String>.from((_answers['activities'] as List?) ?? []),
+          selectedList: List<String>.from(
+            (_answers['activities'] as List?) ?? [],
+          ),
           onChanged: (list) {
             setState(() {
               _answers['activities'] = list;
@@ -323,7 +326,9 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
       case QuestionType.injuries:
         return InjuriesGridWidget(
           options: question.injuryOptions,
-          selectedList: List<String>.from((_answers['injuries'] as List?) ?? ['knee']),
+          selectedList: List<String>.from(
+            (_answers['injuries'] as List?) ?? ['knee'],
+          ),
           onChanged: (list) {
             setState(() {
               _answers['injuries'] = list;
@@ -355,4 +360,3 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
     }
   }
 }
-

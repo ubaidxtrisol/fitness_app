@@ -62,12 +62,10 @@ class AppTheme {
       // ElevatedButton Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(
-            0xFFE45881,
-          ), // #E45881 (AppColors.primary)
-          foregroundColor: const Color(0xFFFDFAF9), // text: #FDFAF9
+          backgroundColor: const Color(0xFFE45881),
+          foregroundColor: const Color(0xFFFDFAF9),
           minimumSize: const Size(327, 56),
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+          // padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(19),

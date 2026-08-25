@@ -49,6 +49,9 @@ dependencies:
   flutter_bloc: ^9.1.1
   connectivity_plus: ^7.3.1
   wave: ^0.2.5
+  easy_localization: ^3.0.8
+  country_flags_pro: ^0.1.1
+  video_player: ^2.9.2
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +79,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

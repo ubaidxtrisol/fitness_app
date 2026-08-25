@@ -1,9 +1,8 @@
 import 'package:fitness_app/core/constants/app_theme.dart';
+import 'package:fitness_app/core/utils/context.dart';
 import 'package:flutter/material.dart';
 
 import 'features/splash/splash_screen.dart';
-
-final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class FitnessApp extends StatelessWidget {
   const FitnessApp({super.key});
@@ -12,7 +11,7 @@ class FitnessApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: rootNavigatorKey,
+      navigatorKey: Ctx.navigatorKey,
       title: 'Fitness App',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,

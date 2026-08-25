@@ -52,7 +52,7 @@ class UserInfoQuestions {
     // 1. Height
     QuestionModel(
       id: 1,
-      title: "What's Your Height?",
+      title: "What is Your Height?",
       subtitle:
           "Height is crucial to estimate your baseline metabolic rate accurately.",
       type: QuestionType.heightPicker,
@@ -60,7 +60,7 @@ class UserInfoQuestions {
     // 2. Current Weight
     QuestionModel(
       id: 2,
-      title: "What's Your Current Weight?",
+      title: "What is Your Current Weight?",
       subtitle:
           "Used to configure safe calorie deficits and track weight trends.",
       type: QuestionType.weightPicker,
@@ -68,7 +68,7 @@ class UserInfoQuestions {
     // 3. Target Weight
     QuestionModel(
       id: 3,
-      title: "What's Your Target Weight?",
+      title: "What is Your Target Weight?",
       subtitle:
           "Set your goal weight. We'll adjust your macro ratios to get you there safely.",
       type: QuestionType.targetWeightPicker,
@@ -106,7 +106,7 @@ class UserInfoQuestions {
     // 5. Target Body Shape
     QuestionModel(
       id: 5,
-      title: "What's Your Target Body Shape?",
+      title: "What is Your Target Body Shape?",
       subtitle:
           "Define your goal physique to configure optimal muscular hypertrophy parameters.",
       type: QuestionType.targetBodyShape,
@@ -193,7 +193,7 @@ class UserInfoQuestions {
     // 9. Workout Level
     QuestionModel(
       id: 9,
-      title: "What's Your Preferred Workout Level?",
+      title: "What is Your Preferred Workout Level?",
       subtitle: "This adjusts the initial difficulty of your core sets.",
       type: QuestionType.workoutLevel,
       workoutLevelOptions: [
@@ -231,12 +231,36 @@ class UserInfoQuestions {
           "Select the zones you want to protect during physical therapy sessions.",
       type: QuestionType.injuries,
       injuryOptions: [
-        InjuryOption(id: 'back', title: 'Back', icon: Icons.person_outline_rounded),
-        InjuryOption(id: 'knee', title: 'Knee', icon: Icons.sports_gymnastics_rounded),
-        InjuryOption(id: 'shoulder', title: 'Shoulder', icon: Icons.accessibility_new_rounded),
-        InjuryOption(id: 'wrist', title: 'Wrist', icon: Icons.pan_tool_outlined),
-        InjuryOption(id: 'ankle', title: 'Ankle', icon: Icons.directions_walk_rounded),
-        InjuryOption(id: 'hip', title: 'Hip', icon: Icons.airline_seat_legroom_extra_rounded),
+        InjuryOption(
+          id: 'back',
+          title: 'Back',
+          icon: Icons.person_outline_rounded,
+        ),
+        InjuryOption(
+          id: 'knee',
+          title: 'Knee',
+          icon: Icons.sports_gymnastics_rounded,
+        ),
+        InjuryOption(
+          id: 'shoulder',
+          title: 'Shoulder',
+          icon: Icons.accessibility_new_rounded,
+        ),
+        InjuryOption(
+          id: 'wrist',
+          title: 'Wrist',
+          icon: Icons.pan_tool_outlined,
+        ),
+        InjuryOption(
+          id: 'ankle',
+          title: 'Ankle',
+          icon: Icons.directions_walk_rounded,
+        ),
+        InjuryOption(
+          id: 'hip',
+          title: 'Hip',
+          icon: Icons.airline_seat_legroom_extra_rounded,
+        ),
         InjuryOption(id: 'none', title: 'None', icon: Icons.shield_outlined),
       ],
     ),

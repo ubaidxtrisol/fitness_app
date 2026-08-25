@@ -194,6 +194,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: .center,
           children: [
             Expanded(
               child: PageView.builder(
@@ -296,13 +297,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
 
-            // Bottom Next Button
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20, top: 8),
-              child: ElevatedButton(
-                onPressed: _onNextPressed,
-                child: Text(AppStrings.next),
-              ),
+            ElevatedButton(
+              onPressed: _onNextPressed,
+
+              child: Text(AppStrings.next),
             ),
           ],
         ),

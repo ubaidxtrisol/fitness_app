@@ -1,10 +1,10 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
-import 'package:fitness_app/fitness_app.dart';
+import 'package:fitness_app/core/utils/context.dart';
 import 'package:flutter/material.dart';
 
 class AppToast {
-  static BuildContext? get _context => rootNavigatorKey.currentContext;
+  static BuildContext? get _context => Ctx.context;
 
   static void success({
     required String title,
@@ -154,4 +154,3 @@ class AppToast {
     ).show(ctx);
   }
 }
-

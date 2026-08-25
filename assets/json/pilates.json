@@ -1,0 +1,284 @@
+[
+    {
+        "id": "cat_weight_loss_01",
+        "title": "Weight Loss Journey",
+        "description": "Targeted workouts focused on burn, strength, and toning.",
+        "workouts": [
+            {
+                "id": "wk_model_leg_booty",
+                "title": "Model Leg & Bubble Booty",
+                "difficulty": "Beginner",
+                "duration_minutes": 6,
+                "net_time_minutes": 5,
+                "calories_burned": 45,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "exercise_id": "ex_glute_bridge",
+                        "title": "Pilates Glute Bridge",
+                        "description": "Lie on your back with knees bent, squeeze glutes and lift hips upward.",
+                        "duration_seconds": 45,
+                        "reps": 15,
+                        "rest_seconds": 15,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Lie on your back with knees bent and feet flat on the floor, hip-width apart.",
+                            "Engage your core and squeeze your glutes.",
+                            "Lift your hips upward until your body forms a straight line from shoulders to knees.",
+                            "Lower down slowly to the starting position."
+                        ],
+                        "common_mistakes": [
+                            "Arching the lower back excessively at the top of the movement.",
+                            "Pushing through the toes instead of driving down through the heels.",
+                            "Letting knees cave inward during the lift."
+                        ],
+                        "breathing_tips": [
+                            "Breathe regularly throughout the movement.",
+                            "Exhale as you lift your hips up towards the ceiling.",
+                            "Inhale slowly as you lower back down to the floor.",
+                            "Do not hold your breath; holding your breath can cause your body to tense up and make the exercise more difficult."
+                        ]
+                    },
+                    {
+                        "order": 2,
+                        "exercise_id": "ex_clamshell",
+                        "title": "Side-Lying Clamshell",
+                        "description": "Lie on your side, knees bent at 45 degrees, rotate upper knee outward.",
+                        "duration_seconds": 45,
+                        "reps": 12,
+                        "rest_seconds": 15,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Lie on your right side with your head resting on your right hand.",
+                            "Bend your knees at a 45-degree angle with legs stacked.",
+                            "Keep feet together and open your top knee as high as possible.",
+                            "Complete reps on one side, then repeat for the left leg."
+                        ],
+                        "common_mistakes": [
+                            "Rolling your hips backward while lifting the leg.",
+                            "Lifting the feet off the floor instead of keeping them pinned together.",
+                            "Moving too quickly without controlled resistance."
+                        ],
+                        "breathing_tips": [
+                            "Breathe regularly and maintain a steady rhythm.",
+                            "Exhale when opening the top knee upward.",
+                            "Inhale as you bring the knees back together.",
+                            "Do not hold your breath; holding your breath can cause your body to tense up and make the exercise more difficult."
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "wk_squat_thigh_toner",
+                "title": "Classic Squat & Thigh Toner",
+                "difficulty": "Intermediate",
+                "duration_minutes": 8,
+                "net_time_minutes": 6,
+                "calories_burned": 65,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "exercise_id": "ex_pilates_squat",
+                        "title": "Pilates Sumo Squat",
+                        "description": "Stand wide with toes pointing outward, lower into a wide squat engaging inner thighs.",
+                        "duration_seconds": 50,
+                        "reps": 15,
+                        "rest_seconds": 10,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Stand with feet wider than hip-width, toes pointing outward at about 45 degrees.",
+                            "Keep your chest upright and core engaged as you lower your hips back and down.",
+                            "Go as low as comfortable while maintaining proper form, aiming for thighs parallel to the floor.",
+                            "Push through your heels to return to the starting position."
+                        ],
+                        "common_mistakes": [
+                            "Letting the knees collapse inward instead of tracking over the toes.",
+                            "Rounding the back or chest forward during the descent.",
+                            "Lifting the heels off the floor when rising up."
+                        ],
+                        "breathing_tips": [
+                            "Breathe deeply and steadily throughout the exercise.",
+                            "Exhale as you lower your hips down into the squat.",
+                            "Inhale as you push back up to the starting position.",
+                            "Avoid holding your breath; regular breathing helps maintain core stability and control."
+                        ]
+                    },
+                    {
+                        "order": 2,
+                        "exercise_id": "ex_leg_circles",
+                        "title": "Side Leg Circles",
+                        "description": "Lie on your side with extended legs, raise top leg and make controlled small circles.",
+                        "duration_seconds": 40,
+                        "reps": 10,
+                        "rest_seconds": 10,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Lie on your right side with your head supported by your hand or arm.",
+                            "Extend your left leg straight up toward the ceiling, keeping it in line with your body.",
+                            "Draw small, controlled circles with your leg, engaging your core to prevent hip rocking.",
+                            "Complete all circles on one side before switching to the other leg."
+                        ],
+                        "common_mistakes": [
+                            "Allowing the hips to rock forward or backward during the circles.",
+                            "Making the circles too large, which can strain the hip joint.",
+                            "Letting the bottom leg bend instead of keeping it extended."
+                        ],
+                        "breathing_tips": [
+                            "Maintain a steady breathing pattern throughout the movement.",
+                            "Exhale as you circle your leg upward and outward.",
+                            "Inhale as you bring your leg back to the starting position.",
+                            "Smooth, controlled breaths help maintain stability and focus."
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "cat_toned_shape_01",
+        "title": "Toned Body Shape",
+        "description": "Targeted workouts focused on burn, strength, and toning.",
+        "workouts": [
+            {
+                "id": "wk_toned_leg_booty",
+                "title": "Legs & Bubble Booty",
+                "difficulty": "Intermediate",
+                "duration_minutes": 6,
+                "net_time_minutes": 5,
+                "calories_burned": 45,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "exercise_id": "ex_glute_bridge",
+                        "title": "Pilates Glute Bridge",
+                        "description": "Lie on your back with knees bent, squeeze glutes and lift hips upward.",
+                        "duration_seconds": 45,
+                        "reps": 15,
+                        "rest_seconds": 15,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Lie on your back with knees bent and feet flat on the floor, hip-width apart.",
+                            "Engage your core and squeeze your glutes.",
+                            "Lift your hips upward until your body forms a straight line from shoulders to knees.",
+                            "Lower down slowly to the starting position."
+                        ],
+                        "common_mistakes": [
+                            "Arching the lower back excessively at the top of the movement.",
+                            "Pushing through the toes instead of driving down through the heels.",
+                            "Letting knees cave inward during the lift."
+                        ],
+                        "breathing_tips": [
+                            "Breathe regularly throughout the movement.",
+                            "Exhale as you lift your hips up towards the ceiling.",
+                            "Inhale slowly as you lower back down to the floor.",
+                            "Do not hold your breath; holding your breath can cause your body to tense up and make the exercise more difficult."
+                        ]
+                    },
+                    {
+                        "order": 2,
+                        "exercise_id": "ex_clamshell",
+                        "title": "Side-Lying Clamshell",
+                        "description": "Lie on your side, knees bent at 45 degrees, rotate upper knee outward.",
+                        "duration_seconds": 45,
+                        "reps": 12,
+                        "rest_seconds": 15,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Lie on your right side with your head resting on your right hand.",
+                            "Bend your knees at a 45-degree angle with legs stacked.",
+                            "Keep feet together and open your top knee as high as possible.",
+                            "Complete reps on one side, then repeat for the left leg."
+                        ],
+                        "common_mistakes": [
+                            "Rolling your hips backward while lifting the leg.",
+                            "Lifting the feet off the floor instead of keeping them pinned together.",
+                            "Moving too quickly without controlled resistance."
+                        ],
+                        "breathing_tips": [
+                            "Breathe regularly and maintain a steady rhythm.",
+                            "Exhale when opening the top knee upward.",
+                            "Inhale as you bring the knees back together.",
+                            "Do not hold your breath; holding your breath can cause your body to tense up and make the exercise more difficult."
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "wk_squat_thigh_toner",
+                "title": "Classic Squat & Thigh Toner",
+                "difficulty": "Intermediate",
+                "duration_minutes": 8,
+                "net_time_minutes": 6,
+                "calories_burned": 65,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "exercise_id": "ex_pilates_squat",
+                        "title": "Pilates Sumo Squat",
+                        "description": "Stand wide with toes pointing outward, lower into a wide squat engaging inner thighs.",
+                        "duration_seconds": 50,
+                        "reps": 15,
+                        "rest_seconds": 10,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Stand with feet wider than hip-width, toes pointing outward at about 45 degrees.",
+                            "Keep your chest upright and core engaged as you lower your hips back and down.",
+                            "Go as low as comfortable while maintaining proper form, aiming for thighs parallel to the floor.",
+                            "Push through your heels to return to the starting position."
+                        ],
+                        "common_mistakes": [
+                            "Letting the knees collapse inward instead of tracking over the toes.",
+                            "Rounding the back or chest forward during the descent.",
+                            "Lifting the heels off the floor when rising up."
+                        ],
+                        "breathing_tips": [
+                            "Breathe deeply and steadily throughout the exercise.",
+                            "Exhale as you lower your hips down into the squat.",
+                            "Inhale as you push back up to the starting position.",
+                            "Avoid holding your breath; regular breathing helps maintain core stability and control."
+                        ]
+                    },
+                    {
+                        "order": 2,
+                        "exercise_id": "ex_leg_circles",
+                        "title": "Side Leg Circles",
+                        "description": "Lie on your side with extended legs, raise top leg and make controlled small circles.",
+                        "duration_seconds": 40,
+                        "reps": 10,
+                        "rest_seconds": 10,
+                        "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                        "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                        "how_to_do": [
+                            "Lie on your right side with your head supported by your hand or arm.",
+                            "Extend your left leg straight up toward the ceiling, keeping it in line with your body.",
+                            "Draw small, controlled circles with your leg, engaging your core to prevent hip rocking.",
+                            "Complete all circles on one side before switching to the other leg."
+                        ],
+                        "common_mistakes": [
+                            "Allowing the hips to rock forward or backward during the circles.",
+                            "Making the circles too large, which can strain the hip joint.",
+                            "Letting the bottom leg bend instead of keeping it extended."
+                        ],
+                        "breathing_tips": [
+                            "Maintain a steady breathing pattern throughout the movement.",
+                            "Exhale as you circle your leg upward and outward.",
+                            "Inhale as you bring your leg back to the starting position.",
+                            "Smooth, controlled breaths help maintain stability and focus."
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
