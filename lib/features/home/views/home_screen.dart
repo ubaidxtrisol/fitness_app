@@ -2,6 +2,9 @@ import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/utils/app_toasts.dart';
+import 'package:fitness_app/core/database/repositories/joined_challenges_repository.dart';
+import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
+import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/home/models/home_models.dart';
 import 'package:fitness_app/features/home/widgets/body_focus_widget.dart';
 import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
@@ -29,6 +32,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ProgressRepository _progress = ProgressRepository();
   final NextUpService _nextUpService = NextUpService();
+  final JoinedChallengesRepository _joinedRepo = JoinedChallengesRepository();
 
   TodaySummaryModel _todaySummary = const TodaySummaryModel(
     calories: 0,
@@ -38,17 +42,24 @@ class _HomeScreenState extends State<HomeScreen> {
   );
   NextUpTarget? _nextUp;
 
+  /// The real challenge model paired with its rendered card, ordered by
+  /// priority: joined-and-in-progress first, then not-yet-joined, then
+  /// joined-and-finished last.
+  List<({ChallengeProgramModel challenge, ChallengeModel card})>
+  _challengeEntries = const [];
+
   @override
   void initState() {
     super.initState();
     _refresh();
   }
 
-  /// Re-reads today's totals and the next suggested day. Called on mount and
-  /// again whenever the user returns from a workout.
+  /// Re-reads today's totals, the next suggested day and the challenges rail.
+  /// Called on mount and again whenever the user returns from a workout.
   Future<void> _refresh() async {
     final summary = await _progress.summaryForDay();
     final nextUp = await _nextUpService.resolve();
+    final entries = await _loadChallengeEntries();
     if (!mounted) return;
 
     setState(() {
@@ -59,35 +70,48 @@ class _HomeScreenState extends State<HomeScreen> {
         streakDays: summary.streakDays,
       );
       _nextUp = nextUp;
+      _challengeEntries = entries;
     });
   }
 
-  final List<ChallengeModel> _challenges = const [
-    ChallengeModel(
-      id: 'ch_wall_pilates',
-      title: 'WALL PILATES',
-      daysLabel: '14 Days',
-      userCount: '244 User',
-      thumbnailUrl:
-          'https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg',
-    ),
-    ChallengeModel(
-      id: 'ch_tai_chi',
-      title: 'TAI CHI',
-      daysLabel: '28 Days',
-      userCount: '244 User',
-      thumbnailUrl:
-          'https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg',
-    ),
-    ChallengeModel(
-      id: 'ch_pilate_busymom',
-      title: 'PILATE BUSYMOM',
-      daysLabel: '28 Days',
-      userCount: '244 User',
-      thumbnailUrl:
-          'https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg',
-    ),
-  ];
+  /// Builds every bundled challenge's card, then orders them so what the user
+  /// has already started shows up first and what they've finished sinks to
+  /// the back — still shown, just marked "Completed" rather than removed.
+  Future<List<({ChallengeProgramModel challenge, ChallengeModel card})>>
+  _loadChallengeEntries() async {
+    final challenges = await ChallengeRepository.loadChallenges();
+    final joinedRows = await _joinedRepo.all();
+    final joinedAt = {for (final r in joinedRows) r.challengeId: r.joinedAt};
+
+    final inProgress = <({ChallengeProgramModel challenge, ChallengeModel card})>[];
+    final notJoined = <({ChallengeProgramModel challenge, ChallengeModel card})>[];
+    final finished = <({ChallengeProgramModel challenge, ChallengeModel card})>[];
+
+    for (final challenge in challenges) {
+      if (!joinedAt.containsKey(challenge.id)) {
+        notJoined.add((challenge: challenge, card: challenge.card()));
+        continue;
+      }
+
+      final progress = await ChallengeProgress.resolve(challenge, _progress);
+      final entry = (
+        challenge: challenge,
+        card: challenge.card(
+          isJoined: true,
+          percentComplete: progress.percentComplete,
+          isCompleted: progress.isComplete,
+        ),
+      );
+      (progress.isComplete ? finished : inProgress).add(entry);
+    }
+
+    // Most recently joined first, within the in-progress tier.
+    inProgress.sort(
+      (a, b) => joinedAt[b.challenge.id]!.compareTo(joinedAt[a.challenge.id]!),
+    );
+
+    return [...inProgress, ...notJoined, ...finished];
+  }
 
   final List<BodyFocusModel> _bodyFocusItems = const [
     BodyFocusModel(
@@ -225,22 +249,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   clipBehavior: Clip.none,
-                  itemCount: _challenges.length,
+                  itemCount: _challengeEntries.length,
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 10.956),
                   itemBuilder: (context, index) {
-                    final challenge = _challenges[index];
+                    final entry = _challengeEntries[index];
                     return ChallengeCardWidget(
-                      challenge: challenge,
-                      onTap: () => _openChallenge(challenge),
-                      onJoin: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Joined ${challenge.title}!'),
-                            backgroundColor: AppColors.primary,
-                          ),
-                        );
-                      },
+                      challenge: entry.card,
+                      onTap: () => _openChallenge(entry.challenge),
+                      onJoin: () => _joinChallenge(entry.challenge),
                     );
                   },
                 ),
@@ -343,20 +360,23 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Challenge cards open the challenge flow (Figma 11:1744).
-  Future<void> _openChallenge(ChallengeModel challenge) async {
-    final challenges = await ChallengeRepository.loadChallenges();
+  Future<void> _openChallenge(ChallengeProgramModel challenge) async {
+    await context.push(ChallengeDetailScreen(challenge: challenge));
+    // The user may have joined, made progress, or finished it while away.
+    await _refresh();
+  }
+
+  /// The card's quick Join pill — joins immediately, no need to open the
+  /// detail screen first.
+  Future<void> _joinChallenge(ChallengeProgramModel challenge) async {
+    await _joinedRepo.join(challenge.id);
     if (!mounted) return;
 
-    if (challenges.isEmpty) {
-      context.push(const ChallengesScreen());
-      return;
-    }
-
-    final match = challenges.firstWhere(
-      (c) => c.title.toLowerCase() == challenge.title.toLowerCase(),
-      orElse: () => challenges.first,
+    AppToast.success(
+      title: 'Joined!',
+      description: 'Now tracking ${challenge.title}.',
+      context: context,
     );
-    await context.push(ChallengeDetailScreen(challenge: match));
     await _refresh();
   }
 }

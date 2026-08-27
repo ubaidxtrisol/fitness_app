@@ -490,9 +490,12 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen>
         startedAt: _startedAt,
         thumbnailUrl: widget.session.thumbnailUrl,
       );
-      // Whether the day was finished or deferred, this attempt is over —
-      // there's nothing left to resume.
-      await _clearCheckpoint();
+      // Only a genuinely finished day has nothing left to resume — "Do it
+      // Later" must leave the checkpoint in place so Start picks up at the
+      // exercise the user left off on instead of restarting at day one.
+      if (outcome == PlayerOutcome.completed) {
+        await _clearCheckpoint();
+      }
     }
 
     if (!mounted) return;

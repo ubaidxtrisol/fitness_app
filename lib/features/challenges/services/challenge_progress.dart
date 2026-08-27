@@ -1,3 +1,4 @@
+import 'package:fitness_app/core/database/repositories/active_session_repository.dart';
 import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/workout/models/program_model.dart';
@@ -29,17 +30,26 @@ class ChallengeProgress {
   final List<int> _currentDayIndexByWeek;
   final List<int> _completedDaysByWeek;
 
+  /// 0.0–1.0: how far into the *current* (not-yet-finished) day the user has
+  /// gotten, from that day's `ActiveSessions` checkpoint if one exists. Lets
+  /// [percentComplete] move the moment an exercise is logged rather than
+  /// only once a whole day is.
+  final double _partialDayCredit;
+
   const ChallengeProgress._(
     this.challenge,
     this._currentDayIndexByWeek,
     this._completedDaysByWeek,
+    this._partialDayCredit,
   );
 
   static Future<ChallengeProgress> resolve(
     ChallengeProgramModel challenge, [
     ProgressRepository? progress,
+    ActiveSessionRepository? activeSessions,
   ]) async {
     final repo = progress ?? ProgressRepository();
+    final sessions = activeSessions ?? ActiveSessionRepository();
     final currentByWeek = <int>[];
     final completedByWeek = <int>[];
 
@@ -49,7 +59,38 @@ class ChallengeProgress {
       completedByWeek.add(row?.completedDays ?? 0);
     }
 
-    return ChallengeProgress._(challenge, currentByWeek, completedByWeek);
+    // A day's own checkpoint is cleared once it's actually finished, so this
+    // only ever finds something for a day that's genuinely still in flight.
+    final withoutCredit = ChallengeProgress._(
+      challenge,
+      currentByWeek,
+      completedByWeek,
+      0,
+    );
+    final target = withoutCredit.currentTarget;
+    var partialCredit = 0.0;
+    if (target != null &&
+        !withoutCredit.isComplete &&
+        target.day.exercises.isNotEmpty) {
+      final week = challenge.weeks[target.weekIndex];
+      final checkpoint = await sessions.find(
+        '${challenge.id}/${week.id}',
+        target.day.id,
+      );
+      if (checkpoint != null) {
+        final done = sessions
+            .decodeCompletedIds(checkpoint.completedExerciseIdsJson)
+            .length;
+        partialCredit = (done / target.day.exercises.length).clamp(0.0, 1.0);
+      }
+    }
+
+    return ChallengeProgress._(
+      challenge,
+      currentByWeek,
+      completedByWeek,
+      partialCredit,
+    );
   }
 
   /// Week 0 is always open. Week N is open once week N-1's every day is done.
@@ -103,6 +144,29 @@ class ChallengeProgress {
     }
     return true;
   }
+
+  /// Total days across every week — the denominator for [percentComplete].
+  int get totalDays =>
+      challenge.weeks.fold(0, (sum, week) => sum + week.days.length);
+
+  /// Days actually finished across every week.
+  int get totalCompletedDays =>
+      _completedDaysByWeek.fold(0, (sum, count) => sum + count);
+
+  /// 0.0–1.0 across the whole challenge — the number behind the "39%"
+  /// progress bar shown on the card and the detail screen. Includes partial
+  /// credit for the day currently in flight, so pausing partway through
+  /// today's exercises moves this instead of waiting for the whole day.
+  double get percentComplete {
+    final total = totalDays;
+    if (total == 0) return 0;
+    return ((totalCompletedDays + _partialDayCredit) / total).clamp(0.0, 1.0);
+  }
+
+  /// True once at least one day anywhere in the challenge has been logged —
+  /// lets a challenge someone started before "Join" existed (or without
+  /// tapping it) still be treated as joined.
+  bool get hasProgress => totalCompletedDays > 0;
 
   /// "Week 2, Day 3" — the line the lock dialog shows the user.
   String get currentPositionLabel {

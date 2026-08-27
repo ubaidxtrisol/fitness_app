@@ -10,8 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// [gridScale] times larger. Every measurement below is the 113pt base times
 /// [scale], so both nodes come from one component.
 class ChallengeCardWidget extends StatefulWidget {
-  static const double width = 113;
-  static const double height = 142;
+  static const double width = 123;
+  static const double height = 152;
 
   /// 172.25608 / 113 — the Challenges grid (Figma 11:1397).
   static const double gridScale = 1.5244;
@@ -115,75 +115,153 @@ class _ChallengeCardWidgetState extends State<ChallengeCardWidget> {
                 ),
               ),
 
-              // Title + user count (Frame 34).
+              // Title + user count, then the Join pill / progress bar /
+              // "Completed" badge below it (Frame 34 + Frame 20).
+              //
+              // Both live in one Column with `spaceBetween` rather than two
+              // independently-`Positioned` blocks with hand-picked offsets —
+              // the title/user-count text and the action row below it would
+              // otherwise overlap whenever the text block's real height
+              // didn't match the offset the action row assumed.
               Positioned(
                 left: _s(5.015),
                 top: _s(103),
                 right: _s(5),
+                bottom: _s(6),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      challenge.title.toUpperCase(),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: _s(9),
-                        height: 1,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                    SizedBox(height: _s(9)),
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        SvgPicture.asset(
-                          'assets/svgs/users.svg',
-                          width: _s(10.047),
-                          height: _s(10.047),
-                        ),
-                        SizedBox(width: _s(3.768)),
                         Text(
-                          challenge.userCount,
+                          challenge.title.toUpperCase(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: _s(7.535),
-                            height: 1.333,
-                            fontWeight: FontWeight.w400,
+                            fontSize: _s(9),
+                            height: 1,
+                            fontWeight: FontWeight.w700,
                             color: AppColors.textPrimary,
                           ),
                         ),
+                        SizedBox(height: _s(6)),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/svgs/users.svg',
+                              width: _s(10.047),
+                              height: _s(10.047),
+                            ),
+                            SizedBox(width: _s(3.768)),
+                            Flexible(
+                              child: Text(
+                                challenge.userCount,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: _s(7.535),
+                                  height: 1.333,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.textPrimary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
-              ),
 
-              // Join pill (Frame 20).
-              Positioned(
-                left: _s(72.015),
-                top: _s(124),
-                child: GestureDetector(
-                  onTap: widget.onJoin,
-                  child: Container(
-                    height: _s(13),
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: _s(10)),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFDECEC),
-                      borderRadius: BorderRadius.circular(_s(7.535)),
-                    ),
-                    child: Text(
-                      'Join',
-                      style: TextStyle(
-                        fontSize: _s(7.535),
-                        height: 1,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.primary,
+                    // Once joined, the Join pill is gone entirely — replaced
+                    // by the progress bar, then by the "Completed" badge.
+                    if (challenge.isCompleted)
+                      Container(
+                        height: _s(13),
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.symmetric(horizontal: _s(8)),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE3F6E8),
+                          borderRadius: BorderRadius.circular(_s(7.535)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.check_circle_rounded,
+                              size: _s(10),
+                              color: AppColors.success,
+                            ),
+                            SizedBox(width: _s(3.768)),
+                            Text(
+                              'Completed',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: _s(7.535),
+                                height: 1,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.success,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    else if (challenge.isJoined)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(_s(4)),
+                              child: LinearProgressIndicator(
+                                value: challenge.percentComplete,
+                                minHeight: _s(5),
+                                backgroundColor: AppColors.primaryLight,
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  AppColors.primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: _s(5)),
+                          Text(
+                            '${(challenge.percentComplete * 100).round()}%',
+                            style: TextStyle(
+                              fontSize: _s(7.535),
+                              height: 1,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: widget.onJoin,
+                          child: Container(
+                            height: _s(13),
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(horizontal: _s(10)),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFDECEC),
+                              borderRadius: BorderRadius.circular(_s(7.535)),
+                            ),
+                            child: Text(
+                              'Join',
+                              style: TextStyle(
+                                fontSize: _s(7.535),
+                                height: 1,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ],

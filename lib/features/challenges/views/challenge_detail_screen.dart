@@ -1,6 +1,7 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
+import 'package:fitness_app/core/database/repositories/joined_challenges_repository.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/challenges/views/challenge_day_screen.dart';
@@ -11,8 +12,9 @@ import 'package:flutter/material.dart';
 
 /// Challenge detail — Figma 11:1744.
 ///
-/// Hero banner, then one [WeekTrack] per week, locked in the order the user
-/// actually has to complete them.
+/// Hero banner, a Join button (or, once joined, the overall progress bar),
+/// then one [WeekTrack] per week, locked in the order the user actually has
+/// to complete them.
 class ChallengeDetailScreen extends StatefulWidget {
   final ChallengeProgramModel challenge;
 
@@ -23,7 +25,10 @@ class ChallengeDetailScreen extends StatefulWidget {
 }
 
 class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
+  final JoinedChallengesRepository _joinedRepo = JoinedChallengesRepository();
+
   ChallengeProgress? _progress;
+  bool _joined = false;
 
   @override
   void initState() {
@@ -34,7 +39,26 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
   Future<void> _load() async {
     final progress = await ChallengeProgress.resolve(widget.challenge);
     if (!mounted) return;
-    setState(() => _progress = progress);
+
+    var joined = await _joinedRepo.isJoined(widget.challenge.id);
+    // Started before "Join" existed (or without tapping it) — back-fill so
+    // it still reads as joined here and everywhere else.
+    if (!joined && progress.hasProgress) {
+      await _joinedRepo.join(widget.challenge.id);
+      joined = true;
+    }
+    if (!mounted) return;
+
+    setState(() {
+      _progress = progress;
+      _joined = joined;
+    });
+  }
+
+  Future<void> _join() async {
+    await _joinedRepo.join(widget.challenge.id);
+    if (!mounted) return;
+    setState(() => _joined = true);
   }
 
   @override
@@ -109,6 +133,117 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                     ],
                   ),
                 ),
+                20.heightBox,
+
+                // Join button, or — once joined — the overall progress bar.
+                if (!_joined)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: ElevatedButton(
+                      onPressed: _join,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: AppColors.surface,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'Join Challenge',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(color: Color(0x14000000), blurRadius: 10),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Your Progress',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                            if (progress.isComplete)
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.check_circle_rounded,
+                                    size: 14,
+                                    color: AppColors.success,
+                                  ),
+                                  4.widthBox,
+                                  const Text(
+                                    'Completed',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.success,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            else
+                              Text(
+                                progress.currentPositionLabel,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.textLight,
+                                ),
+                              ),
+                          ],
+                        ),
+                        12.heightBox,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: LinearProgressIndicator(
+                                  value: progress.percentComplete,
+                                  minHeight: 10,
+                                  backgroundColor: AppColors.primaryLight,
+                                  valueColor: const AlwaysStoppedAnimation<Color>(
+                                    AppColors.primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            10.widthBox,
+                            Text(
+                              '${(progress.percentComplete * 100).round()}%',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 28.heightBox,
 
                 // Week tracks (12:2014), 22 apart
@@ -137,6 +272,9 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                               index,
                               dayIndex,
                             ),
+                            isCompleted:
+                                progress.statusOf(index, dayIndex) ==
+                                ChallengeDayStatus.completed,
                             currentPositionLabel: progress
                                 .currentPositionLabel,
                           ),

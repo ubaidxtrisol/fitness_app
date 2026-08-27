@@ -185,6 +185,88 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   the old pushed-route's behaviour when dismissed without an explicit choice.
   The final exercise still skips celebration entirely and goes straight to
   `_finish()`/`WorkoutCompleteScreen`, unchanged.
+* **Join Challenge** — a persisted `JoinedChallenges` table (schema v5,
+  `challengeId` + `joinedAt` only) backs a new
+  `JoinedChallengesRepository`. `ChallengeDetailScreen` shows a "Join
+  Challenge" button until joined, then a "Your Progress" card (percent bar,
+  "Week N, Day M" or a "Completed" badge) instead — nothing else on the
+  screen changed, so the existing per-day lock rules are untouched. Whether a
+  joined challenge is finished or how far through it the user is was
+  deliberately **not** duplicated into the new table: `ChallengeProgress`
+  gained `totalDays`/`totalCompletedDays`/`percentComplete`/`hasProgress`
+  getters that recompute it from `plan_progress_rows` every time, the same
+  way `isComplete` already did. A challenge someone started before "Join"
+  existed (or without tapping it) is silently back-filled as joined the next
+  time its detail screen loads (`hasProgress` true + no join row yet). Both
+  `ChallengesScreen` and the Home rail render the same progress bar/
+  "Completed" badge on `ChallengeCardWidget` (via new `ChallengeModel.
+  isJoined/percentComplete/isCompleted` fields, threaded through
+  `ChallengeProgramModel.card()`, now a method instead of a getter since the
+  progress fields have to be resolved per challenge) and their Join pill
+  joins immediately rather than just opening the detail screen. The Home
+  rail's hardcoded three-item `_challenges` list (never wired to
+  `ChallengeRepository`) is gone; it now loads the real bundled challenges
+  and orders them joined-and-in-progress first (most recently joined first),
+  then not-yet-joined, then joined-and-finished last — finished challenges
+  stay visible, just marked, rather than disappearing. This also fixed a
+  latent bug: `_openChallenge` used to match the tapped card back to a real
+  `ChallengeProgramModel` by lower-cased title (`orElse: () =>
+  challenges.first`), which would silently open the wrong challenge if
+  titles ever diverged; it now carries the real model straight through.
+  `NextUpService.resolve()` gained a fallback tier between "the most
+  recently touched plan" and "day one of the first bundled program": a
+  challenge the user joined but hasn't logged a single day of yet, most
+  recently joined first, skipping any that are already complete — so joining
+  makes a challenge show up on the Home hero banner immediately, not only
+  after finishing day 1.
+* **Mid-day resume, real per-challenge lengths, card layout fix.** Three
+  related follow-ups:
+  * **A real "Do it Later" bug fix.** `ExercisePlayerScreen._finish()` used
+    to clear the `ActiveSessions` checkpoint on *any* outcome, including
+    "Do it Later" — so pausing partway through a day and tapping Start again
+    silently restarted at exercise one, the checkpoint having already been
+    wiped. It's now only cleared when the outcome is `completed`; deferring
+    a day leaves the checkpoint in place so the player's existing
+    `_offerResume()` dialog (already there, just never actually reached)
+    correctly offers to continue.
+  * **`ChallengeDayScreen`'s exercise list reflects real progress.** Now a
+    `StatefulWidget` that reads the day's `ActiveSessions` checkpoint (or, if
+    `isCompleted` is set — the day was already finished on a prior run and
+    its checkpoint is long gone — treats every exercise as done). Each
+    already-logged exercise gets a small checkmark badge (new `isDone` on
+    `WorkoutRowCard`, anchored to the thumbnail's own corner so both row
+    variants can use it), the "Exercise N" heading gains a "3/7" pill (with a
+    thin progress bar) or a "Completed" badge, and the Start button reads
+    "Resume" whenever a day is genuinely mid-way through. `ChallengeProgress`
+    itself also now takes partial credit for the in-flight day into
+    `percentComplete` (a new `ActiveSessionRepository` lookup for whatever
+    `currentTarget` points at, added as an optional third `resolve()`
+    param) — pausing after 5 of a day's exercises moves the *whole
+    challenge's* percent immediately rather than waiting for the full day to
+    log.
+  * **Challenges now actually have the length their `days_label` claims.**
+    Every bundled challenge was authored with the same 4 weeks x 7 days (28
+    days) regardless of whether its label said "14 Days", "60 Days", "45
+    Days", etc. — the label was purely cosmetic text. `ChallengeRepository`
+    now re-chunks the days actually authored into the real week/day shape
+    implied by that label: full 7-day weeks with the remainder in the last
+    one (14 -> 7+7, 10 -> 7+3, 20 -> 7+7+6, ...), cycling back through the
+    authored days when the label calls for more than were written down (a
+    60-day challenge cycles the same 28 authored days twice-plus). Nothing
+    about the week/day *rendering* code changed — `WeekTrack`,
+    `ChallengeProgress`, etc. were already fully generic over week/day
+    counts; this was purely a bundled-content shaping fix in the repository
+    load path.
+  * **Fixed the Home card's progress bar overlapping the title/user-count
+    text.** The title+user-count block and the Join-pill/progress-bar/
+    "Completed" row were two independently-`Positioned` blocks with
+    hand-picked Figma offsets; the offset chosen for the new progress row
+    didn't actually clear the text block's real height. They're now one
+    `Column` with `mainAxisAlignment: spaceBetween` inside a single
+    `Positioned`, so the action row can never overlap the text above it
+    regardless of exact metrics. Once joined, the Join pill is gone
+    entirely — replaced by the progress bar, then, once finished, by the
+    "Completed" badge — never shown alongside either.
 
 ### In-Progress Work
 
@@ -310,6 +392,30 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   with the player via two new extracted widgets rather than duplicating
   markup.
 
+* **Second follow-up pass (same day): Join Challenge.** Added the
+  `JoinedChallenges` table (schema v5) + `JoinedChallengesRepository`, a
+  "Join Challenge" button and progress card on `ChallengeDetailScreen`, real
+  percent-complete/"Completed" rendering on `ChallengeCardWidget` (grid and
+  Home rail alike, with a quick-join pill), Home's challenge rail wired to
+  real bundled data (the old hardcoded three-item list and its fragile
+  title-matching lookup are gone) and ordered by join/progress priority, and
+  a `NextUpService` fallback tier so a freshly joined challenge reaches the
+  Home hero banner before day 1 is ever logged. See **Join Challenge** above
+  for the full behaviour.
+
+* **Third follow-up pass (same day): resume-from-where-you-left-off, real
+  challenge lengths, card overlap fix.** Fixed `_finish()` clearing the
+  `ActiveSessions` checkpoint on "Do it Later" (the actual cause of Start
+  restarting at exercise one); `ChallengeDayScreen` now reads that checkpoint
+  and shows per-exercise checkmarks, a day-level "3/7"/"Completed" pill, a
+  "Resume" button label, and folds partial in-day progress into
+  `ChallengeProgress.percentComplete`; `ChallengeRepository` re-chunks every
+  bundled challenge's authored days into the week/day layout its `days_label`
+  actually implies instead of always 4x7; and `ChallengeCardWidget`'s bottom
+  section was restructured into one `spaceBetween` `Column` so the progress
+  bar/badge can no longer overlap the title/user-count text. See
+  **Mid-day resume, real per-challenge lengths, card layout fix** above.
+
 * **Files modified (this pass):**
   * Created: `lib/core/database/repositories/active_session_repository.dart`,
     `lib/features/challenges/services/challenge_progress.dart`,
@@ -320,21 +426,42 @@ Implemented and verified (62 passing tests across `test/*.dart`;
     `lib/features/player/widgets/get_ready_card.dart`,
     `lib/features/player/widgets/paused_overlay.dart`,
     `lib/features/player/widgets/exercise_celebration.dart`,
+    `lib/core/database/repositories/joined_challenges_repository.dart`,
     `test/challenge_progress_test.dart`, `test/active_session_test.dart`,
-    `test/challenge_lock_widgets_test.dart`, `test/completion_ui_test.dart`
+    `test/challenge_lock_widgets_test.dart`, `test/completion_ui_test.dart`,
+    `test/joined_challenges_test.dart`, `test/challenge_repository_test.dart`,
+    `test/challenge_day_screen_test.dart`
   * Rewritten: `lib/features/challenges/widgets/week_track.dart`,
     `lib/features/challenges/views/challenge_detail_screen.dart` (now
     `StatefulWidget`, loads `ChallengeProgress` once and reloads it after
-    returning from a day), `lib/features/player/views/exercise_player_screen.dart`
+    returning from a day; Join button/progress card added in the second
+    pass), `lib/features/player/views/exercise_player_screen.dart`
     (route-per-state → one `AnimatedSwitcher` state machine),
     `lib/features/player/views/workout_paused_screen.dart` (now a thin wrapper
-    around `PausedOverlay`)
+    around `PausedOverlay`), `lib/features/challenges/views/challenges_screen.dart`
+    (now resolves per-challenge join/progress state before building cards),
+    `lib/features/home/views/home_screen.dart` (real challenge data +
+    priority ordering + join wiring, replacing the hardcoded rail),
+    `lib/features/challenges/views/challenge_day_screen.dart` (now
+    `StatefulWidget`, reads the day's `ActiveSessions` checkpoint),
+    `lib/features/challenges/services/challenge_repository.dart` (added
+    `_repaginate`), `lib/features/home/widgets/challenge_card_widget.dart`
+    (bottom section now one `spaceBetween` `Column`)
   * Modified: `lib/core/database/app_database.dart` (+ `.g.dart`),
-    `lib/features/challenges/views/challenge_day_screen.dart`,
-    `lib/features/home/services/next_up_service.dart`,
-    `lib/features/player/views/get_ready_screen.dart` (now built on
-    `GetReadyCard`), `lib/features/player/widgets/player_scaffold.dart`
-    (added `showBack`), `docs/context.md`
+    `lib/features/home/services/next_up_service.dart` (joined-challenge
+    fallback tier), `lib/features/player/views/get_ready_screen.dart` (now
+    built on `GetReadyCard`), `lib/features/player/widgets/player_scaffold.dart`
+    (added `showBack`), `lib/features/challenges/models/challenge_program_model.dart`
+    (`card` getter → `card()` method with progress params),
+    `lib/features/home/models/home_models.dart` (`ChallengeModel` gained
+    `isJoined`/`percentComplete`/`isCompleted`),
+    `lib/features/challenges/services/challenge_progress.dart` (partial-day
+    credit via `ActiveSessionRepository`),
+    `lib/features/player/views/exercise_player_screen.dart` (`_finish()` only
+    clears the checkpoint on `completed`),
+    `lib/features/workout/widgets/workout_row_card.dart` (added `isDone`
+    badge), `lib/features/challenges/views/challenge_detail_screen.dart`
+    (passes `isCompleted` through to `ChallengeDayScreen`), `docs/context.md`
 
 * **Next immediate steps:**
   1. **Run the app on a device/simulator.** Nothing here has been executed

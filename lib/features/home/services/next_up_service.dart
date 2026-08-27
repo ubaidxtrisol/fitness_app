@@ -1,4 +1,5 @@
 import 'package:fitness_app/core/database/app_database.dart';
+import 'package:fitness_app/core/database/repositories/joined_challenges_repository.dart';
 import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
@@ -31,15 +32,19 @@ class NextUpTarget {
 
 /// Decides what to put in front of the user next.
 ///
-/// Prefers whatever plan they last touched; otherwise falls back to day one of
-/// the first bundled program. Everything the banner shows — the day number, the
-/// plan name, the "6min/7 Exercise" line — comes from here rather than being
-/// hard-coded.
+/// Prefers whatever plan they last touched; then a challenge the user joined
+/// but hasn't logged a single day of yet (so "Join Challenge" shows up on
+/// Home right away, not just after finishing day 1); otherwise falls back to
+/// day one of the first bundled program. Everything the banner shows — the
+/// day number, the plan name, the "6min/7 Exercise" line — comes from here
+/// rather than being hard-coded.
 class NextUpService {
   final ProgressRepository _progress;
+  final JoinedChallengesRepository _joinedChallenges;
 
-  NextUpService([ProgressRepository? progress])
-    : _progress = progress ?? ProgressRepository();
+  NextUpService([ProgressRepository? progress, JoinedChallengesRepository? joined])
+    : _progress = progress ?? ProgressRepository(),
+      _joinedChallenges = joined ?? JoinedChallengesRepository();
 
   Future<NextUpTarget?> resolve() async {
     final recent = await _progress.mostRecentPlan();
@@ -51,6 +56,9 @@ class NextUpService {
       };
       if (resumed != null) return resumed;
     }
+
+    final joined = await _firstJoinedChallenge();
+    if (joined != null) return joined;
 
     return _firstProgramDay();
   }
@@ -122,6 +130,50 @@ class NextUpService {
         isResuming: true,
       ),
     );
+  }
+
+  /// A challenge the user joined but hasn't logged a single day of yet (so
+  /// `mostRecentPlan()` has no row for it at all) — the most recently joined
+  /// one that isn't already finished, pointed at its first outstanding day.
+  Future<NextUpTarget?> _firstJoinedChallenge() async {
+    final joinedRows = await _joinedChallenges.all();
+    if (joinedRows.isEmpty) return null;
+
+    final challenges = await ChallengeRepository.loadChallenges();
+
+    for (final row in joinedRows) {
+      final challenge = _firstWhereOrNull(
+        challenges,
+        (c) => c.id == row.challengeId,
+      );
+      if (challenge == null) continue;
+
+      final progress = await ChallengeProgress.resolve(challenge, _progress);
+      // Already finished — don't keep resurfacing it ahead of fresh content.
+      if (progress.isComplete) continue;
+
+      final target = progress.currentTarget;
+      if (target == null) continue;
+
+      final week = challenge.weeks[target.weekIndex];
+      return NextUpTarget(
+        challenge: challenge,
+        week: week,
+        day: target.day,
+        suggestion: NextUpSuggestion(
+          planId: '${challenge.id}/${week.id}',
+          planType: PlanType.challenge,
+          planTitle: challenge.title,
+          dayTitle: target.day.title,
+          dayIndex: target.dayIndex,
+          totalDays: week.days.length,
+          exerciseCount: target.day.exercises.length,
+          durationMinutes: target.day.durationMinutes,
+          isResuming: false,
+        ),
+      );
+    }
+    return null;
   }
 
   Future<NextUpTarget?> _firstProgramDay() async {

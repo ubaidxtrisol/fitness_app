@@ -157,6 +157,24 @@ class ActiveSessions extends Table {
   Set<Column> get primaryKey => {planId, dayId};
 }
 
+/// A challenge the user has explicitly joined — Requirement: a "Join"
+/// button on the challenge detail screen (and the quick-join pill on its
+/// card) that starts tracking that specific challenge for the Home banner
+/// and the joined-challenges priority ordering.
+///
+/// Deliberately holds only the join event. Whether a joined challenge is
+/// complete, and how far through it the user is, is always recomputed from
+/// `plan_progress_rows` via `ChallengeProgress` rather than duplicated here
+/// — see the known-bugs note in docs/context.md about not persisting a
+/// number that can drift out of sync with the real per-day progress.
+class JoinedChallenges extends Table {
+  TextColumn get challengeId => text()();
+  DateTimeColumn get joinedAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {challengeId};
+}
+
 @DriftDatabase(
   tables: [
     UserProfiles,
@@ -166,6 +184,7 @@ class ActiveSessions extends Table {
     ExerciseLogs,
     ExercisePreferences,
     ActiveSessions,
+    JoinedChallenges,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -182,7 +201,7 @@ class AppDatabase extends _$AppDatabase {
   static void overrideInstance(AppDatabase database) => _instance = database;
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -201,6 +220,11 @@ class AppDatabase extends _$AppDatabase {
       // being closed and can be resumed.
       if (from < 4) {
         await m.createTable(activeSessions);
+      }
+      // v5 — "Join Challenge" persists which challenges the user has opted
+      // into tracking.
+      if (from < 5) {
+        await m.createTable(joinedChallenges);
       }
     },
     onCreate: (m) async {

@@ -31,14 +31,25 @@ class ChallengeProgramModel {
     required this.weeks,
   });
 
-  /// Adapter so the grid can render the shared [ChallengeCardWidget].
-  ChallengeModel get card => ChallengeModel(
+  /// Adapter so the grid/rail can render the shared [ChallengeCardWidget].
+  ///
+  /// The progress fields are optional because computing them needs a DB read
+  /// per joined challenge (via `ChallengeProgress.resolve`) — callers only
+  /// pass them once they already know this challenge is joined.
+  ChallengeModel card({
+    bool isJoined = false,
+    double percentComplete = 0,
+    bool isCompleted = false,
+  }) => ChallengeModel(
     id: id,
     title: title,
     daysLabel: daysLabel,
     userCount: userCount,
     thumbnailUrl: thumbnailUrl,
     isFavorite: isFavorite,
+    isJoined: isJoined,
+    percentComplete: percentComplete,
+    isCompleted: isCompleted,
   );
 
   factory ChallengeProgramModel.fromJson(Map<String, dynamic> json) {

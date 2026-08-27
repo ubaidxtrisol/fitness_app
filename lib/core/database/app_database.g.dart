@@ -4371,6 +4371,229 @@ class ActiveSessionsCompanion extends UpdateCompanion<ActiveSession> {
   }
 }
 
+class $JoinedChallengesTable extends JoinedChallenges
+    with TableInfo<$JoinedChallengesTable, JoinedChallenge> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $JoinedChallengesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _challengeIdMeta = const VerificationMeta(
+    'challengeId',
+  );
+  @override
+  late final GeneratedColumn<String> challengeId = GeneratedColumn<String>(
+    'challenge_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _joinedAtMeta = const VerificationMeta(
+    'joinedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> joinedAt = GeneratedColumn<DateTime>(
+    'joined_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [challengeId, joinedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'joined_challenges';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<JoinedChallenge> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('challenge_id')) {
+      context.handle(
+        _challengeIdMeta,
+        challengeId.isAcceptableOrUnknown(
+          data['challenge_id']!,
+          _challengeIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_challengeIdMeta);
+    }
+    if (data.containsKey('joined_at')) {
+      context.handle(
+        _joinedAtMeta,
+        joinedAt.isAcceptableOrUnknown(data['joined_at']!, _joinedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_joinedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {challengeId};
+  @override
+  JoinedChallenge map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return JoinedChallenge(
+      challengeId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}challenge_id'],
+      )!,
+      joinedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}joined_at'],
+      )!,
+    );
+  }
+
+  @override
+  $JoinedChallengesTable createAlias(String alias) {
+    return $JoinedChallengesTable(attachedDatabase, alias);
+  }
+}
+
+class JoinedChallenge extends DataClass implements Insertable<JoinedChallenge> {
+  final String challengeId;
+  final DateTime joinedAt;
+  const JoinedChallenge({required this.challengeId, required this.joinedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['challenge_id'] = Variable<String>(challengeId);
+    map['joined_at'] = Variable<DateTime>(joinedAt);
+    return map;
+  }
+
+  JoinedChallengesCompanion toCompanion(bool nullToAbsent) {
+    return JoinedChallengesCompanion(
+      challengeId: Value(challengeId),
+      joinedAt: Value(joinedAt),
+    );
+  }
+
+  factory JoinedChallenge.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return JoinedChallenge(
+      challengeId: serializer.fromJson<String>(json['challengeId']),
+      joinedAt: serializer.fromJson<DateTime>(json['joinedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'challengeId': serializer.toJson<String>(challengeId),
+      'joinedAt': serializer.toJson<DateTime>(joinedAt),
+    };
+  }
+
+  JoinedChallenge copyWith({String? challengeId, DateTime? joinedAt}) =>
+      JoinedChallenge(
+        challengeId: challengeId ?? this.challengeId,
+        joinedAt: joinedAt ?? this.joinedAt,
+      );
+  JoinedChallenge copyWithCompanion(JoinedChallengesCompanion data) {
+    return JoinedChallenge(
+      challengeId: data.challengeId.present
+          ? data.challengeId.value
+          : this.challengeId,
+      joinedAt: data.joinedAt.present ? data.joinedAt.value : this.joinedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JoinedChallenge(')
+          ..write('challengeId: $challengeId, ')
+          ..write('joinedAt: $joinedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(challengeId, joinedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is JoinedChallenge &&
+          other.challengeId == this.challengeId &&
+          other.joinedAt == this.joinedAt);
+}
+
+class JoinedChallengesCompanion extends UpdateCompanion<JoinedChallenge> {
+  final Value<String> challengeId;
+  final Value<DateTime> joinedAt;
+  final Value<int> rowid;
+  const JoinedChallengesCompanion({
+    this.challengeId = const Value.absent(),
+    this.joinedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  JoinedChallengesCompanion.insert({
+    required String challengeId,
+    required DateTime joinedAt,
+    this.rowid = const Value.absent(),
+  }) : challengeId = Value(challengeId),
+       joinedAt = Value(joinedAt);
+  static Insertable<JoinedChallenge> custom({
+    Expression<String>? challengeId,
+    Expression<DateTime>? joinedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (challengeId != null) 'challenge_id': challengeId,
+      if (joinedAt != null) 'joined_at': joinedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  JoinedChallengesCompanion copyWith({
+    Value<String>? challengeId,
+    Value<DateTime>? joinedAt,
+    Value<int>? rowid,
+  }) {
+    return JoinedChallengesCompanion(
+      challengeId: challengeId ?? this.challengeId,
+      joinedAt: joinedAt ?? this.joinedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (challengeId.present) {
+      map['challenge_id'] = Variable<String>(challengeId.value);
+    }
+    if (joinedAt.present) {
+      map['joined_at'] = Variable<DateTime>(joinedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JoinedChallengesCompanion(')
+          ..write('challengeId: $challengeId, ')
+          ..write('joinedAt: $joinedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -4385,6 +4608,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ExercisePreferencesTable exercisePreferences =
       $ExercisePreferencesTable(this);
   late final $ActiveSessionsTable activeSessions = $ActiveSessionsTable(this);
+  late final $JoinedChallengesTable joinedChallenges = $JoinedChallengesTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -4397,6 +4623,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     exerciseLogs,
     exercisePreferences,
     activeSessions,
+    joinedChallenges,
   ];
 }
 
@@ -6560,6 +6787,157 @@ typedef $$ActiveSessionsTableProcessedTableManager =
       ActiveSession,
       PrefetchHooks Function()
     >;
+typedef $$JoinedChallengesTableCreateCompanionBuilder =
+    JoinedChallengesCompanion Function({
+      required String challengeId,
+      required DateTime joinedAt,
+      Value<int> rowid,
+    });
+typedef $$JoinedChallengesTableUpdateCompanionBuilder =
+    JoinedChallengesCompanion Function({
+      Value<String> challengeId,
+      Value<DateTime> joinedAt,
+      Value<int> rowid,
+    });
+
+class $$JoinedChallengesTableFilterComposer
+    extends Composer<_$AppDatabase, $JoinedChallengesTable> {
+  $$JoinedChallengesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get challengeId => $composableBuilder(
+    column: $table.challengeId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get joinedAt => $composableBuilder(
+    column: $table.joinedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$JoinedChallengesTableOrderingComposer
+    extends Composer<_$AppDatabase, $JoinedChallengesTable> {
+  $$JoinedChallengesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get challengeId => $composableBuilder(
+    column: $table.challengeId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get joinedAt => $composableBuilder(
+    column: $table.joinedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$JoinedChallengesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JoinedChallengesTable> {
+  $$JoinedChallengesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get challengeId => $composableBuilder(
+    column: $table.challengeId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get joinedAt =>
+      $composableBuilder(column: $table.joinedAt, builder: (column) => column);
+}
+
+class $$JoinedChallengesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JoinedChallengesTable,
+          JoinedChallenge,
+          $$JoinedChallengesTableFilterComposer,
+          $$JoinedChallengesTableOrderingComposer,
+          $$JoinedChallengesTableAnnotationComposer,
+          $$JoinedChallengesTableCreateCompanionBuilder,
+          $$JoinedChallengesTableUpdateCompanionBuilder,
+          (
+            JoinedChallenge,
+            BaseReferences<
+              _$AppDatabase,
+              $JoinedChallengesTable,
+              JoinedChallenge
+            >,
+          ),
+          JoinedChallenge,
+          PrefetchHooks Function()
+        > {
+  $$JoinedChallengesTableTableManager(
+    _$AppDatabase db,
+    $JoinedChallengesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$JoinedChallengesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JoinedChallengesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$JoinedChallengesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> challengeId = const Value.absent(),
+                Value<DateTime> joinedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => JoinedChallengesCompanion(
+                challengeId: challengeId,
+                joinedAt: joinedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String challengeId,
+                required DateTime joinedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => JoinedChallengesCompanion.insert(
+                challengeId: challengeId,
+                joinedAt: joinedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$JoinedChallengesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JoinedChallengesTable,
+      JoinedChallenge,
+      $$JoinedChallengesTableFilterComposer,
+      $$JoinedChallengesTableOrderingComposer,
+      $$JoinedChallengesTableAnnotationComposer,
+      $$JoinedChallengesTableCreateCompanionBuilder,
+      $$JoinedChallengesTableUpdateCompanionBuilder,
+      (
+        JoinedChallenge,
+        BaseReferences<_$AppDatabase, $JoinedChallengesTable, JoinedChallenge>,
+      ),
+      JoinedChallenge,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6578,4 +6956,6 @@ class $AppDatabaseManager {
       $$ExercisePreferencesTableTableManager(_db, _db.exercisePreferences);
   $$ActiveSessionsTableTableManager get activeSessions =>
       $$ActiveSessionsTableTableManager(_db, _db.activeSessions);
+  $$JoinedChallengesTableTableManager get joinedChallenges =>
+      $$JoinedChallengesTableTableManager(_db, _db.joinedChallenges);
 }

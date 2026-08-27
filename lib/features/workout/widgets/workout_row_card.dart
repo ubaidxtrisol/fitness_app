@@ -25,6 +25,11 @@ class WorkoutRowCard extends StatelessWidget {
   final Color titleColor;
   final VoidCallback? onTap;
 
+  /// Shows a small green checkmark badge over the thumbnail's top-right
+  /// corner — Requirement: an exercise already logged this run (or every
+  /// exercise, once the whole day is done) reads as complete at a glance.
+  final bool isDone;
+
   /// Figma 11:766 — day row on the program screen.
   const WorkoutRowCard.day({
     super.key,
@@ -33,6 +38,7 @@ class WorkoutRowCard extends StatelessWidget {
     required this.thumbnailUrl,
     required String badge,
     this.onTap,
+    this.isDone = false,
   }) : badgeLabel = badge,
        thumbnailWidth = 115,
        thumbnailRadius = 16,
@@ -49,6 +55,7 @@ class WorkoutRowCard extends StatelessWidget {
     required this.subtitle,
     required this.thumbnailUrl,
     this.onTap,
+    this.isDone = false,
   }) : badgeLabel = null,
        thumbnailWidth = 76,
        thumbnailRadius = 13,
@@ -93,6 +100,29 @@ class WorkoutRowCard extends StatelessWidget {
                       ),
               ),
             ),
+
+            // Completed checkmark — anchored to the thumbnail's own corner so
+            // it lands in the same spot regardless of which variant this is.
+            if (isDone)
+              Positioned(
+                left: thumbnailWidth - 18,
+                top: 4,
+                child: Container(
+                  width: 18,
+                  height: 18,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: AppColors.success,
+                    shape: BoxShape.circle,
+                    boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 2)],
+                  ),
+                  child: const Icon(
+                    Icons.check_rounded,
+                    color: Colors.white,
+                    size: 12,
+                  ),
+                ),
+              ),
 
             // Order badge (day rows only)
             if (badgeLabel != null)
