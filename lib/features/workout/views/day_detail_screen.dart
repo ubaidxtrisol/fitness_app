@@ -1,4 +1,5 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/features/discover/views/exercise_detail_screen.dart';
@@ -17,12 +18,18 @@ class DayDetailScreen extends StatefulWidget {
   final DayModel day;
   final PhaseModel phase;
   final String programName;
+  final String programId;
+  final int dayIndex;
+  final int totalDays;
 
   const DayDetailScreen({
     super.key,
     required this.day,
     required this.phase,
     required this.programName,
+    this.programId = '',
+    this.dayIndex = 0,
+    this.totalDays = 0,
   });
 
   @override
@@ -37,6 +44,21 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
     final secs = (totalSecs % 60).toString().padLeft(2, '0');
     return '$mins:$secs';
   }
+
+  /// One definition of this day's run, shared by the Start button and by
+  /// "Start Now" on each exercise's detail screen.
+  PlayerSession get _session => PlayerSession(
+    exercises: widget.day.exercises,
+    workoutTitle: '${widget.programName} · ${widget.day.title}',
+    planId: widget.programId,
+    planType: PlanType.program,
+    planTitle: widget.programName,
+    dayId: widget.day.id,
+    dayTitle: widget.day.title,
+    dayLevel: widget.day.difficulty,
+    dayIndex: widget.dayIndex,
+    totalDays: widget.totalDays,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +135,8 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
                           exercise: exercise,
                           dayLabel: day.title,
                           showFavorite: true,
+                          session: _session,
+                          exerciseIndex: index,
                         ),
                       ),
                     ),
@@ -130,14 +154,8 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
               child: SizedBox(
                 height: 52,
                 child: ElevatedButton(
-                  onPressed: () => context.push(
-                    ExercisePlayerScreen(
-                      session: PlayerSession(
-                        exercises: day.exercises,
-                        workoutTitle: '${widget.programName} · ${day.title}',
-                      ),
-                    ),
-                  ),
+                  onPressed: () =>
+                      context.push(ExercisePlayerScreen(session: _session)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.surface,

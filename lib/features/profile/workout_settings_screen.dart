@@ -1,4 +1,5 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/database/repositories/settings_repository.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/features/profile/widgets/countdown_picker_dialog.dart';
@@ -20,6 +21,24 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
   final ValueNotifier<double> _volume = ValueNotifier<double>(0.6);
   final ValueNotifier<bool> _isSoundEffectEnabled = ValueNotifier<bool>(true);
   final ValueNotifier<int> _countdownSeconds = ValueNotifier<int>(5);
+
+  final SettingsRepository _settings = SettingsRepository();
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final row = await _settings.load();
+    if (!mounted) return;
+    _isVoiceGuideEnabled.value = row.voiceGuideEnabled;
+    _isDetailedGuide.value = row.detailedGuide;
+    _volume.value = row.volume;
+    _isSoundEffectEnabled.value = row.soundEffectEnabled;
+    _countdownSeconds.value = row.countdownSeconds;
+  }
 
   @override
   void dispose() {
@@ -64,7 +83,10 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
                       return CupertinoSwitch(
                         value: isEnabled,
                         activeTrackColor: AppColors.primary,
-                        onChanged: (val) => _isVoiceGuideEnabled.value = val,
+                        onChanged: (val) {
+                          _isVoiceGuideEnabled.value = val;
+                          _settings.update(voiceGuideEnabled: val);
+                        },
                       );
                     },
                   ),
@@ -139,8 +161,10 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
                               return CupertinoSwitch(
                                 value: isSoundEnabled,
                                 activeTrackColor: AppColors.primary,
-                                onChanged: (val) =>
-                                    _isSoundEffectEnabled.value = val,
+                                onChanged: (val) {
+                                  _isSoundEffectEnabled.value = val;
+                                  _settings.update(soundEffectEnabled: val);
+                                },
                               );
                             },
                           ),
@@ -164,7 +188,10 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
                           initialSeconds: _countdownSeconds.value,
                           minSeconds: 1,
                           maxSeconds: 120,
-                          onSave: (val) => _countdownSeconds.value = val,
+                          onSave: (val) {
+                            _countdownSeconds.value = val;
+                            _settings.update(countdownSeconds: val);
+                          },
                         );
                       },
                       borderRadius: const BorderRadius.vertical(
@@ -299,7 +326,10 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
               // Detailed Guide Button
               Expanded(
                 child: GestureDetector(
-                  onTap: () => _isDetailedGuide.value = true,
+                  onTap: () {
+                    _isDetailedGuide.value = true;
+                    _settings.update(detailedGuide: true);
+                  },
                   behavior: HitTestBehavior.opaque,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
@@ -327,7 +357,10 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
               // Brief Guide Button
               Expanded(
                 child: GestureDetector(
-                  onTap: () => _isDetailedGuide.value = false,
+                  onTap: () {
+                    _isDetailedGuide.value = false;
+                    _settings.update(detailedGuide: false);
+                  },
                   behavior: HitTestBehavior.opaque,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
@@ -387,6 +420,7 @@ class _WorkoutSettingsScreenState extends State<WorkoutSettingsScreen> {
                   min: 0.0,
                   max: 1.0,
                   onChanged: (newVol) => _volume.value = newVol,
+                  onChangeEnd: (newVol) => _settings.update(volume: newVol),
                 ),
               );
             },

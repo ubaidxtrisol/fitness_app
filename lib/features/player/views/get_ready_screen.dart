@@ -1,50 +1,99 @@
+import 'dart:async';
+
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/player/widgets/player_scaffold.dart';
+import 'package:fitness_app/features/player/widgets/video_backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:video_player/video_player.dart';
 
 /// "Get Ready!" — Figma 11:1201.
 ///
-/// Full-bleed model artwork with a 361x210 sheet pinned near the bottom.
-class GetReadyScreen extends StatelessWidget {
+/// Counts down from the user's configured countdown before handing over to the
+/// player. The exercise clip is already playing behind the sheet so the first
+/// rep starts the instant the count hits zero.
+class GetReadyScreen extends StatefulWidget {
   final ExerciseModel exercise;
+
+  /// From workout settings; 0 skips the countdown entirely.
+  final int countdownSeconds;
+
+  /// Controller owned by the player, shown here so playback is seamless.
+  final VideoPlayerController? controller;
+  final bool isVideoReady;
   final VoidCallback onSkip;
 
   const GetReadyScreen({
     super.key,
     required this.exercise,
+    required this.countdownSeconds,
     required this.onSkip,
+    this.controller,
+    this.isVideoReady = false,
   });
+
+  @override
+  State<GetReadyScreen> createState() => _GetReadyScreenState();
+}
+
+class _GetReadyScreenState extends State<GetReadyScreen> {
+  Timer? _ticker;
+  late int _remaining;
+
+  @override
+  void initState() {
+    super.initState();
+    _remaining = widget.countdownSeconds;
+    if (_remaining <= 0) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => widget.onSkip());
+      return;
+    }
+    _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!mounted) return;
+      if (_remaining <= 1) {
+        _ticker?.cancel();
+        widget.onSkip();
+      } else {
+        setState(() => _remaining--);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _ticker?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return PlayerScaffold(
-      // Node 11:1296 rotates the landscape source -90 to fill the portrait area.
-      backdrop: const RotatedBox(
-        quarterTurns: 3,
-        child: Image(
-          image: AssetImage('assets/images/player_model.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 17),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              // Same banner the player uses, so the hand-off is seamless.
+              VideoBanner(
+                controller: widget.controller,
+                isReady: widget.isVideoReady,
+                maxHeight: MediaQuery.sizeOf(context).height * 0.36,
+              ),
+              const SizedBox(height: 16),
               PlayerSheet(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 39, 10, 0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Heading block (11:1220)
-                      const Text(
-                        'Get Ready!',
+                      // Heading block (11:1220) — shows the live count once the
+                      // countdown is running.
+                      Text(
+                        _remaining > 0 ? '$_remaining' : 'Get Ready!',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 29.12,
                           height: 1,
                           fontWeight: FontWeight.w800,
@@ -53,7 +102,7 @@ class GetReadyScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 17),
                       Text(
-                        exercise.title,
+                        widget.exercise.title,
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -78,7 +127,10 @@ class GetReadyScreen extends StatelessWidget {
 
                       // Skip button (11:1223) with its trailing arrow pill.
                       GestureDetector(
-                        onTap: onSkip,
+                        onTap: () {
+                          _ticker?.cancel();
+                          widget.onSkip();
+                        },
                         child: Container(
                           height: 52,
                           decoration: BoxDecoration(

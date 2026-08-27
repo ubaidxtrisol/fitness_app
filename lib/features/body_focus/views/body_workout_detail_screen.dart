@@ -97,6 +97,9 @@ class _BodyWorkoutDetailScreenState extends State<BodyWorkoutDetailScreen> {
                   BodySessionScreen(
                     session: session,
                     workoutTitle: workout.title,
+                    planId: workout.id,
+                    sessionIndex: index,
+                    totalSessions: workout.sessions.length,
                   ),
                 ),
               ),

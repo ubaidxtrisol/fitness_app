@@ -1,11 +1,41 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeroBanner extends StatelessWidget {
   final VoidCallback? onStartWorkout;
 
-  const HomeHeroBanner({super.key, this.onStartWorkout});
+  /// What to offer next, resolved from real progress. Null until the first
+  /// read completes, or when no plan could be resolved.
+  final NextUpSuggestion? nextUp;
+
+  const HomeHeroBanner({super.key, this.onStartWorkout, this.nextUp});
+
+  /// "Day 3" for a resumed plan, "Day 1" for a fresh start.
+  String get _dayLabel => nextUp?.dayTitle ?? 'Day 1';
+
+  /// Two lines: the plan being resumed, or the stock line before any history.
+  String get _title {
+    final next = nextUp;
+    if (next == null) return 'Move Better\nFeel Stronger';
+    return next.isResuming
+        ? 'Keep Going\n${next.dayTitle}'
+        : 'Move Better\nFeel Stronger';
+  }
+
+  String get _subtitle {
+    final next = nextUp;
+    if (next == null) return 'Pilates and Yoga for a\nhealthier lifestyle';
+    return next.isResuming
+        ? '${next.planTitle}\nDay ${next.dayIndex + 1} of ${next.totalDays}'
+        : '${next.planTitle}\nStart your first session';
+  }
+
+  String get _meta => nextUp?.metaLabel ?? '6min/7 Exercise';
+
+  String get _cta =>
+      (nextUp?.isResuming ?? false) ? 'Continue' : 'Start Workout';
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +85,9 @@ class HomeHeroBanner extends StatelessWidget {
                   color: const Color(0xFFF398B1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Text(
-                  'Day 1',
-                  style: TextStyle(
+                child: Text(
+                  _dayLabel,
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -69,9 +99,9 @@ class HomeHeroBanner extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Move Better\nFeel Stronger',
-                    style: TextStyle(
+                  Text(
+                    _title,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
                       color: AppColors.primary,
@@ -79,9 +109,11 @@ class HomeHeroBanner extends StatelessWidget {
                     ),
                   ),
                   // 6.heightBox,
-                  const Text(
-                    'Pilates and Yoga for a\nhealthier lifestyle',
-                    style: TextStyle(
+                  Text(
+                    _subtitle,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
                       fontSize: 8,
                       fontWeight: FontWeight.w400,
                       color: Color(0xFF7A686D),
@@ -89,9 +121,9 @@ class HomeHeroBanner extends StatelessWidget {
                     ),
                   ),
                   4.heightBox,
-                  const Text(
-                    '6min/7 Exercise',
-                    style: TextStyle(
+                  Text(
+                    _meta,
+                    style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF6C434C),
@@ -122,9 +154,9 @@ class HomeHeroBanner extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        'Start Workout',
-                        style: TextStyle(
+                      Text(
+                        _cta,
+                        style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,

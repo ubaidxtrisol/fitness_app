@@ -2,6 +2,7 @@ import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/app_strings.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
+import 'package:fitness_app/core/database/repositories/user_profile_repository.dart';
 import 'package:fitness_app/core/services/user_info_storage.dart';
 import 'package:fitness_app/features/bottom_bar/bottom_bar_screen.dart';
 import 'package:fitness_app/features/user_info_flow/models/user_info_question_model.dart';
@@ -44,6 +45,7 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
   };
 
   final List<QuestionModel> _questions = UserInfoQuestions.questions;
+  final UserProfileRepository _profiles = UserProfileRepository();
 
   @override
   void dispose() {
@@ -53,6 +55,11 @@ class _UserInfoFlowScreenState extends State<UserInfoFlowScreen> {
 
   void _onNext() async {
     await UserInfoStorage.saveAnswers(_answers);
+
+    final isLastStep = _currentStep >= _questions.length - 1;
+    // Every step is persisted so a mid-flow exit is not lost; the final step
+    // also flips the onboarding gate the splash screen reads.
+    await _profiles.saveAnswers(_answers, markComplete: isLastStep);
 
     if (_currentStep < _questions.length - 1) {
       _pageController.nextPage(

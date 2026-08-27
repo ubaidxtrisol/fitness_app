@@ -1,4 +1,5 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/features/discover/views/exercise_detail_screen.dart';
 import 'package:fitness_app/features/player/models/player_session.dart';
@@ -14,11 +15,17 @@ import 'package:flutter/material.dart';
 class BodySessionScreen extends StatefulWidget {
   final DayModel session;
   final String workoutTitle;
+  final String planId;
+  final int sessionIndex;
+  final int totalSessions;
 
   const BodySessionScreen({
     super.key,
     required this.session,
     required this.workoutTitle,
+    this.planId = '',
+    this.sessionIndex = 0,
+    this.totalSessions = 0,
   });
 
   @override
@@ -33,6 +40,21 @@ class _BodySessionScreenState extends State<BodySessionScreen> {
     final secs = (totalSecs % 60).toString().padLeft(2, '0');
     return '$mins:$secs';
   }
+
+  /// One definition of this session's run, shared by the Start button and by
+  /// "Start Now" on each exercise's detail screen.
+  PlayerSession get _session => PlayerSession(
+    exercises: widget.session.exercises,
+    workoutTitle: '${widget.workoutTitle} · ${widget.session.title}',
+    planId: widget.planId.isEmpty ? widget.session.id : widget.planId,
+    planType: PlanType.bodyFocus,
+    planTitle: widget.workoutTitle,
+    dayId: widget.session.id,
+    dayTitle: widget.session.title,
+    dayLevel: widget.session.difficulty,
+    dayIndex: widget.sessionIndex,
+    totalDays: widget.totalSessions,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +89,8 @@ class _BodySessionScreenState extends State<BodySessionScreen> {
                       exercise: exercise,
                       dayLabel: widget.session.title,
                       showFavorite: true,
+                      session: _session,
+                      exerciseIndex: index,
                     ),
                   ),
                 );
@@ -85,13 +109,7 @@ class _BodySessionScreenState extends State<BodySessionScreen> {
                   onPressed: exercises.isEmpty
                       ? null
                       : () => context.push(
-                          ExercisePlayerScreen(
-                            session: PlayerSession(
-                              exercises: exercises,
-                              workoutTitle:
-                                  '${widget.workoutTitle} · ${widget.session.title}',
-                            ),
-                          ),
+                          ExercisePlayerScreen(session: _session),
                         ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

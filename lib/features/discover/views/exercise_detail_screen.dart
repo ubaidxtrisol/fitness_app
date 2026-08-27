@@ -1,6 +1,14 @@
+import 'dart:async';
+
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
+import 'package:fitness_app/core/constants/routes/nav_extension.dart';
+import 'package:fitness_app/core/database/app_database.dart';
+import 'package:fitness_app/core/database/repositories/exercise_prefs_repository.dart';
+import 'package:fitness_app/core/database/repositories/settings_repository.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
+import 'package:fitness_app/features/player/models/player_session.dart';
+import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
@@ -14,11 +22,21 @@ class ExerciseDetailScreen extends StatefulWidget {
   final String dayLabel;
   final bool showFavorite;
 
+  /// The run "Start Now" launches. Every flow passes the same session its own
+  /// Start button uses, so the player logs against the right plan; the button
+  /// jumps straight to [exerciseIndex].
+  ///
+  /// Null falls back to a one-exercise, untracked run.
+  final PlayerSession? session;
+  final int exerciseIndex;
+
   const ExerciseDetailScreen({
     super.key,
     required this.exercise,
     this.dayLabel = 'Day 1',
     this.showFavorite = false,
+    this.session,
+    this.exerciseIndex = 0,
   });
 
   @override
@@ -26,19 +44,69 @@ class ExerciseDetailScreen extends StatefulWidget {
 }
 
 class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
+  final ExercisePrefsRepository _prefs = ExercisePrefsRepository();
+  final SettingsRepository _settingsRepo = SettingsRepository();
+
   VideoPlayerController? _videoController;
   bool _isVideoInitialized = false;
   bool _hasError = false;
   bool _isFavorite = false;
-  late int _durationSeconds;
+
+  /// What the user dialled in for this exercise, if anything. Null means the
+  /// clip's own length still wins.
+  int? _override;
+
+  /// The clip's natural length, known once the controller initialises.
+  int? _clipSeconds;
+
+  WorkoutSettingsRow? _settings;
+  StreamSubscription<WorkoutSettingsRow>? _settingsSub;
+
+  /// The stepper's value: the saved override, else the clip's length, else
+  /// whatever the catalogue claims.
+  int get _durationSeconds {
+    final saved = _override;
+    if (saved != null && saved > 0) return saved;
+
+    final clip = _clipSeconds;
+    if (clip != null && clip > 0) return clip;
+
+    return widget.exercise.durationSeconds > 0
+        ? widget.exercise.durationSeconds
+        : 35;
+  }
 
   @override
   void initState() {
     super.initState();
-    _durationSeconds = widget.exercise.durationSeconds > 0
-        ? widget.exercise.durationSeconds
-        : 35;
-    _initializeVideo();
+    _boot();
+  }
+
+  Future<void> _boot() async {
+    final saved = await _prefs.durationFor(widget.exercise.exerciseId);
+    final settings = await _settingsRepo.load();
+    if (!mounted) return;
+
+    setState(() {
+      _override = saved;
+      _settings = settings;
+    });
+
+    // Volume and mute are global — a change made in workout settings while
+    // this screen is open applies straight away.
+    _settingsSub = _settingsRepo.watch().listen((row) {
+      if (!mounted) return;
+      setState(() => _settings = row);
+      _videoController?.setVolume(_playbackVolume);
+    });
+
+    await _initializeVideo();
+  }
+
+  double get _playbackVolume {
+    final settings = _settings;
+    if (settings == null) return 0.6;
+    return settings.soundEffectEnabled ? settings.volume : 0.0;
   }
 
   Future<void> _initializeVideo() async {
@@ -50,12 +118,16 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       );
 
       await _videoController!.initialize();
-      _videoController!.setLooping(true);
-      _videoController!.play();
+      await _videoController!.setLooping(true);
+      await _videoController!.setVolume(_playbackVolume);
+      await _videoController!.play();
 
       if (mounted) {
         setState(() {
           _isVideoInitialized = true;
+          // The stepper starts at the clip's length unless the user has
+          // already chosen one for this exercise.
+          _clipSeconds = _videoController!.value.duration.inSeconds;
         });
       }
     } catch (e) {
@@ -69,17 +141,45 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
 
   @override
   void dispose() {
+    _settingsSub?.cancel();
     _videoController?.dispose();
     super.dispose();
   }
 
+  /// Steps the duration and caches it against this exercise, so the player and
+  /// the next visit to this screen both pick it up.
   void _adjustDuration(int delta) {
-    setState(() {
-      final newDuration = _durationSeconds + delta;
-      if (newDuration >= 5) {
-        _durationSeconds = newDuration;
-      }
-    });
+    final next = (_durationSeconds + delta).clamp(
+      ExercisePrefsRepository.minSeconds,
+      ExercisePrefsRepository.maxSeconds,
+    );
+    if (next == _durationSeconds) return;
+
+    setState(() => _override = next);
+    _prefs.setDuration(widget.exercise.exerciseId, next);
+  }
+
+  /// Opens the shared player on this exercise. The player re-reads the cached
+  /// durations, so the clip loops for exactly what the stepper shows.
+  Future<void> _startNow() async {
+    await _videoController?.pause();
+    if (!mounted) return;
+
+    final session = widget.session;
+    await context.push(
+      ExercisePlayerScreen(
+        session: session == null
+            ? PlayerSession(
+                exercises: [widget.exercise],
+                workoutTitle: widget.exercise.title,
+              )
+            : session.startingAt(widget.exerciseIndex),
+      ),
+    );
+    if (!mounted) return;
+
+    // Back on the detail screen: the preview picks up where it left off.
+    await _videoController?.play();
   }
 
   String _formatDuration(int totalSecs) {
@@ -169,6 +269,34 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
               ),
             ),
         ],
+      ),
+      // Start Now (matches the 52pt r20 Start button on 11:738 / 12:2422).
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: SizedBox(
+            height: 52,
+            child: ElevatedButton(
+              onPressed: _startNow,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.surface,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                'Start Now · ${_formatDuration(_durationSeconds)}',
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 11, 16, 30),

@@ -1,6 +1,8 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
+import 'package:fitness_app/core/database/repositories/user_profile_repository.dart';
+import 'package:fitness_app/features/profile/unit_conversion.dart';
 import 'package:fitness_app/features/profile/widgets/profile_slider_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,37 +15,56 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  // ValueNotifiers for reactive state management without setState
+  final UserProfileRepository _profiles = UserProfileRepository();
+
+  // Display unit only. The three values below are always metric.
   final ValueNotifier<bool> _isMetric = ValueNotifier<bool>(true);
-  final ValueNotifier<int> _height = ValueNotifier<int>(162); // cm or ft
-  final ValueNotifier<int> _weight = ValueNotifier<int>(58); // kg or lbs
-  final ValueNotifier<int> _targetWeight = ValueNotifier<int>(58); // kg or lbs
+  final ValueNotifier<int> _heightCm = ValueNotifier<int>(165);
+  final ValueNotifier<int> _weightKg = ValueNotifier<int>(75);
+  final ValueNotifier<int> _targetWeightKg = ValueNotifier<int>(70);
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  /// Shows back what the user picked during the info flow.
+  Future<void> _load() async {
+    final profile = await _profiles.load();
+    if (!mounted) return;
+
+    _heightCm.value = profile.heightCm;
+    _weightKg.value = profile.weightKg;
+    _targetWeightKg.value = profile.targetWeightKg;
+  }
 
   @override
   void dispose() {
     _isMetric.dispose();
-    _height.dispose();
-    _weight.dispose();
-    _targetWeight.dispose();
+    _heightCm.dispose();
+    _weightKg.dispose();
+    _targetWeightKg.dispose();
     super.dispose();
   }
 
-  void _onUnitToggle(bool toMetric) {
-    if (_isMetric.value == toMetric) return;
+  /// Flips the display unit only — the stored metric values never round-trip
+  /// through a conversion, so toggling back and forth cannot drift.
+  void _onUnitToggle(bool toMetric) => _isMetric.value = toMetric;
 
-    if (toMetric) {
-      // Imperial (lbs, ft) -> Metric (kg, cm)
-      _weight.value = (_weight.value / 2.20462).round().clamp(30, 200);
-      _targetWeight.value = (_targetWeight.value / 2.20462).round().clamp(30, 200);
-      _height.value = (_height.value * 30.48).round().clamp(100, 230);
-      _isMetric.value = true;
-    } else {
-      // Metric (kg, cm) -> Imperial (lbs, ft)
-      _weight.value = (_weight.value * 2.20462).round().clamp(66, 440);
-      _targetWeight.value = (_targetWeight.value * 2.20462).round().clamp(66, 440);
-      _height.value = (_height.value / 30.48).round().clamp(3, 8);
-      _isMetric.value = false;
-    }
+  Future<void> _saveHeight(int cm) async {
+    _heightCm.value = cm;
+    await _profiles.saveAnswers({'height': cm});
+  }
+
+  Future<void> _saveWeight(int kg) async {
+    _weightKg.value = kg;
+    await _profiles.saveAnswers({'weight': kg});
+  }
+
+  Future<void> _saveTargetWeight(int kg) async {
+    _targetWeightKg.value = kg;
+    await _profiles.saveAnswers({'target_weight': kg});
   }
 
   @override
@@ -85,21 +106,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       valueListenable: _isMetric,
                       builder: (context, isMetric, _) {
                         return ValueListenableBuilder<int>(
-                          valueListenable: _height,
-                          builder: (context, heightVal, _) {
+                          valueListenable: _heightCm,
+                          builder: (context, heightCm, _) {
                             return _buildProfileItem(
                               svgPath: 'assets/svgs/height.svg',
                               title: 'Height',
-                              value: isMetric ? '$heightVal cm' : '$heightVal ft',
+                              value: isMetric
+                                  ? '$heightCm cm'
+                                  : feetInches(heightCm),
                               onTap: () {
                                 ProfileSliderDialog.show(
                                   context: context,
                                   title: 'Height',
-                                  initialValue: heightVal,
-                                  minValue: isMetric ? 100 : 3,
-                                  maxValue: isMetric ? 230 : 8,
-                                  unit: isMetric ? 'cm' : 'ft',
-                                  onSave: (newVal) => _height.value = newVal,
+                                  initialValue: isMetric
+                                      ? heightCm
+                                      : cmToInches(heightCm),
+                                  minValue: isMetric ? 100 : 39,
+                                  maxValue: isMetric ? 230 : 91,
+                                  unit: isMetric ? 'cm' : 'in',
+                                  onSave: (newVal) => _saveHeight(
+                                    isMetric ? newVal : inchesToCm(newVal),
+                                  ),
                                 );
                               },
                             );
@@ -121,21 +148,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       valueListenable: _isMetric,
                       builder: (context, isMetric, _) {
                         return ValueListenableBuilder<int>(
-                          valueListenable: _weight,
-                          builder: (context, weightVal, _) {
+                          valueListenable: _weightKg,
+                          builder: (context, weightKg, _) {
                             return _buildProfileItem(
                               svgPath: 'assets/svgs/weight.svg',
                               title: 'Weight',
-                              value: isMetric ? '${weightVal}kg' : '$weightVal lbs',
+                              value: isMetric
+                                  ? '${weightKg}kg'
+                                  : '${kgToLbs(weightKg)} lbs',
                               onTap: () {
                                 ProfileSliderDialog.show(
                                   context: context,
                                   title: 'Current Weight',
-                                  initialValue: weightVal,
+                                  initialValue: isMetric
+                                      ? weightKg
+                                      : kgToLbs(weightKg),
                                   minValue: isMetric ? 30 : 66,
                                   maxValue: isMetric ? 200 : 440,
                                   unit: isMetric ? 'kg' : 'lbs',
-                                  onSave: (newVal) => _weight.value = newVal,
+                                  onSave: (newVal) => _saveWeight(
+                                    isMetric ? newVal : lbsToKg(newVal),
+                                  ),
                                 );
                               },
                             );
@@ -157,21 +190,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       valueListenable: _isMetric,
                       builder: (context, isMetric, _) {
                         return ValueListenableBuilder<int>(
-                          valueListenable: _targetWeight,
-                          builder: (context, targetWeightVal, _) {
+                          valueListenable: _targetWeightKg,
+                          builder: (context, targetKg, _) {
                             return _buildProfileItem(
                               svgPath: 'assets/svgs/target.svg',
                               title: 'Target Weight',
-                              value: isMetric ? '${targetWeightVal}kg' : '$targetWeightVal lbs',
+                              value: isMetric
+                                  ? '${targetKg}kg'
+                                  : '${kgToLbs(targetKg)} lbs',
                               onTap: () {
                                 ProfileSliderDialog.show(
                                   context: context,
                                   title: 'Target Weight',
-                                  initialValue: targetWeightVal,
+                                  initialValue: isMetric
+                                      ? targetKg
+                                      : kgToLbs(targetKg),
                                   minValue: isMetric ? 30 : 66,
                                   maxValue: isMetric ? 200 : 440,
                                   unit: isMetric ? 'kg' : 'lbs',
-                                  onSave: (newVal) => _targetWeight.value = newVal,
+                                  onSave: (newVal) => _saveTargetWeight(
+                                    isMetric ? newVal : lbsToKg(newVal),
+                                  ),
                                 );
                               },
                             );

@@ -7,11 +7,13 @@ import 'package:fitness_app/features/home/widgets/body_focus_widget.dart';
 import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
 import 'package:fitness_app/features/body_focus/services/body_focus_repository.dart';
 import 'package:fitness_app/features/body_focus/views/body_focus_category_screen.dart';
+import 'package:fitness_app/core/database/repositories/progress_repository.dart';
+import 'package:fitness_app/features/challenges/views/challenge_day_screen.dart';
+import 'package:fitness_app/features/home/services/next_up_service.dart';
+import 'package:fitness_app/features/workout/views/day_detail_screen.dart';
 import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
 import 'package:fitness_app/features/challenges/views/challenge_detail_screen.dart';
 import 'package:fitness_app/features/challenges/views/challenges_screen.dart';
-import 'package:fitness_app/features/workout/services/workout_repository.dart';
-import 'package:fitness_app/features/workout/views/program_detail_screen.dart';
 import 'package:fitness_app/features/home/widgets/home_hero_banner.dart';
 import 'package:fitness_app/features/home/widgets/today_summary_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +27,40 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TodaySummaryModel _todaySummary = const TodaySummaryModel(
-    calories: 234,
-    minutes: 25,
-    workoutsCount: 4,
-    streakDays: 6,
+  final ProgressRepository _progress = ProgressRepository();
+  final NextUpService _nextUpService = NextUpService();
+
+  TodaySummaryModel _todaySummary = const TodaySummaryModel(
+    calories: 0,
+    minutes: 0,
+    workoutsCount: 0,
+    streakDays: 0,
   );
+  NextUpTarget? _nextUp;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  /// Re-reads today's totals and the next suggested day. Called on mount and
+  /// again whenever the user returns from a workout.
+  Future<void> _refresh() async {
+    final summary = await _progress.summaryForDay();
+    final nextUp = await _nextUpService.resolve();
+    if (!mounted) return;
+
+    setState(() {
+      _todaySummary = TodaySummaryModel(
+        calories: summary.calories,
+        minutes: summary.minutes,
+        workoutsCount: summary.workouts,
+        streakDays: summary.streakDays,
+      );
+      _nextUp = nextUp;
+    });
+  }
 
   final List<ChallengeModel> _challenges = const [
     ChallengeModel(
@@ -129,7 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // 1. Hero Banner
             SliverToBoxAdapter(
-              child: HomeHeroBanner(onStartWorkout: _openProgram),
+              child: HomeHeroBanner(
+                onStartWorkout: _openNextUp,
+                nextUp: _nextUp?.suggestion,
+              ),
             ),
             12.heightBox.sliver,
 
@@ -245,19 +278,49 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// "Start Workout" on the hero banner opens the program flow (Figma 10:509).
-  Future<void> _openProgram() async {
-    final programs = await WorkoutRepository.loadPrograms();
-    if (!mounted) return;
-
-    if (programs.isEmpty) {
+  /// The banner's CTA opens the exact day the user should do next, rather
+  /// than always dumping them at the top of the program.
+  Future<void> _openNextUp() async {
+    final target = _nextUp;
+    if (target == null) {
       AppToast.error(
         title: 'Unavailable',
-        description: 'No program is available yet',
+        description: 'No workout is available yet',
       );
       return;
     }
-    context.push(ProgramDetailScreen(program: programs.first));
+
+    final program = target.program;
+    final challenge = target.challenge;
+    final week = target.week;
+    final day = target.day;
+
+    if (program != null && target.phase != null && day != null) {
+      await context.push(
+        DayDetailScreen(
+          day: day,
+          phase: target.phase!,
+          programName: target.suggestion.planTitle,
+          programId: program.id,
+          dayIndex: target.suggestion.dayIndex,
+          totalDays: target.suggestion.totalDays,
+        ),
+      );
+    } else if (challenge != null && week != null && day != null) {
+      await context.push(
+        ChallengeDayScreen(
+          challenge: challenge,
+          week: week,
+          day: day,
+          weekNumber: challenge.weeks.indexOf(week) + 1,
+        ),
+      );
+    } else {
+      return;
+    }
+
+    // The user may have finished something while away.
+    await _refresh();
   }
 
   /// Body Focus tiles open that body part's workouts (Figma 14:2).
@@ -275,7 +338,8 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       return;
     }
-    context.push(BodyFocusCategoryScreen(category: category));
+    await context.push(BodyFocusCategoryScreen(category: category));
+    await _refresh();
   }
 
   /// Challenge cards open the challenge flow (Figma 11:1744).
@@ -292,7 +356,8 @@ class _HomeScreenState extends State<HomeScreen> {
       (c) => c.title.toLowerCase() == challenge.title.toLowerCase(),
       orElse: () => challenges.first,
     );
-    context.push(ChallengeDetailScreen(challenge: match));
+    await context.push(ChallengeDetailScreen(challenge: match));
+    await _refresh();
   }
 }
 

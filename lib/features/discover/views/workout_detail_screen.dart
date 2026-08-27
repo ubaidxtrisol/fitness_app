@@ -1,5 +1,6 @@
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/player/models/player_session.dart';
@@ -19,6 +20,20 @@ class WorkoutDetailScreen extends StatefulWidget {
 
 class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
   bool _isFavorite = false;
+
+  /// One definition of this workout's run, shared by the Start button and by
+  /// "Start Now" on each exercise's detail screen.
+  PlayerSession get _session => PlayerSession(
+    exercises: widget.workout.exercises,
+    workoutTitle: widget.workout.title,
+    planId: widget.workout.id,
+    planType: PlanType.discover,
+    planTitle: widget.workout.title,
+    dayId: widget.workout.id,
+    dayTitle: widget.workout.title,
+    dayLevel: widget.workout.difficulty,
+    totalDays: 1,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +216,8 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                           builder: (context) => ExerciseDetailScreen(
                             exercise: exercise,
                             dayLabel: 'Day 1',
+                            session: _session,
+                            exerciseIndex: index,
                           ),
                         ),
                       );
@@ -332,14 +349,8 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                 width: double.infinity,
                 height: 54,
                 child: ElevatedButton(
-                  onPressed: () => context.push(
-                    ExercisePlayerScreen(
-                      session: PlayerSession(
-                        exercises: workout.exercises,
-                        workoutTitle: workout.title,
-                      ),
-                    ),
-                  ),
+                  onPressed: () =>
+                      context.push(ExercisePlayerScreen(session: _session)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,

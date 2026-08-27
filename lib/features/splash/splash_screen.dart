@@ -4,6 +4,8 @@ import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/app_strings.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
+import 'package:fitness_app/core/database/repositories/user_profile_repository.dart';
+import 'package:fitness_app/features/bottom_bar/bottom_bar_screen.dart';
 import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -64,12 +66,19 @@ class _SplashScreenState extends State<SplashScreen> {
     _navigateToNextScreen();
   }
 
-  void _navigateToNextScreen() {
+  Future<void> _navigateToNextScreen() async {
     if (_isNavigating) return;
     _isNavigating = true;
     _timer?.cancel();
 
-    context.pushAndRemoveUntil(OnBoardingScreen());
+    // Returning users skip straight to the app; only a profile that has never
+    // finished the info flow sees onboarding again.
+    final onboarded = await UserProfileRepository().isOnboardingComplete();
+    if (!mounted) return;
+
+    context.pushAndRemoveUntil(
+      onboarded ? const BottomBarScreen() : const OnBoardingScreen(),
+    );
   }
 
   @override

@@ -52,6 +52,11 @@ dependencies:
   easy_localization: ^3.0.8
   country_flags_pro: ^0.1.1
   video_player: ^2.9.2
+  drift: ^2.34.3
+  drift_sqflite: ^2.0.1
+  sqflite: ^2.4.3
+  path_provider: ^2.1.6
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +68,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  drift_dev: ^2.34.5
+  build_runner: ^2.16.0
+  sqlite3: ^3.5.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

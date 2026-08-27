@@ -1,4 +1,5 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
@@ -36,6 +37,21 @@ class ChallengeDayScreen extends StatelessWidget {
     final secs = (totalSecs % 60).toString().padLeft(2, '0');
     return '$mins:$secs';
   }
+
+  /// One definition of this day's run, shared by the Start button and by
+  /// "Start Now" on each exercise's detail screen.
+  PlayerSession get _session => PlayerSession(
+    exercises: day.exercises,
+    workoutTitle: '${challenge.title} · ${day.title}',
+    planId: '${challenge.id}/${week.id}',
+    planType: PlanType.challenge,
+    planTitle: challenge.title,
+    dayId: day.id,
+    dayTitle: day.title,
+    dayLevel: day.difficulty,
+    dayIndex: week.days.indexOf(day),
+    totalDays: week.days.length,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +130,8 @@ class ChallengeDayScreen extends StatelessWidget {
                         ExerciseDetailScreen(
                           exercise: exercise,
                           dayLabel: day.title,
+                          session: _session,
+                          exerciseIndex: index,
                         ),
                       ),
                     ),
@@ -131,14 +149,8 @@ class ChallengeDayScreen extends StatelessWidget {
               child: SizedBox(
                 height: 60,
                 child: ElevatedButton(
-                  onPressed: () => context.push(
-                    ExercisePlayerScreen(
-                      session: PlayerSession(
-                        exercises: day.exercises,
-                        workoutTitle: '${challenge.title} · ${day.title}',
-                      ),
-                    ),
-                  ),
+                  onPressed: () =>
+                      context.push(ExercisePlayerScreen(session: _session)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.surface,
