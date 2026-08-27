@@ -1,4 +1,5 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,18 +13,17 @@ class WeekTrack extends StatelessWidget {
 
   final String title;
   final String subtitle;
-  final int dayCount;
 
-  /// Index of the day the user is on — that chip gets the `Color 1` outline.
-  final int currentDayIndex;
+  /// One status per day, in order — real progress, not the static
+  /// `current_day_index` the content ships. See [ChallengeProgress].
+  final List<ChallengeDayStatus> statuses;
   final void Function(int dayIndex)? onDaySelected;
 
   const WeekTrack({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.dayCount,
-    required this.currentDayIndex,
+    required this.statuses,
     this.onDaySelected,
   });
 
@@ -63,10 +63,10 @@ class WeekTrack extends StatelessWidget {
         // Chips + separators (12:1936)
         Row(
           children: [
-            for (var i = 0; i < dayCount; i++) ...[
+            for (var i = 0; i < statuses.length; i++) ...[
               _DayChip(
                 label: '${i + 1}',
-                isCurrent: i == currentDayIndex,
+                status: statuses[i],
                 onTap: onDaySelected == null ? null : () => onDaySelected!(i),
               ),
               const _Separator(),
@@ -96,15 +96,22 @@ class _Separator extends StatelessWidget {
   }
 }
 
+/// Filled + checked when done, outlined when current, dimmed with a lock
+/// glyph when out of reach. Locked chips still open the day (browsing ahead
+/// is allowed) — only starting it is blocked, on the day's own screen.
 class _DayChip extends StatelessWidget {
   final String label;
-  final bool isCurrent;
+  final ChallengeDayStatus status;
   final VoidCallback? onTap;
 
-  const _DayChip({required this.label, required this.isCurrent, this.onTap});
+  const _DayChip({required this.label, required this.status, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final isLocked = status == ChallengeDayStatus.locked;
+    final isCompleted = status == ChallengeDayStatus.completed;
+    final isCurrent = status == ChallengeDayStatus.current;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -112,22 +119,32 @@ class _DayChip extends StatelessWidget {
         height: WeekTrack.chipSize,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: isCompleted
+              ? AppColors.primary
+              : (isLocked ? const Color(0xFFF3F3F3) : AppColors.surface),
           borderRadius: BorderRadius.circular(16),
           border: isCurrent ? Border.all(color: AppColors.primary) : null,
-          boxShadow: isCurrent
+          boxShadow: isCurrent || isLocked
               ? null
               : const [BoxShadow(color: Color(0x24000000), blurRadius: 0.5)],
         ),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            height: 1,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFFA32045),
-          ),
-        ),
+        child: isCompleted
+            ? const Icon(Icons.check_rounded, color: Colors.white, size: 18)
+            : isLocked
+            ? const Icon(
+                Icons.lock_rounded,
+                color: Color(0xFFB0B0B0),
+                size: 15,
+              )
+            : Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 16,
+                  height: 1,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFFA32045),
+                ),
+              ),
       ),
     );
   }

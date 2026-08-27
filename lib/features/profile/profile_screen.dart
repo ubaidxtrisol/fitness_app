@@ -1,15 +1,54 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
+import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:fitness_app/core/utils/context.dart';
+import 'package:fitness_app/features/home/models/home_models.dart';
+import 'package:fitness_app/features/home/widgets/today_summary_widget.dart';
 import 'package:fitness_app/features/language/language_screen.dart';
 import 'package:fitness_app/features/profile/my_profile_screen.dart';
 import 'package:fitness_app/features/profile/workout_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final ProgressRepository _progress = ProgressRepository();
+  TodaySummaryModel _todaySummary = const TodaySummaryModel(
+    calories: 0,
+    minutes: 0,
+    workoutsCount: 0,
+    streakDays: 0,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  /// Re-reads today's totals and the next suggested day. Called on mount and
+  /// again whenever the user returns from a workout.
+  Future<void> _refresh() async {
+    final summary = await _progress.summaryForDay();
+
+    if (!mounted) return;
+
+    setState(() {
+      _todaySummary = TodaySummaryModel(
+        calories: summary.calories,
+        minutes: summary.minutes,
+        workoutsCount: summary.workouts,
+        streakDays: summary.streakDays,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
               18.heightBox,
               _buildUserInfoRow(),
               20.heightBox,
-              _buildStatsRow(),
+              TodaySummaryWidget(summary: _todaySummary, padding: .zero),
               20.heightBox,
               _buildPremiumBanner(),
               24.heightBox,
@@ -216,96 +255,6 @@ class ProfileScreen extends StatelessWidget {
                 SvgPicture.asset('assets/svgs/edit.svg', width: 10, height: 10),
               ],
             ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // ==================== Stats Row ====================
-  Widget _buildStatsRow() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(13),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 6,
-            spreadRadius: 0,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: _buildStatItem(
-              svgPath: 'assets/svgs/fire.svg',
-              value: '234',
-              label: 'Calories',
-            ),
-          ),
-          Container(width: 1, height: 36, color: const Color(0xFFF1F1F1)),
-          Expanded(
-            child: _buildStatItem(
-              svgPath: 'assets/svgs/history.svg',
-              value: '25',
-              label: '25 Minutes',
-            ),
-          ),
-          Container(width: 1, height: 36, color: const Color(0xFFF1F1F1)),
-          Expanded(
-            child: _buildStatItem(
-              svgPath: 'assets/svgs/check.svg',
-              value: '04',
-              label: 'Workout',
-            ),
-          ),
-          Container(width: 1, height: 36, color: const Color(0xFFF1F1F1)),
-          Expanded(
-            child: _buildStatItem(
-              svgPath: 'assets/svgs/stars.svg',
-              value: '06',
-              label: 'Day Streak',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatItem({
-    required String svgPath,
-    required String value,
-    required String label,
-  }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(svgPath, width: 24, height: 24),
-        6.heightBox,
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
-          ),
-        ),
-        2.heightBox,
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
           ),
         ),
       ],

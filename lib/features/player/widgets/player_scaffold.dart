@@ -13,11 +13,16 @@ class PlayerScaffold extends StatelessWidget {
   final Widget child;
   final VoidCallback? onBack;
 
+  /// Hides the back tile — the paused state (Figma 11:1312) has no back arrow
+  /// of its own, just its three actions.
+  final bool showBack;
+
   const PlayerScaffold({
     super.key,
     this.backdrop,
     required this.child,
     this.onBack,
+    this.showBack = true,
   });
 
   @override
@@ -32,31 +37,32 @@ class PlayerScaffold extends StatelessWidget {
           child,
 
           // Back tile (11:1215) — r8 here, unlike the r7 used on detail screens.
-          Positioned(
-            left: 16,
-            top: MediaQuery.of(context).padding.top + 2,
-            child: GestureDetector(
-              onTap: onBack ?? () => Navigator.of(context).pop(),
-              child: Container(
-                width: 30,
-                height: 30,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: const [
-                    BoxShadow(color: Color(0x17000000), blurRadius: 3),
-                  ],
-                ),
-                child: SvgPicture.asset(
-                  'assets/svgs/arrow.svg',
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.contain,
+          if (showBack)
+            Positioned(
+              left: 16,
+              top: MediaQuery.of(context).padding.top + 2,
+              child: GestureDetector(
+                onTap: onBack ?? () => Navigator.of(context).pop(),
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(color: Color(0x17000000), blurRadius: 3),
+                    ],
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/svgs/arrow.svg',
+                    width: 20,
+                    height: 20,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

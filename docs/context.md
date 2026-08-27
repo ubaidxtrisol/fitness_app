@@ -62,19 +62,18 @@
 
 ### Working Features
 
-Implemented and verified (37 passing tests across
-`test/progress_tracking_test.dart`, `test/progress_history_test.dart`,
-`test/progress_layout_test.dart`, `test/exercise_duration_test.dart`,
-`test/player_layout_test.dart` and `test/home_hero_banner_test.dart`;
+Implemented and verified (62 passing tests across `test/*.dart`;
 `flutter analyze lib test` clean apart from one pre-existing warning):
 
-* **Persistence layer** — Drift schema (v3) with six tables: `UserProfiles`,
-  `WorkoutSettingsRows`, `PlanProgressRows`, `SessionLogs`, `ExerciseLogs`.
-  Single-row tables are seeded on create so reads never return empty. v2 added
-  `thumbnailUrl` (both log tables) and `dayLevel` (`SessionLogs`) behind an
-  `onUpgrade` step, so history cards can render real artwork and
-  "Day 2. Beginner"; v3 added `ExercisePreferences` (the per-exercise duration
-  the detail screen's stepper caches).
+* **Persistence layer** — Drift schema (v4) with seven tables: `UserProfiles`,
+  `WorkoutSettingsRows`, `PlanProgressRows`, `SessionLogs`, `ExerciseLogs`,
+  `ExercisePreferences`, `ActiveSessions`. Single-row tables are seeded on
+  create so reads never return empty. v2 added `thumbnailUrl` (both log
+  tables) and `dayLevel` (`SessionLogs`) behind an `onUpgrade` step, so history
+  cards can render real artwork and "Day 2. Beginner"; v3 added
+  `ExercisePreferences` (the per-exercise duration the detail screen's stepper
+  caches); v4 added `ActiveSessions`, the mid-workout resume checkpoint (see
+  below).
 * **Onboarding gate** — Splash routes on real state: returning users go straight
   to `BottomBarScreen`; only a profile that never finished the info flow sees
   onboarding. The user info flow persists on **every step** (mid-flow exit is not
@@ -129,6 +128,63 @@ Implemented and verified (37 passing tests across
   393×852: Home card (8:32), program flow (10:509, 11:738, 11:959), challenge
   flow (11:1397, 11:1744, 12:2319, 12:2424), player (11:1201, 11:1235, 11:1312),
   body focus (14:2, 14:242, 14:528, 15:765).
+* **Challenge locking** — real per-user progress, not the static
+  `current_day_index` the content JSON ships (always `0`). `ChallengeProgress`
+  (`challenges/services/challenge_progress.dart`) reads `plan_progress_rows`
+  per week and enforces "step by step": a day unlocks once the previous one is
+  done, and a week unlocks once every day in the previous week is done.
+  `WeekTrack` renders completed (check), current (outline) and locked (lock
+  glyph) chips from this — locked chips are still tappable, matching "you can
+  browse ahead, you just can't start ahead." `ChallengeDayScreen` gates both
+  its Start button and every exercise row on `isUnlocked`, showing
+  `showChallengeLockedDialog` ("You're currently on Week 2, Day 3...") instead
+  of navigating when locked. `NextUpService._resumeChallenge` was rewritten to
+  use the same class, fixing a real bug: a finished week's `currentDayIndex`
+  (7, past the last valid index) used to clamp back to day 7 instead of
+  rolling into week 2 day 1, the same way program phases already rolled over.
+* **Resumable workouts** — `ActiveSessionRepository` checkpoints
+  (planId, dayId) → completed-exercise-ids/elapsed-time/started-at, written
+  after *every* finished exercise via `_saveCheckpoint()`, not just at the end
+  — so it survives the app being killed mid-workout. `ExercisePlayerScreen`
+  checks for one on boot (only for the plain Start button, never for "Start
+  Now" on a specific exercise) and offers `showResumeSessionDialog` —
+  "Continue" restores `_index`/`_loggedExerciseIds`/`_elapsedSeconds`/
+  `_startedAt`; "Start Over" clears it and begins at 0. The checkpoint is
+  cleared on finish (completed or "Do it Later") and on an explicit Restart
+  from the paused screen. Fixed a latent reentrancy bug in the same pass:
+  `_completeCurrentExercise` didn't cancel the periodic ticker before its own
+  `await`s, so a slow save/overlay could let the next tick fire the handler a
+  second time and skip an exercise.
+* **Completion UI** — `showExerciseCompleteOverlay` is a self-dismissing
+  card ("Exercise Complete!" + the exercise's title), still used standalone
+  and covered by its own test, but no longer called by the player itself (see
+  below). `WorkoutCompleteScreen` is a full celebration (confetti via
+  `flutter_confetti_plus`'s `ConfettiPlus.success`, duration/calories/exercise
+  stats, a Done button) shown by `_finish()` whenever the outcome is
+  `completed`, before handing control back to whoever pushed the player.
+* **Single-screen player state machine** — `ExercisePlayerScreen` no longer
+  pushes `GetReadyScreen`/`WorkoutPausedScreen` as separate routes; it cross
+  fades between four in-place phases (`getReady`/`playing`/`paused`/
+  `celebrating`) via `AnimatedSwitcher`, so pausing, resuming and the
+  between-exercise beat never navigate away from the screen. `GetReadyScreen`
+  and `WorkoutPausedScreen` still exist as thin standalone routes (kept for
+  any other caller and their existing tests) but now share their visual
+  content with the player through two extracted widgets: `GetReadyCard`
+  (countdown + title + Skip) and `PausedOverlay` (still + blur scrim + the
+  three actions). A new `ExerciseCelebration` widget plus a
+  `ConfettiPlus.success` burst play between exercises — a natural finish (or
+  the forward-skip button) fires this instead of jumping straight to the next
+  clip: it rings a system chime (`SystemSound.play`, muted with the same
+  sound-effect toggle — there's no bundled audio asset/package in the project
+  yet, so this is the one built-in "ring" available without adding a
+  dependency), waits ~1.8s showing the "Exercise Complete!" card, then starts
+  the next exercise's own get-ready countdown rather than auto-starting it.
+  The hardware/gesture back button and the transport's pause glyph both just
+  flip to the paused phase in place (remembering which phase to return to on
+  "Keep exercising"); backing out again while already paused resumes, matching
+  the old pushed-route's behaviour when dismissed without an explicit choice.
+  The final exercise still skips celebration entirely and goes straight to
+  `_finish()`/`WorkoutCompleteScreen`, unchanged.
 
 ### In-Progress Work
 
@@ -156,6 +212,20 @@ Implemented and verified (37 passing tests across
   the info-flow answers (goal, age, body shape, activities, injuries).
 * The Progress screen's greeting ("Good Morning Emily") and its menu/bell
   buttons are still static — no name from `UserProfiles`, no destinations.
+* Programs and Body Focus have no step-by-step locking — only Challenges do,
+  per the explicit ask. Every program day and body-focus session is freely
+  startable regardless of progress.
+* There is no "Continue Workout" surface on Home — the resume checkpoint is
+  only offered at the point the user taps Start again on that same day.
+  A banner reading the most-recently-updated `ActiveSessions` row would be a
+  natural follow-up.
+* History rows don't show a persistent "completed" checkmark — the completion
+  UI is the live in-player moment only (the overlay and the finish screen),
+  not a retroactive marker on exercise-list rows elsewhere in the app.
+* The between-exercise "ring" is `SystemSound.play(SystemSoundType.click)` —
+  the built-in OS click, not a designed chime. There's no audio-player package
+  (`audioplayers`/`just_audio`) or bundled sound asset in the project yet;
+  adding a real chime needs both.
 
 **Technical debt**
 
@@ -191,6 +261,13 @@ Implemented and verified (37 passing tests across
   complete on real timers the fake clock never advances. DB assertions must live
   in plain `test()` (or inside `tester.runAsync`). This is why the widget tests
   pass data in directly.
+* `ProgressRepository._advancePlan` increments `completedDays` on every
+  *completed* session, including a replay of an already-finished day — so
+  `completedDays` can end up larger than the plan's actual day count (e.g.
+  redoing day 1 five times after finishing a 7-day week reports 12). Harmless
+  for challenge unlocking (`ChallengeProgress` only ever checks `>=`, so
+  over-counting can't wrongly lock or unlock anything), but the raw number
+  would be misleading if ever shown as "X of Y days done" verbatim.
 
 **Unverified**
 
@@ -203,52 +280,81 @@ Implemented and verified (37 passing tests across
 
 ## 3. Latest Session Summary (Updated: 2026-08-27)
 
-* **What was just completed:** Two passes in one session. First the Progress and
-  History screens were rebuilt against Figma 16:418 / 17:1159 / 17:1688 and
-  wired to real data (see the Progress/History bullets above). Then the player
-  and detail surfaces: the exercise detail screen gained a "Start Now" footer
-  that opens the shared player on that exercise, its duration stepper now seeds
-  from the clip's own length and caches per-exercise in the new
-  `ExercisePreferences` table (schema v3), and the player resolves each
-  exercise's runtime as cached override -> clip length -> catalogue value,
-  looping the clip until the time is up. The player's full-bleed video backdrop
-  was replaced by an aspect-ratio `VideoBanner` shared with the Get Ready
-  screen. Workout settings now stream into both the player and the detail
-  preview via `SettingsRepository.watch()`. My Profile reads and writes
-  `UserProfileRepository`, with imperial units reduced to a display-only
-  conversion so they cannot corrupt the stored metric values.
+* **What was just completed:** Challenge step-by-step locking, in-workout
+  completion UI, and resumable workouts — three related pieces of the
+  challenge/player experience, plus a small fix to the exercise detail
+  screen's hero (now a static banner sharing `ChallengeHeroBanner`'s
+  background asset, not a video preview). `ChallengeProgress` replaces the
+  static `current_day_index` the content JSON ships with real progress read
+  from `plan_progress_rows`, and `WeekTrack`/`ChallengeDayScreen` use it to
+  lock every day beyond the user's actual position — days still open for
+  browsing, but Start and every exercise row show a "one step at a time"
+  dialog instead of navigating. The same class fixed a real bug in
+  `NextUpService`: a finished challenge week used to clamp back onto its own
+  last day instead of rolling into the next week, unlike programs. The player
+  now checkpoints progress via a new `ActiveSessions` table (schema v4) after
+  every finished exercise, offers to resume via a dialog when the Start button
+  (not "Start Now") reopens a day with saved progress, and shows a
+  self-dismissing "Exercise Complete!" card between exercises plus a full
+  confetti "Workout Complete!" screen on finish. Fixed a latent reentrancy bug
+  found while wiring this in: the periodic ticker wasn't cancelled before
+  `_completeCurrentExercise`'s own awaits, so a slow save could let it fire
+  again and skip an exercise.
+
+* **Follow-up pass (same day):** Collapsed `ExercisePlayerScreen` from a
+  screen that pushed `GetReadyScreen`/`WorkoutPausedScreen` as separate routes
+  into one screen with an `AnimatedSwitcher` state machine (`getReady` /
+  `playing` / `paused` / `celebrating`) — see **Single-screen player state
+  machine** above for the full behaviour. `GetReadyScreen` and
+  `WorkoutPausedScreen` were refactored (not deleted) to share their visuals
+  with the player via two new extracted widgets rather than duplicating
+  markup.
 
 * **Files modified (this pass):**
-  * Created: `lib/core/database/repositories/exercise_prefs_repository.dart`,
-    `lib/features/profile/unit_conversion.dart`,
-    `test/exercise_duration_test.dart`, `test/player_layout_test.dart`
+  * Created: `lib/core/database/repositories/active_session_repository.dart`,
+    `lib/features/challenges/services/challenge_progress.dart`,
+    `lib/features/challenges/widgets/challenge_lock_dialog.dart`,
+    `lib/features/player/widgets/resume_session_dialog.dart`,
+    `lib/features/player/widgets/exercise_complete_overlay.dart`,
+    `lib/features/player/views/workout_complete_screen.dart`,
+    `lib/features/player/widgets/get_ready_card.dart`,
+    `lib/features/player/widgets/paused_overlay.dart`,
+    `lib/features/player/widgets/exercise_celebration.dart`,
+    `test/challenge_progress_test.dart`, `test/active_session_test.dart`,
+    `test/challenge_lock_widgets_test.dart`, `test/completion_ui_test.dart`
+  * Rewritten: `lib/features/challenges/widgets/week_track.dart`,
+    `lib/features/challenges/views/challenge_detail_screen.dart` (now
+    `StatefulWidget`, loads `ChallengeProgress` once and reloads it after
+    returning from a day), `lib/features/player/views/exercise_player_screen.dart`
+    (route-per-state → one `AnimatedSwitcher` state machine),
+    `lib/features/player/views/workout_paused_screen.dart` (now a thin wrapper
+    around `PausedOverlay`)
   * Modified: `lib/core/database/app_database.dart` (+ `.g.dart`),
-    `lib/features/discover/views/exercise_detail_screen.dart`,
-    `lib/features/discover/views/workout_detail_screen.dart`,
-    `lib/features/workout/views/day_detail_screen.dart`,
     `lib/features/challenges/views/challenge_day_screen.dart`,
-    `lib/features/body_focus/views/body_session_screen.dart`,
-    `lib/features/player/models/player_session.dart`,
-    `lib/features/player/views/exercise_player_screen.dart`,
-    `lib/features/player/views/get_ready_screen.dart`,
-    `lib/features/player/widgets/video_backdrop.dart`,
-    `lib/features/profile/my_profile_screen.dart`, `docs/context.md`
+    `lib/features/home/services/next_up_service.dart`,
+    `lib/features/player/views/get_ready_screen.dart` (now built on
+    `GetReadyCard`), `lib/features/player/widgets/player_scaffold.dart`
+    (added `showBack`), `docs/context.md`
 
 * **Next immediate steps:**
   1. **Run the app on a device/simulator.** Nothing here has been executed
-     outside the test harness. Confirm the v2 -> v3 migrations apply on an
-     existing install, the banner sizes correctly against the real clip, the
-     cached stepper duration drives the player, and history thumbnails load.
+     outside the test harness — same standing gap as every prior session.
+     Confirm the v3 -> v4 migration applies on an existing install, the resume
+     dialog fires correctly after force-quitting mid-workout, and the lock
+     dialog reads sensibly against real challenge content.
   2. **Commit.** The tree is still entirely uncommitted; the last commit
-     predates the data layer, the Progress rebuild and this pass.
-  3. Decide on voice guidance: the toggle and the Detailed/Brief switch persist
+     predates the entire data layer.
+  3. Decide whether Home should surface an `ActiveSessions` row as a
+     "Continue Workout" banner, rather than only offering resume when the user
+     re-opens that exact day (see Not Yet Wired above).
+  4. Decide on voice guidance: the toggle and the Detailed/Brief switch persist
      but nothing speaks. It needs a TTS package (`flutter_tts`) plus per-exercise
      cue copy, or the controls should be removed.
-  4. Clarify the open question: *"Play video in BG"* was implemented as the clip
+  5. Clarify the open question: *"Play video in BG"* was implemented as the clip
      playing behind/above the player UI. If background **audio** while the app is
      minimised was meant, that needs `audio_service`/`just_audio` plus platform
      background modes — the current behaviour (pause on background) is the
      deliberate opposite.
-  5. Surface the rest of the info-flow answers on `my_profile_screen.dart`.
-  6. Delete or rewrite `test/widget_test.dart` so `flutter test` is green.
-  7. Downscale the four oversized banner PNGs.
+  6. Surface the rest of the info-flow answers on `my_profile_screen.dart`.
+  7. Delete or rewrite `test/widget_test.dart` so `flutter test` is green.
+  8. Downscale the four oversized banner PNGs.

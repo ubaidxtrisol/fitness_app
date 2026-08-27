@@ -4,6 +4,7 @@ import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/widgets/challenge_hero_banner.dart';
+import 'package:fitness_app/features/challenges/widgets/challenge_lock_dialog.dart';
 import 'package:fitness_app/features/discover/views/exercise_detail_screen.dart';
 import 'package:fitness_app/features/player/models/player_session.dart';
 import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
@@ -18,11 +19,17 @@ import 'package:flutter/material.dart';
 /// Same structure as the workout day screen (11:738); the stat strip leads with
 /// the week number instead of the difficulty, and the section heading is a
 /// plain "Exercise N" with no progress pill.
+///
+/// Days beyond the user's real progress still open (browsing ahead is fine),
+/// but [isUnlocked] gates actually starting them — Start and every exercise
+/// row explain why with [showChallengeLockedDialog] instead of navigating.
 class ChallengeDayScreen extends StatelessWidget {
   final ChallengeProgramModel challenge;
   final ChallengeWeekModel week;
   final DayModel day;
   final int weekNumber;
+  final bool isUnlocked;
+  final String currentPositionLabel;
 
   const ChallengeDayScreen({
     super.key,
@@ -30,6 +37,8 @@ class ChallengeDayScreen extends StatelessWidget {
     required this.week,
     required this.day,
     required this.weekNumber,
+    this.isUnlocked = true,
+    this.currentPositionLabel = '',
   });
 
   String _formatDuration(int totalSecs) {
@@ -52,6 +61,17 @@ class ChallengeDayScreen extends StatelessWidget {
     dayIndex: week.days.indexOf(day),
     totalDays: week.days.length,
   );
+
+  void _guard(BuildContext context, VoidCallback action) {
+    if (isUnlocked) {
+      action();
+    } else {
+      showChallengeLockedDialog(
+        context,
+        currentPositionLabel: currentPositionLabel,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +125,24 @@ class ChallengeDayScreen extends StatelessWidget {
                 21.heightBox,
 
                 // Section heading (12:2380)
-                Text(
-                  'Exercise ${day.exercises.length}',
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Exercise ${day.exercises.length}',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    if (!isUnlocked)
+                      const Icon(
+                        Icons.lock_rounded,
+                        size: 18,
+                        color: AppColors.textLight,
+                      ),
+                  ],
                 ),
                 16.heightBox,
 
@@ -126,12 +157,15 @@ class ChallengeDayScreen extends StatelessWidget {
                       title: exercise.title,
                       subtitle: _formatDuration(exercise.durationSeconds),
                       thumbnailUrl: exercise.thumbnailUrl,
-                      onTap: () => context.push(
-                        ExerciseDetailScreen(
-                          exercise: exercise,
-                          dayLabel: day.title,
-                          session: _session,
-                          exerciseIndex: index,
+                      onTap: () => _guard(
+                        context,
+                        () => context.push(
+                          ExerciseDetailScreen(
+                            exercise: exercise,
+                            dayLabel: day.title,
+                            session: _session,
+                            exerciseIndex: index,
+                          ),
                         ),
                       ),
                     ),
@@ -141,7 +175,8 @@ class ChallengeDayScreen extends StatelessWidget {
             ),
           ),
 
-          // Start button (12:2422) — opens the shared player.
+          // Start button (12:2422) — opens the shared player, unless this day
+          // is still ahead of the user's real progress.
           SafeArea(
             top: false,
             child: Padding(
@@ -149,19 +184,35 @@ class ChallengeDayScreen extends StatelessWidget {
               child: SizedBox(
                 height: 60,
                 child: ElevatedButton(
-                  onPressed: () =>
-                      context.push(ExercisePlayerScreen(session: _session)),
+                  onPressed: () => _guard(
+                    context,
+                    () => context.push(ExercisePlayerScreen(session: _session)),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: isUnlocked
+                        ? AppColors.primary
+                        : const Color(0xFFC9C9C9),
                     foregroundColor: AppColors.surface,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                     elevation: 0,
                   ),
-                  child: const Text(
-                    'Start',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (!isUnlocked) ...[
+                        const Icon(Icons.lock_rounded, size: 16),
+                        8.widthBox,
+                      ],
+                      const Text(
+                        'Start',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -55,30 +55,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
                   child: Row(
                     children: [
-                      // Leading Menu Icon Card
-                      Container(
-                        width: 42,
-                        height: 42,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x14000000),
-                              blurRadius: 6,
-                              offset: Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(5.8),
-                        child: SvgPicture.asset(
-                          'assets/svgs/menu.svg',
-                          height: 22,
-                        ),
-                      ),
-                      14.widthBox,
-
-                      // Greeting Texts
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +79,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
 
-                      // Notification Bell Icon
                       IconButton(
                         onPressed: () {},
                         icon: SvgPicture.asset(
@@ -247,4 +222,3 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     );
   }
 }
-

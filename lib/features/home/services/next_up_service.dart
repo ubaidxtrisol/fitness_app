@@ -1,6 +1,7 @@
 import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
+import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
 import 'package:fitness_app/features/workout/models/program_model.dart';
 import 'package:fitness_app/features/workout/services/workout_repository.dart';
@@ -96,25 +97,28 @@ class NextUpService {
     final challenge = _firstWhereOrNull(challenges, (c) => c.id == parts.first);
     if (challenge == null) return null;
 
-    final week = _firstWhereOrNull(challenge.weeks, (w) => w.id == parts.last);
-    if (week == null || week.days.isEmpty) return null;
+    // Progress is tracked per week, but the banner needs one flat position
+    // across the whole challenge — this rolls a finished week over into the
+    // next one, the same way program phases roll over.
+    final progress = await ChallengeProgress.resolve(challenge, _progress);
+    final target = progress.currentTarget;
+    if (target == null) return null;
 
-    final index = row.currentDayIndex.clamp(0, week.days.length - 1);
-    final day = week.days[index];
+    final week = challenge.weeks[target.weekIndex];
 
     return NextUpTarget(
       challenge: challenge,
       week: week,
-      day: day,
+      day: target.day,
       suggestion: NextUpSuggestion(
-        planId: row.planId,
+        planId: '${challenge.id}/${week.id}',
         planType: PlanType.challenge,
         planTitle: challenge.title,
-        dayTitle: day.title,
-        dayIndex: index,
+        dayTitle: target.day.title,
+        dayIndex: target.dayIndex,
         totalDays: week.days.length,
-        exerciseCount: day.exercises.length,
-        durationMinutes: day.durationMinutes,
+        exerciseCount: target.day.exercises.length,
+        durationMinutes: target.day.durationMinutes,
         isResuming: true,
       ),
     );

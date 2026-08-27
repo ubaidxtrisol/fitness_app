@@ -129,6 +129,34 @@ class ExercisePreferences extends Table {
   Set<Column> get primaryKey => {exerciseId};
 }
 
+/// A run through a day that has started but not yet finished — the
+/// resumable checkpoint behind "continue where you left off".
+///
+/// Written incrementally as each exercise finishes (not just at the end), so
+/// it survives the app being killed mid-workout. Cleared once the day is
+/// finished or explicitly abandoned via "Do it Later"/"Restart".
+class ActiveSessions extends Table {
+  TextColumn get planId => text()();
+  TextColumn get dayId => text()();
+  TextColumn get planType => text()();
+  TextColumn get planTitle => text()();
+  TextColumn get dayTitle => text()();
+  TextColumn get dayLevel => text().withDefault(const Constant(''))();
+  IntColumn get dayIndex => integer().withDefault(const Constant(0))();
+  IntColumn get totalDays => integer().withDefault(const Constant(0))();
+
+  /// JSON-encoded list of `"exerciseId#index"` keys — the same dedup key the
+  /// player already uses, so resuming can't double-log an exercise.
+  TextColumn get completedExerciseIdsJson =>
+      text().withDefault(const Constant('[]'))();
+  IntColumn get elapsedSeconds => integer().withDefault(const Constant(0))();
+  DateTimeColumn get startedAt => dateTime()();
+  DateTimeColumn get updatedAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {planId, dayId};
+}
+
 @DriftDatabase(
   tables: [
     UserProfiles,
@@ -137,6 +165,7 @@ class ExercisePreferences extends Table {
     SessionLogs,
     ExerciseLogs,
     ExercisePreferences,
+    ActiveSessions,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -153,7 +182,7 @@ class AppDatabase extends _$AppDatabase {
   static void overrideInstance(AppDatabase database) => _instance = database;
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -167,6 +196,11 @@ class AppDatabase extends _$AppDatabase {
       // v3 — the detail screen's stepper remembers a per-exercise duration.
       if (from < 3) {
         await m.createTable(exercisePreferences);
+      }
+      // v4 — mid-workout progress is checkpointed so it survives the app
+      // being closed and can be resumed.
+      if (from < 4) {
+        await m.createTable(activeSessions);
       }
     },
     onCreate: (m) async {

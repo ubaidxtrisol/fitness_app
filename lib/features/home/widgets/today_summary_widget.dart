@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class TodaySummaryWidget extends StatelessWidget {
   final TodaySummaryModel summary;
-
-  const TodaySummaryWidget({super.key, required this.summary});
+  final EdgeInsets? padding;
+  const TodaySummaryWidget({super.key, required this.summary, this.padding});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      margin: padding ?? const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,

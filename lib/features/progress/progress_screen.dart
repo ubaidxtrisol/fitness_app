@@ -152,47 +152,22 @@ class _ProgressScreenState extends State<ProgressScreen> {
   Widget _buildTopBar() {
     return Row(
       children: [
-        GestureDetector(
-          onTap: () {},
-          behavior: HitTestBehavior.opaque,
-          child: Container(
-            width: 30,
-            height: 30,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: const [
-                BoxShadow(color: Color(0x17000000), blurRadius: 3),
-              ],
-            ),
-            child: SvgPicture.asset(
-              'assets/svgs/menu.svg',
-              width: 22,
-              height: 16,
-            ),
-          ),
-        ),
-
-        7.widthBox,
-
-        const Expanded(
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Good Morning Emily',
                 style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
                   color: AppColors.textPrimary,
                 ),
               ),
-              SizedBox(height: 4),
-              Text(
+              const Text(
                 "Let's continue your wellness journey",
                 style: TextStyle(
-                  fontSize: 8,
+                  fontSize: 11,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFF6C434C),
                 ),
@@ -201,20 +176,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
           ),
         ),
 
-        GestureDetector(
-          onTap: () {},
-          behavior: HitTestBehavior.opaque,
-          child: SizedBox(
-            width: 26,
-            height: 26,
-            child: Center(
-              child: SvgPicture.asset(
-                'assets/svgs/notifications.svg',
-                width: 16,
-                height: 18,
-              ),
-            ),
-          ),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset('assets/svgs/notifications.svg', height: 22),
         ),
       ],
     );
@@ -232,11 +196,7 @@ class _EmptyHistory extends StatelessWidget {
       child: Text(
         'No workouts logged yet.\nFinish a session and it will show up here.',
         textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 11,
-          color: AppColors.textLight,
-          height: 1.5,
-        ),
+        style: TextStyle(fontSize: 11, color: AppColors.textLight, height: 1.5),
       ),
     );
   }

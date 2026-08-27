@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
+import 'package:fitness_app/features/player/widgets/get_ready_card.dart';
 import 'package:fitness_app/features/player/widgets/player_scaffold.dart';
 import 'package:fitness_app/features/player/widgets/video_backdrop.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
 
 /// "Get Ready!" — Figma 11:1201.
@@ -73,106 +72,24 @@ class _GetReadyScreenState extends State<GetReadyScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 17),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Spacer(),
               // Same banner the player uses, so the hand-off is seamless.
               VideoBanner(
                 controller: widget.controller,
                 isReady: widget.isVideoReady,
                 maxHeight: MediaQuery.sizeOf(context).height * 0.36,
               ),
-              const SizedBox(height: 16),
+              Spacer(),
               PlayerSheet(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 39, 10, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Heading block (11:1220) — shows the live count once the
-                      // countdown is running.
-                      Text(
-                        _remaining > 0 ? '$_remaining' : 'Get Ready!',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 29.12,
-                          height: 1,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      const SizedBox(height: 17),
-                      Text(
-                        widget.exercise.title,
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          height: 1.125,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      const Text(
-                        'Start Your Practice Now',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      // Skip button (11:1223) with its trailing arrow pill.
-                      GestureDetector(
-                        onTap: () {
-                          _ticker?.cancel();
-                          widget.onSkip();
-                        },
-                        child: Container(
-                          height: 52,
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: Stack(
-                            children: [
-                              const Center(
-                                child: Text(
-                                  'Skip',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.surface,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                right: 10,
-                                top: 11,
-                                child: Container(
-                                  width: 30,
-                                  height: 30,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primaryLight,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: SvgPicture.asset(
-                                    'assets/svgs/arrow_right.svg',
-                                    width: 16,
-                                    height: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                child: GetReadyCard(
+                  remaining: _remaining,
+                  exerciseTitle: widget.exercise.title,
+                  onSkip: () {
+                    _ticker?.cancel();
+                    widget.onSkip();
+                  },
                 ),
               ),
             ],

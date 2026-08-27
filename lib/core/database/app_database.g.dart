@@ -3652,6 +3652,725 @@ class ExercisePreferencesCompanion extends UpdateCompanion<ExercisePreference> {
   }
 }
 
+class $ActiveSessionsTable extends ActiveSessions
+    with TableInfo<$ActiveSessionsTable, ActiveSession> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ActiveSessionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _planIdMeta = const VerificationMeta('planId');
+  @override
+  late final GeneratedColumn<String> planId = GeneratedColumn<String>(
+    'plan_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dayIdMeta = const VerificationMeta('dayId');
+  @override
+  late final GeneratedColumn<String> dayId = GeneratedColumn<String>(
+    'day_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _planTypeMeta = const VerificationMeta(
+    'planType',
+  );
+  @override
+  late final GeneratedColumn<String> planType = GeneratedColumn<String>(
+    'plan_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _planTitleMeta = const VerificationMeta(
+    'planTitle',
+  );
+  @override
+  late final GeneratedColumn<String> planTitle = GeneratedColumn<String>(
+    'plan_title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dayTitleMeta = const VerificationMeta(
+    'dayTitle',
+  );
+  @override
+  late final GeneratedColumn<String> dayTitle = GeneratedColumn<String>(
+    'day_title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dayLevelMeta = const VerificationMeta(
+    'dayLevel',
+  );
+  @override
+  late final GeneratedColumn<String> dayLevel = GeneratedColumn<String>(
+    'day_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _dayIndexMeta = const VerificationMeta(
+    'dayIndex',
+  );
+  @override
+  late final GeneratedColumn<int> dayIndex = GeneratedColumn<int>(
+    'day_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _totalDaysMeta = const VerificationMeta(
+    'totalDays',
+  );
+  @override
+  late final GeneratedColumn<int> totalDays = GeneratedColumn<int>(
+    'total_days',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _completedExerciseIdsJsonMeta =
+      const VerificationMeta('completedExerciseIdsJson');
+  @override
+  late final GeneratedColumn<String> completedExerciseIdsJson =
+      GeneratedColumn<String>(
+        'completed_exercise_ids_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
+  static const VerificationMeta _elapsedSecondsMeta = const VerificationMeta(
+    'elapsedSeconds',
+  );
+  @override
+  late final GeneratedColumn<int> elapsedSeconds = GeneratedColumn<int>(
+    'elapsed_seconds',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _startedAtMeta = const VerificationMeta(
+    'startedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> startedAt = GeneratedColumn<DateTime>(
+    'started_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    planId,
+    dayId,
+    planType,
+    planTitle,
+    dayTitle,
+    dayLevel,
+    dayIndex,
+    totalDays,
+    completedExerciseIdsJson,
+    elapsedSeconds,
+    startedAt,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'active_sessions';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ActiveSession> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('plan_id')) {
+      context.handle(
+        _planIdMeta,
+        planId.isAcceptableOrUnknown(data['plan_id']!, _planIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_planIdMeta);
+    }
+    if (data.containsKey('day_id')) {
+      context.handle(
+        _dayIdMeta,
+        dayId.isAcceptableOrUnknown(data['day_id']!, _dayIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dayIdMeta);
+    }
+    if (data.containsKey('plan_type')) {
+      context.handle(
+        _planTypeMeta,
+        planType.isAcceptableOrUnknown(data['plan_type']!, _planTypeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_planTypeMeta);
+    }
+    if (data.containsKey('plan_title')) {
+      context.handle(
+        _planTitleMeta,
+        planTitle.isAcceptableOrUnknown(data['plan_title']!, _planTitleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_planTitleMeta);
+    }
+    if (data.containsKey('day_title')) {
+      context.handle(
+        _dayTitleMeta,
+        dayTitle.isAcceptableOrUnknown(data['day_title']!, _dayTitleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dayTitleMeta);
+    }
+    if (data.containsKey('day_level')) {
+      context.handle(
+        _dayLevelMeta,
+        dayLevel.isAcceptableOrUnknown(data['day_level']!, _dayLevelMeta),
+      );
+    }
+    if (data.containsKey('day_index')) {
+      context.handle(
+        _dayIndexMeta,
+        dayIndex.isAcceptableOrUnknown(data['day_index']!, _dayIndexMeta),
+      );
+    }
+    if (data.containsKey('total_days')) {
+      context.handle(
+        _totalDaysMeta,
+        totalDays.isAcceptableOrUnknown(data['total_days']!, _totalDaysMeta),
+      );
+    }
+    if (data.containsKey('completed_exercise_ids_json')) {
+      context.handle(
+        _completedExerciseIdsJsonMeta,
+        completedExerciseIdsJson.isAcceptableOrUnknown(
+          data['completed_exercise_ids_json']!,
+          _completedExerciseIdsJsonMeta,
+        ),
+      );
+    }
+    if (data.containsKey('elapsed_seconds')) {
+      context.handle(
+        _elapsedSecondsMeta,
+        elapsedSeconds.isAcceptableOrUnknown(
+          data['elapsed_seconds']!,
+          _elapsedSecondsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('started_at')) {
+      context.handle(
+        _startedAtMeta,
+        startedAt.isAcceptableOrUnknown(data['started_at']!, _startedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_startedAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {planId, dayId};
+  @override
+  ActiveSession map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ActiveSession(
+      planId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}plan_id'],
+      )!,
+      dayId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}day_id'],
+      )!,
+      planType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}plan_type'],
+      )!,
+      planTitle: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}plan_title'],
+      )!,
+      dayTitle: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}day_title'],
+      )!,
+      dayLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}day_level'],
+      )!,
+      dayIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}day_index'],
+      )!,
+      totalDays: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}total_days'],
+      )!,
+      completedExerciseIdsJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}completed_exercise_ids_json'],
+      )!,
+      elapsedSeconds: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}elapsed_seconds'],
+      )!,
+      startedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}started_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $ActiveSessionsTable createAlias(String alias) {
+    return $ActiveSessionsTable(attachedDatabase, alias);
+  }
+}
+
+class ActiveSession extends DataClass implements Insertable<ActiveSession> {
+  final String planId;
+  final String dayId;
+  final String planType;
+  final String planTitle;
+  final String dayTitle;
+  final String dayLevel;
+  final int dayIndex;
+  final int totalDays;
+
+  /// JSON-encoded list of `"exerciseId#index"` keys — the same dedup key the
+  /// player already uses, so resuming can't double-log an exercise.
+  final String completedExerciseIdsJson;
+  final int elapsedSeconds;
+  final DateTime startedAt;
+  final DateTime updatedAt;
+  const ActiveSession({
+    required this.planId,
+    required this.dayId,
+    required this.planType,
+    required this.planTitle,
+    required this.dayTitle,
+    required this.dayLevel,
+    required this.dayIndex,
+    required this.totalDays,
+    required this.completedExerciseIdsJson,
+    required this.elapsedSeconds,
+    required this.startedAt,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['plan_id'] = Variable<String>(planId);
+    map['day_id'] = Variable<String>(dayId);
+    map['plan_type'] = Variable<String>(planType);
+    map['plan_title'] = Variable<String>(planTitle);
+    map['day_title'] = Variable<String>(dayTitle);
+    map['day_level'] = Variable<String>(dayLevel);
+    map['day_index'] = Variable<int>(dayIndex);
+    map['total_days'] = Variable<int>(totalDays);
+    map['completed_exercise_ids_json'] = Variable<String>(
+      completedExerciseIdsJson,
+    );
+    map['elapsed_seconds'] = Variable<int>(elapsedSeconds);
+    map['started_at'] = Variable<DateTime>(startedAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  ActiveSessionsCompanion toCompanion(bool nullToAbsent) {
+    return ActiveSessionsCompanion(
+      planId: Value(planId),
+      dayId: Value(dayId),
+      planType: Value(planType),
+      planTitle: Value(planTitle),
+      dayTitle: Value(dayTitle),
+      dayLevel: Value(dayLevel),
+      dayIndex: Value(dayIndex),
+      totalDays: Value(totalDays),
+      completedExerciseIdsJson: Value(completedExerciseIdsJson),
+      elapsedSeconds: Value(elapsedSeconds),
+      startedAt: Value(startedAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory ActiveSession.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ActiveSession(
+      planId: serializer.fromJson<String>(json['planId']),
+      dayId: serializer.fromJson<String>(json['dayId']),
+      planType: serializer.fromJson<String>(json['planType']),
+      planTitle: serializer.fromJson<String>(json['planTitle']),
+      dayTitle: serializer.fromJson<String>(json['dayTitle']),
+      dayLevel: serializer.fromJson<String>(json['dayLevel']),
+      dayIndex: serializer.fromJson<int>(json['dayIndex']),
+      totalDays: serializer.fromJson<int>(json['totalDays']),
+      completedExerciseIdsJson: serializer.fromJson<String>(
+        json['completedExerciseIdsJson'],
+      ),
+      elapsedSeconds: serializer.fromJson<int>(json['elapsedSeconds']),
+      startedAt: serializer.fromJson<DateTime>(json['startedAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'planId': serializer.toJson<String>(planId),
+      'dayId': serializer.toJson<String>(dayId),
+      'planType': serializer.toJson<String>(planType),
+      'planTitle': serializer.toJson<String>(planTitle),
+      'dayTitle': serializer.toJson<String>(dayTitle),
+      'dayLevel': serializer.toJson<String>(dayLevel),
+      'dayIndex': serializer.toJson<int>(dayIndex),
+      'totalDays': serializer.toJson<int>(totalDays),
+      'completedExerciseIdsJson': serializer.toJson<String>(
+        completedExerciseIdsJson,
+      ),
+      'elapsedSeconds': serializer.toJson<int>(elapsedSeconds),
+      'startedAt': serializer.toJson<DateTime>(startedAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  ActiveSession copyWith({
+    String? planId,
+    String? dayId,
+    String? planType,
+    String? planTitle,
+    String? dayTitle,
+    String? dayLevel,
+    int? dayIndex,
+    int? totalDays,
+    String? completedExerciseIdsJson,
+    int? elapsedSeconds,
+    DateTime? startedAt,
+    DateTime? updatedAt,
+  }) => ActiveSession(
+    planId: planId ?? this.planId,
+    dayId: dayId ?? this.dayId,
+    planType: planType ?? this.planType,
+    planTitle: planTitle ?? this.planTitle,
+    dayTitle: dayTitle ?? this.dayTitle,
+    dayLevel: dayLevel ?? this.dayLevel,
+    dayIndex: dayIndex ?? this.dayIndex,
+    totalDays: totalDays ?? this.totalDays,
+    completedExerciseIdsJson:
+        completedExerciseIdsJson ?? this.completedExerciseIdsJson,
+    elapsedSeconds: elapsedSeconds ?? this.elapsedSeconds,
+    startedAt: startedAt ?? this.startedAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  ActiveSession copyWithCompanion(ActiveSessionsCompanion data) {
+    return ActiveSession(
+      planId: data.planId.present ? data.planId.value : this.planId,
+      dayId: data.dayId.present ? data.dayId.value : this.dayId,
+      planType: data.planType.present ? data.planType.value : this.planType,
+      planTitle: data.planTitle.present ? data.planTitle.value : this.planTitle,
+      dayTitle: data.dayTitle.present ? data.dayTitle.value : this.dayTitle,
+      dayLevel: data.dayLevel.present ? data.dayLevel.value : this.dayLevel,
+      dayIndex: data.dayIndex.present ? data.dayIndex.value : this.dayIndex,
+      totalDays: data.totalDays.present ? data.totalDays.value : this.totalDays,
+      completedExerciseIdsJson: data.completedExerciseIdsJson.present
+          ? data.completedExerciseIdsJson.value
+          : this.completedExerciseIdsJson,
+      elapsedSeconds: data.elapsedSeconds.present
+          ? data.elapsedSeconds.value
+          : this.elapsedSeconds,
+      startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ActiveSession(')
+          ..write('planId: $planId, ')
+          ..write('dayId: $dayId, ')
+          ..write('planType: $planType, ')
+          ..write('planTitle: $planTitle, ')
+          ..write('dayTitle: $dayTitle, ')
+          ..write('dayLevel: $dayLevel, ')
+          ..write('dayIndex: $dayIndex, ')
+          ..write('totalDays: $totalDays, ')
+          ..write('completedExerciseIdsJson: $completedExerciseIdsJson, ')
+          ..write('elapsedSeconds: $elapsedSeconds, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    planId,
+    dayId,
+    planType,
+    planTitle,
+    dayTitle,
+    dayLevel,
+    dayIndex,
+    totalDays,
+    completedExerciseIdsJson,
+    elapsedSeconds,
+    startedAt,
+    updatedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ActiveSession &&
+          other.planId == this.planId &&
+          other.dayId == this.dayId &&
+          other.planType == this.planType &&
+          other.planTitle == this.planTitle &&
+          other.dayTitle == this.dayTitle &&
+          other.dayLevel == this.dayLevel &&
+          other.dayIndex == this.dayIndex &&
+          other.totalDays == this.totalDays &&
+          other.completedExerciseIdsJson == this.completedExerciseIdsJson &&
+          other.elapsedSeconds == this.elapsedSeconds &&
+          other.startedAt == this.startedAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class ActiveSessionsCompanion extends UpdateCompanion<ActiveSession> {
+  final Value<String> planId;
+  final Value<String> dayId;
+  final Value<String> planType;
+  final Value<String> planTitle;
+  final Value<String> dayTitle;
+  final Value<String> dayLevel;
+  final Value<int> dayIndex;
+  final Value<int> totalDays;
+  final Value<String> completedExerciseIdsJson;
+  final Value<int> elapsedSeconds;
+  final Value<DateTime> startedAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const ActiveSessionsCompanion({
+    this.planId = const Value.absent(),
+    this.dayId = const Value.absent(),
+    this.planType = const Value.absent(),
+    this.planTitle = const Value.absent(),
+    this.dayTitle = const Value.absent(),
+    this.dayLevel = const Value.absent(),
+    this.dayIndex = const Value.absent(),
+    this.totalDays = const Value.absent(),
+    this.completedExerciseIdsJson = const Value.absent(),
+    this.elapsedSeconds = const Value.absent(),
+    this.startedAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ActiveSessionsCompanion.insert({
+    required String planId,
+    required String dayId,
+    required String planType,
+    required String planTitle,
+    required String dayTitle,
+    this.dayLevel = const Value.absent(),
+    this.dayIndex = const Value.absent(),
+    this.totalDays = const Value.absent(),
+    this.completedExerciseIdsJson = const Value.absent(),
+    this.elapsedSeconds = const Value.absent(),
+    required DateTime startedAt,
+    required DateTime updatedAt,
+    this.rowid = const Value.absent(),
+  }) : planId = Value(planId),
+       dayId = Value(dayId),
+       planType = Value(planType),
+       planTitle = Value(planTitle),
+       dayTitle = Value(dayTitle),
+       startedAt = Value(startedAt),
+       updatedAt = Value(updatedAt);
+  static Insertable<ActiveSession> custom({
+    Expression<String>? planId,
+    Expression<String>? dayId,
+    Expression<String>? planType,
+    Expression<String>? planTitle,
+    Expression<String>? dayTitle,
+    Expression<String>? dayLevel,
+    Expression<int>? dayIndex,
+    Expression<int>? totalDays,
+    Expression<String>? completedExerciseIdsJson,
+    Expression<int>? elapsedSeconds,
+    Expression<DateTime>? startedAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (planId != null) 'plan_id': planId,
+      if (dayId != null) 'day_id': dayId,
+      if (planType != null) 'plan_type': planType,
+      if (planTitle != null) 'plan_title': planTitle,
+      if (dayTitle != null) 'day_title': dayTitle,
+      if (dayLevel != null) 'day_level': dayLevel,
+      if (dayIndex != null) 'day_index': dayIndex,
+      if (totalDays != null) 'total_days': totalDays,
+      if (completedExerciseIdsJson != null)
+        'completed_exercise_ids_json': completedExerciseIdsJson,
+      if (elapsedSeconds != null) 'elapsed_seconds': elapsedSeconds,
+      if (startedAt != null) 'started_at': startedAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ActiveSessionsCompanion copyWith({
+    Value<String>? planId,
+    Value<String>? dayId,
+    Value<String>? planType,
+    Value<String>? planTitle,
+    Value<String>? dayTitle,
+    Value<String>? dayLevel,
+    Value<int>? dayIndex,
+    Value<int>? totalDays,
+    Value<String>? completedExerciseIdsJson,
+    Value<int>? elapsedSeconds,
+    Value<DateTime>? startedAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return ActiveSessionsCompanion(
+      planId: planId ?? this.planId,
+      dayId: dayId ?? this.dayId,
+      planType: planType ?? this.planType,
+      planTitle: planTitle ?? this.planTitle,
+      dayTitle: dayTitle ?? this.dayTitle,
+      dayLevel: dayLevel ?? this.dayLevel,
+      dayIndex: dayIndex ?? this.dayIndex,
+      totalDays: totalDays ?? this.totalDays,
+      completedExerciseIdsJson:
+          completedExerciseIdsJson ?? this.completedExerciseIdsJson,
+      elapsedSeconds: elapsedSeconds ?? this.elapsedSeconds,
+      startedAt: startedAt ?? this.startedAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (planId.present) {
+      map['plan_id'] = Variable<String>(planId.value);
+    }
+    if (dayId.present) {
+      map['day_id'] = Variable<String>(dayId.value);
+    }
+    if (planType.present) {
+      map['plan_type'] = Variable<String>(planType.value);
+    }
+    if (planTitle.present) {
+      map['plan_title'] = Variable<String>(planTitle.value);
+    }
+    if (dayTitle.present) {
+      map['day_title'] = Variable<String>(dayTitle.value);
+    }
+    if (dayLevel.present) {
+      map['day_level'] = Variable<String>(dayLevel.value);
+    }
+    if (dayIndex.present) {
+      map['day_index'] = Variable<int>(dayIndex.value);
+    }
+    if (totalDays.present) {
+      map['total_days'] = Variable<int>(totalDays.value);
+    }
+    if (completedExerciseIdsJson.present) {
+      map['completed_exercise_ids_json'] = Variable<String>(
+        completedExerciseIdsJson.value,
+      );
+    }
+    if (elapsedSeconds.present) {
+      map['elapsed_seconds'] = Variable<int>(elapsedSeconds.value);
+    }
+    if (startedAt.present) {
+      map['started_at'] = Variable<DateTime>(startedAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ActiveSessionsCompanion(')
+          ..write('planId: $planId, ')
+          ..write('dayId: $dayId, ')
+          ..write('planType: $planType, ')
+          ..write('planTitle: $planTitle, ')
+          ..write('dayTitle: $dayTitle, ')
+          ..write('dayLevel: $dayLevel, ')
+          ..write('dayIndex: $dayIndex, ')
+          ..write('totalDays: $totalDays, ')
+          ..write('completedExerciseIdsJson: $completedExerciseIdsJson, ')
+          ..write('elapsedSeconds: $elapsedSeconds, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3665,6 +4384,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ExerciseLogsTable exerciseLogs = $ExerciseLogsTable(this);
   late final $ExercisePreferencesTable exercisePreferences =
       $ExercisePreferencesTable(this);
+  late final $ActiveSessionsTable activeSessions = $ActiveSessionsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3676,6 +4396,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     sessionLogs,
     exerciseLogs,
     exercisePreferences,
+    activeSessions,
   ];
 }
 
@@ -5500,6 +6221,345 @@ typedef $$ExercisePreferencesTableProcessedTableManager =
       ExercisePreference,
       PrefetchHooks Function()
     >;
+typedef $$ActiveSessionsTableCreateCompanionBuilder =
+    ActiveSessionsCompanion Function({
+      required String planId,
+      required String dayId,
+      required String planType,
+      required String planTitle,
+      required String dayTitle,
+      Value<String> dayLevel,
+      Value<int> dayIndex,
+      Value<int> totalDays,
+      Value<String> completedExerciseIdsJson,
+      Value<int> elapsedSeconds,
+      required DateTime startedAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$ActiveSessionsTableUpdateCompanionBuilder =
+    ActiveSessionsCompanion Function({
+      Value<String> planId,
+      Value<String> dayId,
+      Value<String> planType,
+      Value<String> planTitle,
+      Value<String> dayTitle,
+      Value<String> dayLevel,
+      Value<int> dayIndex,
+      Value<int> totalDays,
+      Value<String> completedExerciseIdsJson,
+      Value<int> elapsedSeconds,
+      Value<DateTime> startedAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
+
+class $$ActiveSessionsTableFilterComposer
+    extends Composer<_$AppDatabase, $ActiveSessionsTable> {
+  $$ActiveSessionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get planId => $composableBuilder(
+    column: $table.planId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get dayId => $composableBuilder(
+    column: $table.dayId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get planType => $composableBuilder(
+    column: $table.planType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get planTitle => $composableBuilder(
+    column: $table.planTitle,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get dayTitle => $composableBuilder(
+    column: $table.dayTitle,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get dayLevel => $composableBuilder(
+    column: $table.dayLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get dayIndex => $composableBuilder(
+    column: $table.dayIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get totalDays => $composableBuilder(
+    column: $table.totalDays,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get completedExerciseIdsJson => $composableBuilder(
+    column: $table.completedExerciseIdsJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get elapsedSeconds => $composableBuilder(
+    column: $table.elapsedSeconds,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get startedAt => $composableBuilder(
+    column: $table.startedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ActiveSessionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ActiveSessionsTable> {
+  $$ActiveSessionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get planId => $composableBuilder(
+    column: $table.planId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get dayId => $composableBuilder(
+    column: $table.dayId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get planType => $composableBuilder(
+    column: $table.planType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get planTitle => $composableBuilder(
+    column: $table.planTitle,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get dayTitle => $composableBuilder(
+    column: $table.dayTitle,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get dayLevel => $composableBuilder(
+    column: $table.dayLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get dayIndex => $composableBuilder(
+    column: $table.dayIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get totalDays => $composableBuilder(
+    column: $table.totalDays,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get completedExerciseIdsJson => $composableBuilder(
+    column: $table.completedExerciseIdsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get elapsedSeconds => $composableBuilder(
+    column: $table.elapsedSeconds,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get startedAt => $composableBuilder(
+    column: $table.startedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ActiveSessionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ActiveSessionsTable> {
+  $$ActiveSessionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get planId =>
+      $composableBuilder(column: $table.planId, builder: (column) => column);
+
+  GeneratedColumn<String> get dayId =>
+      $composableBuilder(column: $table.dayId, builder: (column) => column);
+
+  GeneratedColumn<String> get planType =>
+      $composableBuilder(column: $table.planType, builder: (column) => column);
+
+  GeneratedColumn<String> get planTitle =>
+      $composableBuilder(column: $table.planTitle, builder: (column) => column);
+
+  GeneratedColumn<String> get dayTitle =>
+      $composableBuilder(column: $table.dayTitle, builder: (column) => column);
+
+  GeneratedColumn<String> get dayLevel =>
+      $composableBuilder(column: $table.dayLevel, builder: (column) => column);
+
+  GeneratedColumn<int> get dayIndex =>
+      $composableBuilder(column: $table.dayIndex, builder: (column) => column);
+
+  GeneratedColumn<int> get totalDays =>
+      $composableBuilder(column: $table.totalDays, builder: (column) => column);
+
+  GeneratedColumn<String> get completedExerciseIdsJson => $composableBuilder(
+    column: $table.completedExerciseIdsJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get elapsedSeconds => $composableBuilder(
+    column: $table.elapsedSeconds,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get startedAt =>
+      $composableBuilder(column: $table.startedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$ActiveSessionsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ActiveSessionsTable,
+          ActiveSession,
+          $$ActiveSessionsTableFilterComposer,
+          $$ActiveSessionsTableOrderingComposer,
+          $$ActiveSessionsTableAnnotationComposer,
+          $$ActiveSessionsTableCreateCompanionBuilder,
+          $$ActiveSessionsTableUpdateCompanionBuilder,
+          (
+            ActiveSession,
+            BaseReferences<_$AppDatabase, $ActiveSessionsTable, ActiveSession>,
+          ),
+          ActiveSession,
+          PrefetchHooks Function()
+        > {
+  $$ActiveSessionsTableTableManager(
+    _$AppDatabase db,
+    $ActiveSessionsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ActiveSessionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ActiveSessionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ActiveSessionsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> planId = const Value.absent(),
+                Value<String> dayId = const Value.absent(),
+                Value<String> planType = const Value.absent(),
+                Value<String> planTitle = const Value.absent(),
+                Value<String> dayTitle = const Value.absent(),
+                Value<String> dayLevel = const Value.absent(),
+                Value<int> dayIndex = const Value.absent(),
+                Value<int> totalDays = const Value.absent(),
+                Value<String> completedExerciseIdsJson = const Value.absent(),
+                Value<int> elapsedSeconds = const Value.absent(),
+                Value<DateTime> startedAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ActiveSessionsCompanion(
+                planId: planId,
+                dayId: dayId,
+                planType: planType,
+                planTitle: planTitle,
+                dayTitle: dayTitle,
+                dayLevel: dayLevel,
+                dayIndex: dayIndex,
+                totalDays: totalDays,
+                completedExerciseIdsJson: completedExerciseIdsJson,
+                elapsedSeconds: elapsedSeconds,
+                startedAt: startedAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String planId,
+                required String dayId,
+                required String planType,
+                required String planTitle,
+                required String dayTitle,
+                Value<String> dayLevel = const Value.absent(),
+                Value<int> dayIndex = const Value.absent(),
+                Value<int> totalDays = const Value.absent(),
+                Value<String> completedExerciseIdsJson = const Value.absent(),
+                Value<int> elapsedSeconds = const Value.absent(),
+                required DateTime startedAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => ActiveSessionsCompanion.insert(
+                planId: planId,
+                dayId: dayId,
+                planType: planType,
+                planTitle: planTitle,
+                dayTitle: dayTitle,
+                dayLevel: dayLevel,
+                dayIndex: dayIndex,
+                totalDays: totalDays,
+                completedExerciseIdsJson: completedExerciseIdsJson,
+                elapsedSeconds: elapsedSeconds,
+                startedAt: startedAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ActiveSessionsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ActiveSessionsTable,
+      ActiveSession,
+      $$ActiveSessionsTableFilterComposer,
+      $$ActiveSessionsTableOrderingComposer,
+      $$ActiveSessionsTableAnnotationComposer,
+      $$ActiveSessionsTableCreateCompanionBuilder,
+      $$ActiveSessionsTableUpdateCompanionBuilder,
+      (
+        ActiveSession,
+        BaseReferences<_$AppDatabase, $ActiveSessionsTable, ActiveSession>,
+      ),
+      ActiveSession,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -5516,4 +6576,6 @@ class $AppDatabaseManager {
       $$ExerciseLogsTableTableManager(_db, _db.exerciseLogs);
   $$ExercisePreferencesTableTableManager get exercisePreferences =>
       $$ExercisePreferencesTableTableManager(_db, _db.exercisePreferences);
+  $$ActiveSessionsTableTableManager get activeSessions =>
+      $$ActiveSessionsTableTableManager(_db, _db.activeSessions);
 }
