@@ -5,14 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
 
+/// Exercise detail — Figma 11:959 (workout flow) and 16:356 (discover flow).
+///
+/// Both nodes are the same layout; only the workout flow shows the favourite
+/// heart, so it is opt-in via [showFavorite].
 class ExerciseDetailScreen extends StatefulWidget {
   final ExerciseModel exercise;
   final String dayLabel;
+  final bool showFavorite;
 
   const ExerciseDetailScreen({
     super.key,
     required this.exercise,
     this.dayLabel = 'Day 1',
+    this.showFavorite = false,
   });
 
   @override
@@ -23,6 +29,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
   VideoPlayerController? _videoController;
   bool _isVideoInitialized = false;
   bool _hasError = false;
+  bool _isFavorite = false;
   late int _durationSeconds;
 
   @override
@@ -104,53 +111,75 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
     final exercise = widget.exercise;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        toolbarHeight: 40,
+        leadingWidth: 16 + 30 + 8,
         leading: Padding(
           padding: const EdgeInsets.only(left: 16),
           child: Center(
             child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: Container(
-                width: 36,
-                height: 36,
-                padding: const EdgeInsets.all(8),
+                width: 30,
+                height: 30,
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(7),
                   boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x12000000),
-                      blurRadius: 6,
-                      offset: Offset(0, 1),
-                    ),
+                    BoxShadow(color: Color(0x17000000), blurRadius: 3),
                   ],
                 ),
-                child: SvgPicture.asset('assets/svgs/arrow.svg'),
+                child: SvgPicture.asset(
+                  'assets/svgs/arrow.svg',
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
         ),
+        actions: [
+          if (widget.showFavorite)
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Center(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => setState(() => _isFavorite = !_isFavorite),
+                  // Figma 13:2584: 24x24 asset box, 20x18 glyph inside.
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Center(
+                      child: SvgPicture.asset(
+                        _isFavorite
+                            ? 'assets/svgs/favorit_fill.svg'
+                            : 'assets/svgs/favorite.svg',
+                        width: 21,
+                        height: 19,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+        padding: const EdgeInsets.fromLTRB(16, 11, 16, 30),
         physics: const BouncingScrollPhysics(),
         children: [
-          // Top Banner Video Player Card
+          // Banner (11:976) — the exercise animation plays here.
           Container(
-            height: 180,
+            height: 232,
             decoration: BoxDecoration(
               color: const Color(0xFFFDE8ED),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
+              borderRadius: BorderRadius.circular(16),
             ),
             clipBehavior: Clip.antiAlias,
             child: Stack(
@@ -257,26 +286,28 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                 // Left Title Overlay when not playing or on error
                 if (!_isVideoInitialized)
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(left: 22, top: 81),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           widget.dayLabel,
                           style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.w900,
+                            fontSize: 29.308,
+                            height: 1.1,
+                            fontWeight: FontWeight.w700,
                             color: AppColors.primary,
                           ),
                         ),
-                        6.heightBox,
+                        6.513.heightBox,
                         Text(
                           exercise.title,
                           style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF4A4A4A),
+                            fontSize: 17.91,
+                            height: 1.1,
+                            fontWeight: FontWeight.w300,
+                            color: AppColors.textPrimary,
                           ),
                         ),
                       ],
@@ -285,219 +316,159 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
               ],
             ),
           ),
-          20.heightBox,
+          22.heightBox,
 
-          // Exercise Title Tag
-          Text(
-            exercise.title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
-              color: AppColors.primary,
+          // Everything below the banner sits at x=21 in the design (11:1134).
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Exercise title (11:1072)
+                Text(
+                  exercise.title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.primary,
+                  ),
+                ),
+                16.heightBox,
+
+                // Duration row with -/+ steppers (11:1104)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Duration',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        _StepperButton(
+                          asset: 'assets/svgs/stepper_minus.svg',
+                          onTap: () => _adjustDuration(-5),
+                        ),
+                        9.widthBox,
+                        Text(
+                          _formatDuration(_durationSeconds),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                        9.widthBox,
+                        _StepperButton(
+                          asset: 'assets/svgs/stepper_plus.svg',
+                          onTap: () => _adjustDuration(5),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                24.heightBox,
+
+                // Guidance sections (11:1128), 17 apart
+                _GuidanceSection(title: 'How to Do', items: exercise.howToDo),
+                _GuidanceSection(
+                  title: 'Common Mistake',
+                  items: exercise.commonMistakes,
+                ),
+                _GuidanceSection(
+                  title: 'Breathing Tip',
+                  items: exercise.breathingTips,
+                  isLast: true,
+                ),
+              ],
             ),
           ),
-          16.heightBox,
+        ],
+      ),
+    );
+  }
+}
 
-          // Duration Row with - / + Steppers
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Duration',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
-                ),
-              ),
-              Row(
+/// 23x22 outlined stepper — Figma 11:1080 (minus) and 11:1091 (plus).
+class _StepperButton extends StatelessWidget {
+  final String asset;
+  final VoidCallback onTap;
+
+  const _StepperButton({required this.asset, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: SvgPicture.asset(asset, width: 23, height: 22),
+    );
+  }
+}
+
+/// Heading plus bulleted copy — Figma 11:1123 / 11:1124 / 11:1129.
+class _GuidanceSection extends StatelessWidget {
+  final String title;
+  final List<String> items;
+  final bool isLast;
+
+  const _GuidanceSection({
+    required this.title,
+    required this.items,
+    this.isLast = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (items.isEmpty) return const SizedBox.shrink();
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: isLast ? 0 : 17),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textPrimary,
+            ),
+          ),
+          11.heightBox,
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 4, left: 16.5),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Minus Button
-                  GestureDetector(
-                    onTap: () => _adjustDuration(-5),
-                    child: Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFC7CDD8),
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: const Icon(
-                        Icons.remove_rounded,
-                        size: 16,
-                        color: Color(0xFF6C434C),
-                      ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 5, right: 6),
+                    child: Icon(
+                      Icons.circle,
+                      size: 3,
+                      color: AppColors.textLight,
                     ),
                   ),
-                  12.widthBox,
-
-                  // Duration text (e.g., 00:35)
-                  Text(
-                    _formatDuration(_durationSeconds),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  12.widthBox,
-
-                  // Plus Button
-                  GestureDetector(
-                    onTap: () => _adjustDuration(5),
-                    child: Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFC7CDD8),
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: const Icon(
-                        Icons.add_rounded,
-                        size: 16,
-                        color: Color(0xFF6C434C),
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textLight,
+                        height: 1.35,
                       ),
                     ),
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-          24.heightBox,
-
-          // How to Do Section
-          if (exercise.howToDo.isNotEmpty) ...[
-            const Text(
-              'How to Do',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            10.heightBox,
-            ...exercise.howToDo.map(
-              (step) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 6, right: 8),
-                      child: Icon(
-                        Icons.circle,
-                        size: 5,
-                        color: Color(0xFF6C434C),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        step,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF6C434C),
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            20.heightBox,
-          ],
-
-          // Common Mistake Section
-          if (exercise.commonMistakes.isNotEmpty) ...[
-            const Text(
-              'Common Mistake',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            10.heightBox,
-            ...exercise.commonMistakes.map(
-              (mistake) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 6, right: 8),
-                      child: Icon(
-                        Icons.circle,
-                        size: 5,
-                        color: Color(0xFF6C434C),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        mistake,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF6C434C),
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            20.heightBox,
-          ],
-
-          // Breathing Tip Section
-          if (exercise.breathingTips.isNotEmpty) ...[
-            const Text(
-              'Breathing Tip',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            10.heightBox,
-            ...exercise.breathingTips.map(
-              (tip) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 6, right: 8),
-                      child: Icon(
-                        Icons.circle,
-                        size: 5,
-                        color: Color(0xFF6C434C),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        tip,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF6C434C),
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
         ],
       ),
     );

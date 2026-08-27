@@ -1,9 +1,17 @@
+import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/utils/app_toasts.dart';
 import 'package:fitness_app/features/home/models/home_models.dart';
 import 'package:fitness_app/features/home/widgets/body_focus_widget.dart';
 import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
+import 'package:fitness_app/features/body_focus/services/body_focus_repository.dart';
+import 'package:fitness_app/features/body_focus/views/body_focus_category_screen.dart';
+import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
+import 'package:fitness_app/features/challenges/views/challenge_detail_screen.dart';
+import 'package:fitness_app/features/challenges/views/challenges_screen.dart';
+import 'package:fitness_app/features/workout/services/workout_repository.dart';
+import 'package:fitness_app/features/workout/views/program_detail_screen.dart';
 import 'package:fitness_app/features/home/widgets/home_hero_banner.dart';
 import 'package:fitness_app/features/home/widgets/today_summary_widget.dart';
 import 'package:flutter/material.dart';
@@ -121,14 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // 1. Hero Banner
             SliverToBoxAdapter(
-              child: HomeHeroBanner(
-                onStartWorkout: () {
-                  AppToast.success(
-                    title: 'Success',
-                    description: 'Workout started',
-                  );
-                },
-              ),
+              child: HomeHeroBanner(onStartWorkout: _openProgram),
             ),
             12.heightBox.sliver,
 
@@ -168,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => context.push(const ChallengesScreen()),
                       child: const Text(
                         'See All',
                         style: TextStyle(
@@ -198,6 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     final challenge = _challenges[index];
                     return ChallengeCardWidget(
                       challenge: challenge,
+                      onTap: () => _openChallenge(challenge),
                       onJoin: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -229,7 +231,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             12.heightBox.sliver,
             SliverToBoxAdapter(
-              child: BodyFocusWidget(items: _bodyFocusItems, onTap: (item) {}),
+              child: BodyFocusWidget(
+                items: _bodyFocusItems,
+                onTap: _openBodyFocus,
+              ),
             ),
 
             // Bottom Spacing for Floating Bottom Bar
@@ -238,6 +243,56 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  /// "Start Workout" on the hero banner opens the program flow (Figma 10:509).
+  Future<void> _openProgram() async {
+    final programs = await WorkoutRepository.loadPrograms();
+    if (!mounted) return;
+
+    if (programs.isEmpty) {
+      AppToast.error(
+        title: 'Unavailable',
+        description: 'No program is available yet',
+      );
+      return;
+    }
+    context.push(ProgramDetailScreen(program: programs.first));
+  }
+
+  /// Body Focus tiles open that body part's workouts (Figma 14:2).
+  Future<void> _openBodyFocus(BodyFocusModel item) async {
+    final category = await BodyFocusRepository.findCategory(
+      id: item.id,
+      title: item.title,
+    );
+    if (!mounted) return;
+
+    if (category == null) {
+      AppToast.error(
+        title: 'Unavailable',
+        description: 'No workouts for ${item.title} yet',
+      );
+      return;
+    }
+    context.push(BodyFocusCategoryScreen(category: category));
+  }
+
+  /// Challenge cards open the challenge flow (Figma 11:1744).
+  Future<void> _openChallenge(ChallengeModel challenge) async {
+    final challenges = await ChallengeRepository.loadChallenges();
+    if (!mounted) return;
+
+    if (challenges.isEmpty) {
+      context.push(const ChallengesScreen());
+      return;
+    }
+
+    final match = challenges.firstWhere(
+      (c) => c.title.toLowerCase() == challenge.title.toLowerCase(),
+      orElse: () => challenges.first,
+    );
+    context.push(ChallengeDetailScreen(challenge: match));
   }
 }
 

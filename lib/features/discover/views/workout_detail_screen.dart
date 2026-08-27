@@ -1,6 +1,9 @@
+import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
+import 'package:fitness_app/features/player/models/player_session.dart';
+import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
 import 'package:fitness_app/features/discover/views/exercise_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -329,14 +332,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                 width: double.infinity,
                 height: 54,
                 child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Starting ${workout.title}!'),
-                        backgroundColor: AppColors.primary,
+                  onPressed: () => context.push(
+                    ExercisePlayerScreen(
+                      session: PlayerSession(
+                        exercises: workout.exercises,
+                        workoutTitle: workout.title,
                       ),
-                    );
-                  },
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,

@@ -1,0 +1,1241 @@
+[
+  {
+    "id": "prog_pilates_premier",
+    "title": "Pilates",
+    "subtitle": "Premier",
+    "phases": [
+      {
+        "id": "phase_1",
+        "title": "Phase 1",
+        "subtitle": "Gentle Beginning",
+        "progress": 0.0,
+        "days": [
+          {
+            "id": "day_1",
+            "title": "Day 1",
+            "difficulty": "Beginner",
+            "duration_minutes": 5,
+            "net_time_minutes": 25,
+            "calories_burned": 234,
+            "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+            "exercises": [
+              {
+                "order": 1,
+                "exercise_id": "ex_side_leg_circle_left",
+                "title": "Side leg Circle Left",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 2,
+                "exercise_id": "ex_side_leg_circle_right",
+                "title": "Side leg Circle Right",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 3,
+                "exercise_id": "ex_slide_laying_leg_lift_left",
+                "title": "Slide- Laying leg lift Left",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 4,
+                "exercise_id": "ex_butt_bride",
+                "title": "Butt Bride",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 5,
+                "exercise_id": "ex_pilates_glute_bridge",
+                "title": "Pilates Glute Bridge",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 6,
+                "exercise_id": "ex_sidelying_clamshell",
+                "title": "Side-Lying Clamshell",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 7,
+                "exercise_id": "ex_pilates_sumo_squat",
+                "title": "Pilates Sumo Squat",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "day_2",
+            "title": "Day 2",
+            "difficulty": "Beginner",
+            "duration_minutes": 6,
+            "net_time_minutes": 27,
+            "calories_burned": 261,
+            "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+            "exercises": [
+              {
+                "order": 1,
+                "exercise_id": "ex_side_leg_circle_left",
+                "title": "Side leg Circle Left",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 2,
+                "exercise_id": "ex_side_leg_circle_right",
+                "title": "Side leg Circle Right",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 3,
+                "exercise_id": "ex_slide_laying_leg_lift_left",
+                "title": "Slide- Laying leg lift Left",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 4,
+                "exercise_id": "ex_butt_bride",
+                "title": "Butt Bride",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 5,
+                "exercise_id": "ex_pilates_glute_bridge",
+                "title": "Pilates Glute Bridge",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 6,
+                "exercise_id": "ex_sidelying_clamshell",
+                "title": "Side-Lying Clamshell",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 7,
+                "exercise_id": "ex_pilates_sumo_squat",
+                "title": "Pilates Sumo Squat",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 8,
+                "exercise_id": "ex_side_leg_circles",
+                "title": "Side Leg Circles",
+                "description": "",
+                "duration_seconds": 40,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "day_3",
+            "title": "Day 3",
+            "difficulty": "Beginner",
+            "duration_minutes": 7,
+            "net_time_minutes": 30,
+            "calories_burned": 298,
+            "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+            "exercises": [
+              {
+                "order": 1,
+                "exercise_id": "ex_side_leg_circle_left",
+                "title": "Side leg Circle Left",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 2,
+                "exercise_id": "ex_side_leg_circle_right",
+                "title": "Side leg Circle Right",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 3,
+                "exercise_id": "ex_slide_laying_leg_lift_left",
+                "title": "Slide- Laying leg lift Left",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 4,
+                "exercise_id": "ex_butt_bride",
+                "title": "Butt Bride",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 5,
+                "exercise_id": "ex_pilates_glute_bridge",
+                "title": "Pilates Glute Bridge",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 6,
+                "exercise_id": "ex_sidelying_clamshell",
+                "title": "Side-Lying Clamshell",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 7,
+                "exercise_id": "ex_pilates_sumo_squat",
+                "title": "Pilates Sumo Squat",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 8,
+                "exercise_id": "ex_side_leg_circles",
+                "title": "Side Leg Circles",
+                "description": "",
+                "duration_seconds": 40,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 9,
+                "exercise_id": "ex_slide_laying_leg_lift_right",
+                "title": "Slide- Laying leg lift Right",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 10,
+                "exercise_id": "ex_standing_leg_lift",
+                "title": "Standing Leg Lift",
+                "description": "",
+                "duration_seconds": 40,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "phase_2",
+        "title": "Phase 2",
+        "subtitle": "Building Strength",
+        "progress": 0.0,
+        "days": [
+          {
+            "id": "day_1",
+            "title": "Day 1",
+            "difficulty": "Beginner",
+            "duration_minutes": 5,
+            "net_time_minutes": 25,
+            "calories_burned": 234,
+            "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+            "exercises": [
+              {
+                "order": 1,
+                "exercise_id": "ex_side_leg_circle_left",
+                "title": "Side leg Circle Left",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 2,
+                "exercise_id": "ex_side_leg_circle_right",
+                "title": "Side leg Circle Right",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 3,
+                "exercise_id": "ex_slide_laying_leg_lift_left",
+                "title": "Slide- Laying leg lift Left",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 4,
+                "exercise_id": "ex_butt_bride",
+                "title": "Butt Bride",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 5,
+                "exercise_id": "ex_pilates_glute_bridge",
+                "title": "Pilates Glute Bridge",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 6,
+                "exercise_id": "ex_sidelying_clamshell",
+                "title": "Side-Lying Clamshell",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 7,
+                "exercise_id": "ex_pilates_sumo_squat",
+                "title": "Pilates Sumo Squat",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "day_2",
+            "title": "Day 2",
+            "difficulty": "Beginner",
+            "duration_minutes": 6,
+            "net_time_minutes": 27,
+            "calories_burned": 261,
+            "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+            "exercises": [
+              {
+                "order": 1,
+                "exercise_id": "ex_side_leg_circle_left",
+                "title": "Side leg Circle Left",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 2,
+                "exercise_id": "ex_side_leg_circle_right",
+                "title": "Side leg Circle Right",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 3,
+                "exercise_id": "ex_slide_laying_leg_lift_left",
+                "title": "Slide- Laying leg lift Left",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 4,
+                "exercise_id": "ex_butt_bride",
+                "title": "Butt Bride",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 5,
+                "exercise_id": "ex_pilates_glute_bridge",
+                "title": "Pilates Glute Bridge",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 6,
+                "exercise_id": "ex_sidelying_clamshell",
+                "title": "Side-Lying Clamshell",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 7,
+                "exercise_id": "ex_pilates_sumo_squat",
+                "title": "Pilates Sumo Squat",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 8,
+                "exercise_id": "ex_side_leg_circles",
+                "title": "Side Leg Circles",
+                "description": "",
+                "duration_seconds": 40,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "day_3",
+            "title": "Day 3",
+            "difficulty": "Beginner",
+            "duration_minutes": 7,
+            "net_time_minutes": 30,
+            "calories_burned": 298,
+            "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+            "exercises": [
+              {
+                "order": 1,
+                "exercise_id": "ex_side_leg_circle_left",
+                "title": "Side leg Circle Left",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 2,
+                "exercise_id": "ex_side_leg_circle_right",
+                "title": "Side leg Circle Right",
+                "description": "",
+                "duration_seconds": 35,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 3,
+                "exercise_id": "ex_slide_laying_leg_lift_left",
+                "title": "Slide- Laying leg lift Left",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 4,
+                "exercise_id": "ex_butt_bride",
+                "title": "Butt Bride",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 5,
+                "exercise_id": "ex_pilates_glute_bridge",
+                "title": "Pilates Glute Bridge",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 6,
+                "exercise_id": "ex_sidelying_clamshell",
+                "title": "Side-Lying Clamshell",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 7,
+                "exercise_id": "ex_pilates_sumo_squat",
+                "title": "Pilates Sumo Squat",
+                "description": "",
+                "duration_seconds": 50,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 8,
+                "exercise_id": "ex_side_leg_circles",
+                "title": "Side Leg Circles",
+                "description": "",
+                "duration_seconds": 40,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 9,
+                "exercise_id": "ex_slide_laying_leg_lift_right",
+                "title": "Slide- Laying leg lift Right",
+                "description": "",
+                "duration_seconds": 45,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              },
+              {
+                "order": 10,
+                "exercise_id": "ex_standing_leg_lift",
+                "title": "Standing Leg Lift",
+                "description": "",
+                "duration_seconds": 40,
+                "reps": 0,
+                "rest_seconds": 10,
+                "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+                "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+                "how_to_do": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "common_mistakes": [
+                  "Lie on your right side with your head resting on your right hand",
+                  "then left leg"
+                ],
+                "breathing_tips": [
+                  "Breath regularly",
+                  "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

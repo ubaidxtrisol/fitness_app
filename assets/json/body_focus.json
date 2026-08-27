@@ -1,0 +1,3844 @@
+{
+  "exercises": {
+    "ex_dynamic_chest": {
+      "order": 1,
+      "exercise_id": "ex_dynamic_chest",
+      "title": "Dynamic Chest",
+      "description": "",
+      "duration_seconds": 35,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_toros_twist": {
+      "order": 2,
+      "exercise_id": "ex_toros_twist",
+      "title": "Toros Twist",
+      "description": "",
+      "duration_seconds": 35,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_overhead_arm_clockwise": {
+      "order": 3,
+      "exercise_id": "ex_overhead_arm_clockwise",
+      "title": "Overhead Arm clockwise",
+      "description": "",
+      "duration_seconds": 45,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_russian_twist": {
+      "order": 4,
+      "exercise_id": "ex_russian_twist",
+      "title": "Russian Twist",
+      "description": "",
+      "duration_seconds": 50,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_side_leg_circle_left": {
+      "order": 5,
+      "exercise_id": "ex_side_leg_circle_left",
+      "title": "Side leg Circle Left",
+      "description": "",
+      "duration_seconds": 35,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_side_leg_circle_right": {
+      "order": 6,
+      "exercise_id": "ex_side_leg_circle_right",
+      "title": "Side leg Circle Right",
+      "description": "",
+      "duration_seconds": 35,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_slide_laying_leg_lift_left": {
+      "order": 7,
+      "exercise_id": "ex_slide_laying_leg_lift_left",
+      "title": "Slide- Laying leg lift Left",
+      "description": "",
+      "duration_seconds": 45,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_butt_bride": {
+      "order": 8,
+      "exercise_id": "ex_butt_bride",
+      "title": "Butt Bride",
+      "description": "",
+      "duration_seconds": 50,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_pilates_glute_bridge": {
+      "order": 9,
+      "exercise_id": "ex_pilates_glute_bridge",
+      "title": "Pilates Glute Bridge",
+      "description": "",
+      "duration_seconds": 45,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    },
+    "ex_sidelying_clamshell": {
+      "order": 10,
+      "exercise_id": "ex_sidelying_clamshell",
+      "title": "Side-Lying Clamshell",
+      "description": "",
+      "duration_seconds": 45,
+      "reps": 0,
+      "rest_seconds": 10,
+      "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+      "video_url": "https://cdn.pixabay.com/video/2020/05/18/39374-422737298_large.mp4",
+      "how_to_do": [
+        "",
+        "then left leg"
+      ],
+      "common_mistakes": [
+        "Lie on your right side with your head resting on your right hand",
+        "then left leg"
+      ],
+      "breathing_tips": [
+        "Breath regularly",
+        "Do not hold your Breath . Holding your breathing can cause your body to tense up mad the exercise more difficult"
+      ]
+    }
+  },
+  "categories": [
+    {
+      "id": "butt_leg",
+      "title": "Butt & Leg",
+      "workouts": [
+        {
+          "id": "butt_leg_wk_1",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_2",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_3",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_4",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_5",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_6",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_7",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "butt_leg_wk_8",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abs",
+      "title": "Abs",
+      "workouts": [
+        {
+          "id": "abs_wk_1",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_2",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_3",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_4",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_5",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_6",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_7",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "abs_wk_8",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "full_body",
+      "title": "Full body",
+      "workouts": [
+        {
+          "id": "full_body_wk_1",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_2",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_3",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_4",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_5",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_6",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_7",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "full_body_wk_8",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arm",
+      "title": "Arm",
+      "workouts": [
+        {
+          "id": "arm_wk_1",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_2",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_3",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_4",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_5",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_6",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_7",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 6,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm_wk_8",
+          "title": "Model Leg & Bubble Booty",
+          "note": "Note: Image Will Change",
+          "difficulty": "Beginner",
+          "duration_minutes": 9,
+          "net_time_minutes": 25,
+          "calories_burned": 234,
+          "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+          "sessions": [
+            {
+              "id": "session_1",
+              "title": "Exercise 1",
+              "difficulty": "Beginner",
+              "duration_minutes": 5,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left"
+              ]
+            },
+            {
+              "id": "session_2",
+              "title": "Exercise 2",
+              "difficulty": "Beginner",
+              "duration_minutes": 6,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride"
+              ]
+            },
+            {
+              "id": "session_3",
+              "title": "Exercise 3",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_4",
+              "title": "Exercise 4",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            },
+            {
+              "id": "session_5",
+              "title": "Exercise 5",
+              "difficulty": "Beginner",
+              "duration_minutes": 7,
+              "net_time_minutes": 25,
+              "calories_burned": 234,
+              "thumbnail_url": "https://cdn.pixabay.com/photo/2017/04/25/14/02/pilates-2259763_960_720.jpg",
+              "exercise_ids": [
+                "ex_dynamic_chest",
+                "ex_toros_twist",
+                "ex_overhead_arm_clockwise",
+                "ex_russian_twist",
+                "ex_side_leg_circle_left",
+                "ex_side_leg_circle_right",
+                "ex_slide_laying_leg_lift_left",
+                "ex_butt_bride",
+                "ex_pilates_glute_bridge",
+                "ex_sidelying_clamshell"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
