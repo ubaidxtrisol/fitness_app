@@ -1,6 +1,7 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/features/discover/discover_screen.dart';
+import 'package:fitness_app/features/home/views/home_screen.dart';
 import 'package:fitness_app/features/profile/profile_screen.dart';
 import 'package:fitness_app/features/progress/progress_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  final ValueNotifier<int> _currentIndex = ValueNotifier<int>(1);
+  final ValueNotifier<int> _currentIndex = ValueNotifier<int>(0);
 
   final List<_NavItem> _navItems = const [
     _NavItem(
@@ -55,7 +56,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           return IndexedStack(
             index: currentIndex,
             children: [
-              _buildPlaceholderPage('Home Screen'),
+              const HomeScreen(),
               const DiscoverScreen(),
               const ProgressScreen(),
               const ProfileScreen(),
