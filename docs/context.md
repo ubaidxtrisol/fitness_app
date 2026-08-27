@@ -108,9 +108,13 @@ Implemented and verified (37 passing tests across
 * **Exercise detail screen** — one shared screen behind all four flows, with a
   "Start Now" footer that opens the shared player on that exercise
   (`PlayerSession.startingAt`) and still logs against the right plan. Its
-  duration stepper seeds from the clip's own length, caches every change against
-  the exercise (`ExercisePrefsRepository`), and the player then loops that clip
-  for exactly that long before skipping on.
+  duration stepper seeds from the catalogue's `duration_seconds`, caches every
+  change against the exercise (`ExercisePrefsRepository`), and the player then
+  loops that clip for exactly that long before skipping on. The hero (Figma
+  16:374) is **static artwork, not a video preview** — the same banner shell as
+  `ChallengeHeroBanner` (`assets/images/challenge_banner.png` is byte-identical
+  to that node's background fill) with the exercise's own thumbnail bled off the
+  right edge. Only `ExercisePlayerScreen` plays video.
 * **My Profile** — reads `UserProfileRepository`, so the height, weight and
   target weight collected in the info flow are shown back and edits persist.
   Metric is canonical; imperial is display-only (`profile/unit_conversion.dart`)

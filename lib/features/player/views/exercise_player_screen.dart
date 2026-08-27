@@ -334,9 +334,9 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen>
         onBack: _openPaused,
         child: SafeArea(
           child: Column(
+            mainAxisAlignment: .center,
             children: [
-              const Spacer(),
-
+              Spacer(),
               // The clip plays in a banner at its own aspect ratio — filling
               // the whole background cropped a 16:9 exercise to a strip.
               Padding(
@@ -347,7 +347,7 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen>
                   maxHeight: MediaQuery.sizeOf(context).height * 0.36,
                 ),
               ),
-              const SizedBox(height: 16),
+              const Spacer(),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

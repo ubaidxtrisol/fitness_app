@@ -1,22 +1,18 @@
-import 'dart:async';
-
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
-import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/database/repositories/exercise_prefs_repository.dart';
-import 'package:fitness_app/core/database/repositories/settings_repository.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/player/models/player_session.dart';
 import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:video_player/video_player.dart';
 
 /// Exercise detail — Figma 11:959 (workout flow) and 16:356 (discover flow).
 ///
 /// Both nodes are the same layout; only the workout flow shows the favourite
-/// heart, so it is opt-in via [showFavorite].
+/// heart, so it is opt-in via [showFavorite]. The hero (16:374) is static
+/// artwork, not a video preview — see [ExercisePlayerScreen] for playback.
 class ExerciseDetailScreen extends StatefulWidget {
   final ExerciseModel exercise;
   final String dayLabel;
@@ -45,31 +41,18 @@ class ExerciseDetailScreen extends StatefulWidget {
 
 class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
   final ExercisePrefsRepository _prefs = ExercisePrefsRepository();
-  final SettingsRepository _settingsRepo = SettingsRepository();
 
-  VideoPlayerController? _videoController;
-  bool _isVideoInitialized = false;
-  bool _hasError = false;
   bool _isFavorite = false;
 
   /// What the user dialled in for this exercise, if anything. Null means the
-  /// clip's own length still wins.
+  /// catalogue's own duration still wins.
   int? _override;
 
-  /// The clip's natural length, known once the controller initialises.
-  int? _clipSeconds;
-
-  WorkoutSettingsRow? _settings;
-  StreamSubscription<WorkoutSettingsRow>? _settingsSub;
-
-  /// The stepper's value: the saved override, else the clip's length, else
-  /// whatever the catalogue claims.
+  /// The stepper's value: the saved override, else whatever the catalogue
+  /// claims.
   int get _durationSeconds {
     final saved = _override;
     if (saved != null && saved > 0) return saved;
-
-    final clip = _clipSeconds;
-    if (clip != null && clip > 0) return clip;
 
     return widget.exercise.durationSeconds > 0
         ? widget.exercise.durationSeconds
@@ -84,66 +67,8 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
 
   Future<void> _boot() async {
     final saved = await _prefs.durationFor(widget.exercise.exerciseId);
-    final settings = await _settingsRepo.load();
     if (!mounted) return;
-
-    setState(() {
-      _override = saved;
-      _settings = settings;
-    });
-
-    // Volume and mute are global — a change made in workout settings while
-    // this screen is open applies straight away.
-    _settingsSub = _settingsRepo.watch().listen((row) {
-      if (!mounted) return;
-      setState(() => _settings = row);
-      _videoController?.setVolume(_playbackVolume);
-    });
-
-    await _initializeVideo();
-  }
-
-  double get _playbackVolume {
-    final settings = _settings;
-    if (settings == null) return 0.6;
-    return settings.soundEffectEnabled ? settings.volume : 0.0;
-  }
-
-  Future<void> _initializeVideo() async {
-    if (widget.exercise.videoUrl.isEmpty) return;
-
-    try {
-      _videoController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.exercise.videoUrl),
-      );
-
-      await _videoController!.initialize();
-      await _videoController!.setLooping(true);
-      await _videoController!.setVolume(_playbackVolume);
-      await _videoController!.play();
-
-      if (mounted) {
-        setState(() {
-          _isVideoInitialized = true;
-          // The stepper starts at the clip's length unless the user has
-          // already chosen one for this exercise.
-          _clipSeconds = _videoController!.value.duration.inSeconds;
-        });
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _hasError = true;
-        });
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _settingsSub?.cancel();
-    _videoController?.dispose();
-    super.dispose();
+    setState(() => _override = saved);
   }
 
   /// Steps the duration and caches it against this exercise, so the player and
@@ -160,11 +85,8 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
   }
 
   /// Opens the shared player on this exercise. The player re-reads the cached
-  /// durations, so the clip loops for exactly what the stepper shows.
+  /// duration, so the clip loops for exactly what the stepper shows.
   Future<void> _startNow() async {
-    await _videoController?.pause();
-    if (!mounted) return;
-
     final session = widget.session;
     await context.push(
       ExercisePlayerScreen(
@@ -176,34 +98,12 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
             : session.startingAt(widget.exerciseIndex),
       ),
     );
-    if (!mounted) return;
-
-    // Back on the detail screen: the preview picks up where it left off.
-    await _videoController?.play();
   }
 
   String _formatDuration(int totalSecs) {
     final mins = (totalSecs ~/ 60).toString().padLeft(2, '0');
     final secs = (totalSecs % 60).toString().padLeft(2, '0');
     return '$mins:$secs';
-  }
-
-  void _forwardVideo(int seconds) {
-    if (_videoController != null && _isVideoInitialized) {
-      final currentPos = _videoController!.value.position;
-      final targetPos = currentPos + Duration(seconds: seconds);
-      _videoController!.seekTo(targetPos);
-    }
-  }
-
-  void _rewindVideo(int seconds) {
-    if (_videoController != null && _isVideoInitialized) {
-      final currentPos = _videoController!.value.position;
-      final targetPos = currentPos - Duration(seconds: seconds);
-      _videoController!.seekTo(
-        targetPos < Duration.zero ? Duration.zero : targetPos,
-      );
-    }
   }
 
   @override
@@ -302,147 +202,12 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
         padding: const EdgeInsets.fromLTRB(16, 11, 16, 30),
         physics: const BouncingScrollPhysics(),
         children: [
-          // Banner (11:976) — the exercise animation plays here.
-          Container(
-            height: 232,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFDE8ED),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Stack(
-              children: [
-                // Video or Fallback Thumbnail
-                if (_videoController != null &&
-                    _isVideoInitialized &&
-                    !_hasError)
-                  Center(
-                    child: AspectRatio(
-                      aspectRatio: _videoController!.value.aspectRatio,
-                      child: VideoPlayer(_videoController!),
-                    ),
-                  )
-                else if (exercise.thumbnailUrl.isNotEmpty)
-                  Positioned.fill(
-                    child: Image.network(
-                      exercise.thumbnailUrl,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: const Color(0xFFFDE8ED),
-                        child: const Icon(
-                          Icons.fitness_center_rounded,
-                          color: AppColors.primary,
-                          size: 48,
-                        ),
-                      ),
-                    ),
-                  )
-                else
-                  Container(color: const Color(0xFFFDE8ED)),
-
-                // Video Interactive Controls Overlay
-                if (_videoController != null && _isVideoInitialized)
-                  Positioned(
-                    bottom: 8,
-                    left: 12,
-                    right: 12,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Rewind 5s
-                        GestureDetector(
-                          onTap: () => _rewindVideo(5),
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.5),
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.replay_5_rounded,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ),
-                        ),
-                        // Play / Pause Toggle
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if (_videoController!.value.isPlaying) {
-                                _videoController!.pause();
-                              } else {
-                                _videoController!.play();
-                              }
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.5),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              _videoController!.value.isPlaying
-                                  ? Icons.pause_rounded
-                                  : Icons.play_arrow_rounded,
-                              color: Colors.white,
-                              size: 22,
-                            ),
-                          ),
-                        ),
-                        // Forward 5s
-                        GestureDetector(
-                          onTap: () => _forwardVideo(5),
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.5),
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.forward_5_rounded,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                // Left Title Overlay when not playing or on error
-                if (!_isVideoInitialized)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 22, top: 81),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          widget.dayLabel,
-                          style: const TextStyle(
-                            fontSize: 29.308,
-                            height: 1.1,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        6.513.heightBox,
-                        Text(
-                          exercise.title,
-                          style: const TextStyle(
-                            fontSize: 17.91,
-                            height: 1.1,
-                            fontWeight: FontWeight.w300,
-                            color: AppColors.textPrimary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
+          // Banner (16:374) — static artwork, matching the challenge/program
+          // hero banners rather than a live preview.
+          _ExerciseBanner(
+            dayLabel: widget.dayLabel,
+            title: exercise.title,
+            thumbnailUrl: exercise.thumbnailUrl,
           ),
           22.heightBox,
 
@@ -517,6 +282,123 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Static hero artwork — Figma 16:374/375/376/377.
+///
+/// 361x169, r20, `#fbe3e5` — the same banner shell as [ChallengeHeroBanner]
+/// (`assets/images/challenge_banner.png` is byte-identical to this node's
+/// background fill). The exercise's own thumbnail bleeds off the right edge
+/// in place of the bundled model shot, with the day/title copy overlaid on
+/// the left. This is deliberately static — no video plays on this screen,
+/// only inside [ExercisePlayerScreen].
+class _ExerciseBanner extends StatelessWidget {
+  final String dayLabel;
+  final String title;
+  final String thumbnailUrl;
+
+  static const double _designWidth = 361;
+  static const double _height = 169;
+
+  const _ExerciseBanner({
+    required this.dayLabel,
+    required this.title,
+    required this.thumbnailUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // The photo is placed by design coordinates, so scale them if the
+        // banner is not exactly 361 wide.
+        final scale = constraints.maxWidth / _designWidth;
+
+        return Container(
+          height: _height,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: const Color(0xFFFBE3E5),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(color: Color(0x0A000000), blurRadius: 4),
+            ],
+          ),
+          child: Stack(
+            children: [
+              // Decorative artwork (16:375) — 361x180 anchored one pixel
+              // above the top; shared with the challenge/program banners.
+              Positioned(
+                left: 0,
+                top: -1 * scale,
+                width: constraints.maxWidth,
+                height: 180 * scale,
+                child: Image.asset(
+                  'assets/images/challenge_banner.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              // Exercise photo (16:376) — 164x170 at (190, -1), bleeding off
+              // the right edge.
+              if (thumbnailUrl.isNotEmpty)
+                Positioned(
+                  left: 190 * scale,
+                  top: -1 * scale,
+                  width: 164 * scale,
+                  height: 170 * scale,
+                  child: Image.network(
+                    thumbnailUrl,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const SizedBox.shrink(),
+                  ),
+                ),
+
+              // Day label + title (16:377).
+              Positioned(
+                left: 24 * scale,
+                top: 58 * scale,
+                child: SizedBox(
+                  width: 160 * scale,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        dayLabel,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 29.308,
+                          height: 1.1,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      6.513.heightBox,
+                      Text(
+                        title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 17.91,
+                          height: 1.1,
+                          fontWeight: FontWeight.w300,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
