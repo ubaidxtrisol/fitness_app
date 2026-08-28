@@ -1,5 +1,6 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
+import 'package:fitness_app/core/widgets/app_shimmer.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:flutter/material.dart';
 
@@ -52,37 +53,40 @@ class DiscoverWorkoutCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Rounded Image
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: .circular(20),
-                topRight: Radius.circular(20),
-              ),
-              child: Image.network(
-                workout.thumbnailUrl,
-                fit: BoxFit.cover,
-                height: imageHeight,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  color: const Color(0xFFF3F4F6),
-                  child: const Icon(
-                    Icons.fitness_center_rounded,
-                    color: Color(0xFF9CA3AF),
-                    size: 32,
-                  ),
+            // Top Rounded Image — sized by this SizedBox, not by Image's own
+            // `height`, because that only sizes the decoded RawImage; the
+            // `loadingBuilder`/`errorBuilder` replacements it swaps in get no
+            // constraint from Image at all and would otherwise inherit the
+            // Column's unbounded height and crash.
+            SizedBox(
+              height: imageHeight,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: .circular(20),
+                  topRight: Radius.circular(20),
                 ),
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Container(
+                child: Image.network(
+                  workout.thumbnailUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Container(
                     color: const Color(0xFFF3F4F6),
-                    child: const Center(
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
+                    child: const Icon(
+                      Icons.fitness_center_rounded,
+                      color: Color(0xFF9CA3AF),
+                      size: 32,
                     ),
-                  );
-                },
+                  ),
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return shimmerImagePlaceholder(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             // Card Text Details — Expanded + Flexible so a two-line title can

@@ -4,6 +4,7 @@ import 'package:fitness_app/core/database/app_database.dart';
 import 'package:fitness_app/core/services/shared_prefrences/storage_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'fitness_app.dart';
 
@@ -15,6 +16,12 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Loads .env (PILATES_API_KEY / PILATES_API_BASE_URL — see ApiEndpoints).
+  // isOptional so a fresh checkout without a local .env still runs; the API
+  // layer falls back to cached/bundled data when the key is missing.
+  await dotenv.load(fileName: '.env', isOptional: true);
+
   await storage.init();
 
   // Opens (and on first run creates + seeds) the local Drift/sqflite database.

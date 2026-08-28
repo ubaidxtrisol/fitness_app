@@ -82,37 +82,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // ==================== Top App Bar ====================
   Widget _buildTopAppBar(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        // Menu Button
-        GestureDetector(
-          onTap: () {},
-          behavior: HitTestBehavior.opaque,
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.borderLight, width: 1),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                'assets/svgs/menu.svg',
-                width: 18,
-                height: 14,
-              ),
-            ),
-          ),
-        ),
-
         // Notifications Button
         GestureDetector(
           onTap: () {},

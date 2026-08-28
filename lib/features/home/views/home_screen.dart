@@ -11,6 +11,7 @@ import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
 import 'package:fitness_app/features/body_focus/services/body_focus_repository.dart';
 import 'package:fitness_app/features/body_focus/views/body_focus_category_screen.dart';
 import 'package:fitness_app/core/database/repositories/progress_repository.dart';
+import 'package:fitness_app/core/widgets/app_shimmer.dart';
 import 'package:fitness_app/features/challenges/views/challenge_day_screen.dart';
 import 'package:fitness_app/features/home/services/next_up_service.dart';
 import 'package:fitness_app/features/workout/views/day_detail_screen.dart';
@@ -48,6 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<({ChallengeProgramModel challenge, ChallengeModel card})>
   _challengeEntries = const [];
 
+  /// True until the first [_refresh] finishes — shows the shimmer rail
+  /// instead of an empty gap while the local DB read is in flight.
+  bool _isLoadingChallenges = true;
+
   @override
   void initState() {
     super.initState();
@@ -71,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       _nextUp = nextUp;
       _challengeEntries = entries;
+      _isLoadingChallenges = false;
     });
   }
 
@@ -111,6 +117,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     return [...inProgress, ...notJoined, ...finished];
+  }
+
+  /// The Challenges rail's card scale — bigger than the Figma base (and
+  /// bigger than the Challenges grid) so roughly 2.3 cards sit in view at
+  /// once, sized off the actual screen width rather than a fixed constant.
+  double _homeCardScale(BuildContext context) {
+    const cardsVisible = 2.3;
+    const leadingPadding = 20.0;
+    const baseSpacing = 10.956;
+    final width = MediaQuery.of(context).size.width;
+    final scale =
+        (width - leadingPadding) /
+        (cardsVisible * ChallengeCardWidget.width + 2 * baseSpacing);
+    return scale.clamp(1.05, 1.6);
   }
 
   final List<BodyFocusModel> _bodyFocusItems = const [
@@ -242,25 +262,55 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             12.heightBox.sliver,
             SliverToBoxAdapter(
-              child: SizedBox(
-                height: ChallengeCardWidget.height,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  clipBehavior: Clip.none,
-                  itemCount: _challengeEntries.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 10.956),
-                  itemBuilder: (context, index) {
-                    final entry = _challengeEntries[index];
-                    return ChallengeCardWidget(
-                      challenge: entry.card,
-                      onTap: () => _openChallenge(entry.challenge),
-                      onJoin: () => _joinChallenge(entry.challenge),
+              child: Builder(
+                builder: (context) {
+                  final scale = _homeCardScale(context);
+                  final spacing = 10.956 * scale;
+                  final cardWidth = ChallengeCardWidget.width * scale;
+                  final cardHeight = ChallengeCardWidget.height * scale;
+
+                  if (_isLoadingChallenges) {
+                    return SizedBox(
+                      height: cardHeight,
+                      child: AppShimmer(
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          itemCount: 3,
+                          separatorBuilder: (context, index) => SizedBox(width: spacing),
+                          itemBuilder: (context, index) => ShimmerBox(
+                            width: cardWidth,
+                            height: cardHeight,
+                            borderRadius: BorderRadius.circular(13 * scale),
+                          ),
+                        ),
+                      ),
                     );
-                  },
-                ),
+                  }
+
+                  return SizedBox(
+                    height: cardHeight,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      clipBehavior: Clip.none,
+                      itemCount: _challengeEntries.length,
+                      separatorBuilder: (context, index) =>
+                          SizedBox(width: spacing),
+                      itemBuilder: (context, index) {
+                        final entry = _challengeEntries[index];
+                        return ChallengeCardWidget(
+                          challenge: entry.card,
+                          scale: scale,
+                          onTap: () => _openChallenge(entry.challenge),
+                          onJoin: () => _joinChallenge(entry.challenge),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ),
             8.heightBox.sliver,

@@ -28,6 +28,23 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- The Pilates API (readme-v3Nm.md) is served over plain HTTP from a raw
+	     IP, not HTTPS — ATS blocks that by default. Scoped to just that host
+	     rather than NSAllowsArbitraryLoads; drop this once the backend gets a
+	     TLS certificate. -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>56.228.38.227</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -1,6 +1,6 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
+import 'package:fitness_app/core/database/repositories/progress_repository.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeroBanner extends StatelessWidget {
@@ -22,14 +22,6 @@ class HomeHeroBanner extends StatelessWidget {
     return next.isResuming
         ? 'Keep Going\n${next.dayTitle}'
         : 'Move Better\nFeel Stronger';
-  }
-
-  String get _subtitle {
-    final next = nextUp;
-    if (next == null) return 'Pilates and Yoga for a\nhealthier lifestyle';
-    return next.isResuming
-        ? '${next.planTitle}\nDay ${next.dayIndex + 1} of ${next.totalDays}'
-        : '${next.planTitle}\nStart your first session';
   }
 
   String get _meta => nextUp?.metaLabel ?? '6min/7 Exercise';
@@ -102,25 +94,14 @@ class HomeHeroBanner extends StatelessWidget {
                   Text(
                     _title,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 22,
                       fontWeight: FontWeight.w800,
                       color: AppColors.primary,
                       height: 1.15,
                     ),
                   ),
-                  // 6.heightBox,
-                  Text(
-                    _subtitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 8,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF7A686D),
-                      height: 1.2,
-                    ),
-                  ),
-                  4.heightBox,
+                  6.heightBox,
+
                   Text(
                     _meta,
                     style: const TextStyle(
@@ -137,7 +118,7 @@ class HomeHeroBanner extends StatelessWidget {
                 onTap: onStartWorkout,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
+                    horizontal: 22,
                     vertical: 7,
                   ),
                   decoration: BoxDecoration(

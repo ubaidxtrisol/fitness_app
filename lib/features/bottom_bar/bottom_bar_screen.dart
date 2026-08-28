@@ -143,19 +143,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       ),
     );
   }
-
-  Widget _buildPlaceholderPage(String title) {
-    return Center(
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
-        ),
-      ),
-    );
-  }
 }
 
 class _NavItem {

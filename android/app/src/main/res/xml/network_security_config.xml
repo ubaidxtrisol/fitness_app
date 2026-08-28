@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 9+ blocks plain HTTP by default. The Pilates API (readme-v3Nm.md)
+  is served over HTTP from a raw IP, not HTTPS, so it needs an explicit
+  cleartext exception — scoped to just that host rather than a blanket
+  usesCleartextTraffic="true". Drop this once the backend gets a TLS
+  certificate.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">56.228.38.227</domain>
+    </domain-config>
+</network-security-config>

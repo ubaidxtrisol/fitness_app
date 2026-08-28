@@ -1,5 +1,6 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
+import 'package:fitness_app/core/widgets/app_shimmer.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/discover/views/workout_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -105,16 +106,10 @@ class CategoryDetailScreen extends StatelessWidget {
                               ),
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
-                            return Container(
-                              color: const Color(0xFFF3F4F6),
-                              child: const Center(
-                                child: SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                  ),
-                                ),
+                            return shimmerImagePlaceholder(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
                               ),
                             );
                           },

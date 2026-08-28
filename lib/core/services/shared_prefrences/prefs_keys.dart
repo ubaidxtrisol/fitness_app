@@ -14,4 +14,9 @@ class PrefsKeys {
   static const String outboxQueue = 'outbox_queue';
 
   static String acceptPrivacyPolicy = 'accept_privacy_policy';
+
+  /// Last-known-good Pilates discover catalogue (raw JSON array) and the
+  /// `ETag` it was served with — see [DiscoverRepository].
+  static const String pilatesCategoriesCache = 'pilates_categories_cache';
+  static const String pilatesCategoriesEtag = 'pilates_categories_etag';
 }

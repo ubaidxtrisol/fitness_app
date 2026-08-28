@@ -6,7 +6,7 @@
         "workouts": [
             {
                 "id": "wk_model_leg_booty",
-                "title": "Model Leg & Bubble Booty",
+                "title": "Model Leg and Bubble Booty",
                 "difficulty": "Beginner",
                 "duration_minutes": 6,
                 "net_time_minutes": 5,
@@ -73,7 +73,7 @@
             },
             {
                 "id": "wk_squat_thigh_toner",
-                "title": "Classic Squat & Thigh Toner",
+                "title": "Classic Squat and Thigh Toner",
                 "difficulty": "Intermediate",
                 "duration_minutes": 8,
                 "net_time_minutes": 6,
@@ -147,7 +147,7 @@
         "workouts": [
             {
                 "id": "wk_toned_leg_booty",
-                "title": "Legs & Bubble Booty",
+                "title": "Legs and Bubble Booty",
                 "difficulty": "Intermediate",
                 "duration_minutes": 6,
                 "net_time_minutes": 5,
@@ -214,7 +214,7 @@
             },
             {
                 "id": "wk_squat_thigh_toner",
-                "title": "Classic Squat & Thigh Toner",
+                "title": "Classic Squat and Thigh Toner",
                 "difficulty": "Intermediate",
                 "duration_minutes": 8,
                 "net_time_minutes": 6,

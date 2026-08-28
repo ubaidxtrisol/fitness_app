@@ -80,87 +80,94 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 68,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: const Color(0xFFF5F5F5), width: 0.4),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Exercise artwork (17:1631) — grey until the image resolves.
-          SessionThumbnail(url: log.thumbnailUrl),
+    // This row's height is fixed at 68 to match the designed artwork tile —
+    // there's no room to grow with it, so cap how far a device's "larger
+    // text" accessibility setting can scale it up (still free to scale
+    // down). Without this, a scale factor as small as 1.1x overflows it.
+    return MediaQuery.withClampedTextScaling(
+      maxScaleFactor: 1,
+      child: Container(
+        height: 68,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: const Color(0xFFF5F5F5), width: 0.4),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Exercise artwork (17:1631) — grey until the image resolves.
+            SessionThumbnail(url: log.thumbnailUrl),
 
-          const SizedBox(width: 4.6),
+            const SizedBox(width: 4.6),
 
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 6.6, right: 4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    log.planTitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 8,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.textLight,
-                    ),
-                  ),
-                  Text(
-                    _title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-
-                  8.heightBox,
-
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _stat(
-                        SessionFormat.clock(log.completedAt),
-                        SessionFormat.shortDate(log.completedAt),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 6.6, right: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      log.planTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textLight,
                       ),
-                      _divider,
-                      _stat(
-                        SessionFormat.duration(log.durationSeconds),
-                        'Duration',
+                    ),
+                    Text(
+                      _title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textPrimary,
                       ),
-                      _divider,
-                      _stat('${log.calories}', 'Kcal'),
-                    ],
-                  ),
-                ],
+                    ),
+
+                    8.heightBox,
+
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _stat(
+                          SessionFormat.clock(log.completedAt),
+                          SessionFormat.shortDate(log.completedAt),
+                        ),
+                        _divider,
+                        _stat(
+                          SessionFormat.duration(log.durationSeconds),
+                          'Duration',
+                        ),
+                        _divider,
+                        _stat('${log.calories}', 'Kcal'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Trash button (17:1652) — 16pt glyph, centred against the 68pt row.
-          GestureDetector(
-            onTap: onDelete,
-            behavior: HitTestBehavior.opaque,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(6, 26.6, 5.4, 6),
-              child: SvgPicture.asset(
-                'assets/svgs/trash.svg',
-                width: 13.01,
-                height: 14.34,
+            // Trash button (17:1652) — 16pt glyph, centred against the 68pt row.
+            GestureDetector(
+              onTap: onDelete,
+              behavior: HitTestBehavior.opaque,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(6, 26.6, 5.4, 6),
+                child: SvgPicture.asset(
+                  'assets/svgs/trash.svg',
+                  width: 13.01,
+                  height: 14.34,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

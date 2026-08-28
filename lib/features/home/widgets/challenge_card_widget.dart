@@ -34,7 +34,7 @@ class ChallengeCardWidget extends StatefulWidget {
 }
 
 class _ChallengeCardWidgetState extends State<ChallengeCardWidget> {
-  static const double _imageHeight = 96.703;
+  static const double _imageHeight = 106;
 
   late bool _isFav;
 
@@ -67,7 +67,7 @@ class _ChallengeCardWidgetState extends State<ChallengeCardWidget> {
           borderRadius: BorderRadius.circular(_s(13)),
           child: Stack(
             children: [
-              // Cover image — fills the card width down to y=96.703.
+              // Cover image — fills the card width down to y=[_imageHeight].
               Positioned(
                 left: 0,
                 right: 0,
@@ -115,156 +115,143 @@ class _ChallengeCardWidgetState extends State<ChallengeCardWidget> {
                 ),
               ),
 
-              // Title + user count, then the Join pill / progress bar /
-              // "Completed" badge below it (Frame 34 + Frame 20).
-              //
-              // Both live in one Column with `spaceBetween` rather than two
-              // independently-`Positioned` blocks with hand-picked offsets —
-              // the title/user-count text and the action row below it would
-              // otherwise overlap whenever the text block's real height
-              // didn't match the offset the action row assumed.
+              // Title + user count + the Join/Continue pill (Frame 34 +
+              // Frame 20), anchored to the card's bottom edge (no `top`)
+              // rather than a fixed offset below the image — so it always
+              // sits flush under the image regardless of [_imageHeight].
               Positioned(
                 left: _s(5.015),
-                top: _s(103),
                 right: _s(5),
                 bottom: _s(6),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
+                    Text(
+                      challenge.title.toUpperCase(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: _s(9),
+                        height: 1,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    SizedBox(height: _s(6)),
+                    Row(
                       children: [
+                        SvgPicture.asset(
+                          'assets/svgs/users.svg',
+                          width: _s(8),
+                          height: _s(8),
+                        ),
+                        SizedBox(width: _s(3.768)),
                         Text(
-                          challenge.title.toUpperCase(),
+                          challenge.userCount,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: _s(9),
-                            height: 1,
-                            fontWeight: FontWeight.w700,
+                            fontSize: 7.56,
+                            height: 1.333,
+                            fontWeight: FontWeight.w400,
                             color: AppColors.textPrimary,
                           ),
                         ),
-                        SizedBox(height: _s(6)),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/svgs/users.svg',
-                              width: _s(10.047),
-                              height: _s(10.047),
-                            ),
-                            SizedBox(width: _s(3.768)),
-                            Flexible(
-                              child: Text(
-                                challenge.userCount,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: _s(7.535),
-                                  height: 1.333,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.textPrimary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    // Once joined, the Join pill is gone entirely — replaced
-                    // by the progress bar, then by the "Completed" badge.
-                    if (challenge.isCompleted)
-                      Container(
-                        height: _s(13),
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.symmetric(horizontal: _s(8)),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE3F6E8),
-                          borderRadius: BorderRadius.circular(_s(7.535)),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.check_circle_rounded,
-                              size: _s(10),
-                              color: AppColors.success,
-                            ),
-                            SizedBox(width: _s(3.768)),
-                            Text(
-                              'Completed',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: _s(7.535),
-                                height: 1,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.success,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    else if (challenge.isJoined)
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(_s(4)),
-                              child: LinearProgressIndicator(
-                                value: challenge.percentComplete,
-                                minHeight: _s(5),
-                                backgroundColor: AppColors.primaryLight,
-                                valueColor: const AlwaysStoppedAnimation<Color>(
-                                  AppColors.primary,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: _s(5)),
-                          Text(
-                            '${(challenge.percentComplete * 100).round()}%',
-                            style: TextStyle(
-                              fontSize: _s(7.535),
-                              height: 1,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      )
-                    else
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: widget.onJoin,
-                          child: Container(
+                        Spacer(),
+                        // Once joined, the Join pill turns into a Continue pill —
+                        // no progress bar — then becomes the "Completed" badge.
+                        if (challenge.isCompleted)
+                          Container(
                             height: _s(13),
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.symmetric(horizontal: _s(10)),
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.symmetric(horizontal: _s(8)),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFDECEC),
+                              color: const Color(0xFFE3F6E8),
                               borderRadius: BorderRadius.circular(_s(7.535)),
                             ),
-                            child: Text(
-                              'Join',
-                              style: TextStyle(
-                                fontSize: _s(7.535),
-                                height: 1,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.primary,
-                              ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.check_circle_rounded,
+                                  size: _s(10),
+                                  color: AppColors.success,
+                                ),
+                                SizedBox(width: _s(3.768)),
+                                Text(
+                                  'Completed',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: _s(7.535),
+                                    height: 1,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.success,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        else if (challenge.isJoined)
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: _ActionPill(
+                              label: 'Continue',
+                              scale: widget.scale,
+                              onTap: widget.onTap,
+                            ),
+                          )
+                        else
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: _ActionPill(
+                              label: 'Join',
+                              scale: widget.scale,
+                              onTap: widget.onJoin,
                             ),
                           ),
-                        ),
-                      ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The pill below the title — "Join" while not joined, "Continue" once the
+/// user has joined but hasn't finished yet. Same look either way.
+class _ActionPill extends StatelessWidget {
+  final String label;
+  final double scale;
+  final VoidCallback? onTap;
+
+  const _ActionPill({required this.label, required this.scale, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 13 * scale,
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 10 * scale),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFDECEC),
+          borderRadius: BorderRadius.circular(7.535 * scale),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 7.535 * scale,
+            height: 1,
+            fontWeight: FontWeight.w400,
+            color: AppColors.primary,
           ),
         ),
       ),
