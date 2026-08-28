@@ -357,18 +357,17 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    final program = target.program;
+    final category = target.category;
     final challenge = target.challenge;
     final week = target.week;
     final day = target.day;
 
-    if (program != null && target.phase != null && day != null) {
+    if (category != null && day != null) {
       await context.push(
         DayDetailScreen(
           day: day,
-          phase: target.phase!,
           programName: target.suggestion.planTitle,
-          programId: program.id,
+          programId: category.id,
           dayIndex: target.suggestion.dayIndex,
           totalDays: target.suggestion.totalDays,
         ),

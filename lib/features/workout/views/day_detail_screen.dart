@@ -7,16 +7,20 @@ import 'package:fitness_app/features/player/models/player_session.dart';
 import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
 import 'package:fitness_app/features/workout/models/program_model.dart';
 import 'package:fitness_app/features/workout/widgets/day_stats_card.dart';
-import 'package:fitness_app/features/workout/widgets/phase_header.dart';
 import 'package:fitness_app/features/workout/widgets/workout_app_bar.dart';
 import 'package:fitness_app/features/workout/widgets/workout_hero_banner.dart';
 import 'package:fitness_app/features/workout/widgets/workout_row_card.dart';
 import 'package:flutter/material.dart';
 
 /// A day's exercise list — Figma `Home` 11:738.
+///
+/// Used by the program flow's Next Up path. [programName] is the category's
+/// display title (there is no separate "phase" concept — the backend's
+/// Programs tab is a flat `Category → Workout → Exercise` catalogue, see
+/// `WorkoutRepository`) and [programId] is that category's id, threaded
+/// through to the player session for progress logging.
 class DayDetailScreen extends StatefulWidget {
   final DayModel day;
-  final PhaseModel phase;
   final String programName;
   final String programId;
   final int dayIndex;
@@ -25,7 +29,6 @@ class DayDetailScreen extends StatefulWidget {
   const DayDetailScreen({
     super.key,
     required this.day,
-    required this.phase,
     required this.programName,
     this.programId = '',
     this.dayIndex = 0,
@@ -112,13 +115,11 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
                 DayStatsCard(day: day),
                 21.heightBox,
 
-                // Phase header (11:909) + exercise rows (11:934), 14 apart.
-                PhaseHeader(
-                  title: widget.phase.title,
-                  subtitle: widget.phase.subtitle,
-                  progressPercent: widget.phase.progressPercent,
-                ),
-                16.heightBox,
+                // Exercise rows (11:934), 14 apart. The design's "Phase 1 ·
+                // Gentle Beginning" header above these rows had no real data
+                // behind it (the model's own progress field was permanently
+                // hardcoded to 0) and the backend has no phase concept at
+                // all, so it's dropped rather than faked.
                 ...List.generate(day.exercises.length, (index) {
                   final exercise = day.exercises[index];
 

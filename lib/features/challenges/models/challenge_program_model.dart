@@ -1,3 +1,4 @@
+import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/home/models/home_models.dart';
 import 'package:fitness_app/features/workout/models/program_model.dart';
 
@@ -83,6 +84,45 @@ class ChallengeProgramModel {
     'is_favorite': isFavorite,
     'weeks': weeks.map((e) => e.toJson()).toList(),
   };
+
+  /// Best-effort adapter from the live backend's catalogue endpoint (`GET
+  /// /api/v1/pilates/challenges`). Like [ProgramModel.fromApiCategory], the
+  /// backend only ships a flat `Category → Workout → Exercise` tree tagged
+  /// `section_type: "challenge"` — no `weeks[]`, no two-tone hero title
+  /// fields, no day count. Every workout in the category becomes one
+  /// [DayModel] inside a single synthetic week; the hero/label fields fall
+  /// back to plain text derived from what the category does have. Swap this
+  /// for a real mapping once the backend ships actual weeks.
+  factory ChallengeProgramModel.fromApiCategory(CategoryModel category) {
+    final dayCount = category.workouts.length;
+    return ChallengeProgramModel(
+      id: category.id,
+      // No accent/lead split from the API — put the whole name in the
+      // accent half rather than guess where to break it.
+      titleLead: '',
+      titleAccent: category.title,
+      title: category.title,
+      daysLabel: '$dayCount Day${dayCount == 1 ? '' : 's'}',
+      // No participant count from the API.
+      userCount: '',
+      thumbnailUrl: category.workouts.isNotEmpty
+          ? category.workouts.first.thumbnailUrl
+          : '',
+      weeks: category.workouts.isEmpty
+          ? const []
+          : [
+              ChallengeWeekModel(
+                id: '${category.id}_week_1',
+                title: 'Week 1',
+                subtitle: category.description,
+                currentDayIndex: 0,
+                days: category.workouts
+                    .map((workout) => DayModel.fromJson(workout.toJson()))
+                    .toList(),
+              ),
+            ],
+    );
+  }
 }
 
 /// "Week 1 · Belly Action" plus its seven days — Figma 12:1937.

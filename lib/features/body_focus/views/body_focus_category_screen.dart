@@ -1,7 +1,7 @@
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/routes/nav_extension.dart';
-import 'package:fitness_app/features/body_focus/models/body_focus_model.dart';
 import 'package:fitness_app/features/body_focus/views/body_workout_detail_screen.dart';
+import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/discover/widgets/discover_workout_card.dart';
 import 'package:fitness_app/features/workout/widgets/workout_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 /// Two columns of the shared [DiscoverWorkoutCard] at its grid size, 16.7
 /// between columns and 16 between rows.
 class BodyFocusCategoryScreen extends StatelessWidget {
-  final BodyFocusCategoryModel category;
+  final CategoryModel category;
 
   const BodyFocusCategoryScreen({super.key, required this.category});
 
@@ -37,7 +37,7 @@ class BodyFocusCategoryScreen extends StatelessWidget {
           final workout = category.workouts[index];
 
           return DiscoverWorkoutCard(
-            workout: workout.card,
+            workout: workout,
             width: DiscoverWorkoutCard.gridWidth,
             height: DiscoverWorkoutCard.gridHeight,
             imageHeight: DiscoverWorkoutCard.gridImageHeight,

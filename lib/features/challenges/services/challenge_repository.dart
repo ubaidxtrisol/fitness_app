@@ -1,18 +1,146 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
+
+import 'package:fitness_app/core/network/api_exception.dart';
+import 'package:fitness_app/core/network/pilates_remote_data_source.dart';
+import 'package:fitness_app/core/services/shared_prefrences/storage_services.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:flutter/services.dart';
 
-/// Mirrors [DiscoverRepository] / [WorkoutRepository].
+/// Challenges: `GET /api/v1/pilates/challenges` first — adapted into
+/// [ChallengeProgramModel] via [ChallengeProgramModel.fromApiCategory] (see
+/// that doc comment for the real shape gap: the backend has no week concept
+/// yet) — falling back to the last locally-cached adapted copy, then to the
+/// bundled `assets/json/challenges.json`. Mirrors [DiscoverRepository]'s
+/// network → cache → bundled-asset chain, and never throws for "the network
+/// is down".
 ///
-/// The bundled document keeps one exercise catalogue and has days reference it
-/// by id, the way the API will; [_resolve] inlines those references before the
-/// models parse, so the models stay reference-free.
+/// The bundled document keeps one exercise catalogue and has days reference
+/// it by id, the way `challenges.json` ships it; [_resolve] inlines those
+/// references before the models parse. This — along with [_repaginate],
+/// which re-chunks the bundled content's uniform 4x7 weeks into the real
+/// week layout each challenge's `days_label` implies — only applies to the
+/// *bundled-asset* fallback tier: it's a fix for known defects in that
+/// specific local file (see `apis/API_REQUIREMENTS.md` §8), not something
+/// live API data needs.
 class ChallengeRepository {
   static List<ChallengeProgramModel>? _cached;
+  static PilatesRemoteDataSource? _remote;
 
-  static Future<List<ChallengeProgramModel>> loadChallenges() async {
-    if (_cached != null) return _cached!;
+  static PilatesRemoteDataSource get _dataSource =>
+      _remote ??= PilatesRemoteDataSource();
 
+  static Future<List<ChallengeProgramModel>> loadChallenges({
+    bool forceRefresh = false,
+  }) async {
+    if (_cached != null && !forceRefresh) return _cached!;
+
+    try {
+      final cachedEtag = storage.getString(PrefsKeys.challengesEtag);
+      final response = await _dataSource.fetchChallenges(
+        etag: forceRefresh || cachedEtag.isEmpty ? null : cachedEtag,
+      );
+
+      if (response.notModified) {
+        final cached = _readCache();
+        if (cached != null) {
+          _cached = cached;
+          return cached;
+        }
+        return await _onFetched(await _dataSource.fetchChallenges());
+      }
+
+      return await _onFetched(response);
+    } on ApiException catch (error) {
+      developer.log('Falling back after API error: $error', name: 'ChallengeRepository');
+      return _fallback();
+    } catch (error) {
+      developer.log(
+        'Falling back after unexpected error: $error',
+        name: 'ChallengeRepository',
+      );
+      return _fallback();
+    }
+  }
+
+  static Future<List<ChallengeProgramModel>> _onFetched(
+    PilatesCategoriesResponse response,
+  ) async {
+    final challenges = response.categories
+        .map(ChallengeProgramModel.fromApiCategory)
+        .toList();
+    _cached = challenges;
+    await _writeCache(challenges, response.etag);
+    return challenges;
+  }
+
+  /// Local cache first, then the bundled catalogue (with its known-defect
+  /// fixes applied — see the class doc comment).
+  static Future<List<ChallengeProgramModel>> _fallback() async {
+    final cached = _readCache();
+    if (cached != null && cached.isNotEmpty) {
+      _cached = cached;
+      return cached;
+    }
+
+    final bundled = await _loadBundledAsset();
+    _cached = bundled;
+    return bundled;
+  }
+
+  static List<ChallengeProgramModel>? _readCache() {
+    final String raw;
+    try {
+      raw = storage.getString(PrefsKeys.challengesCache);
+    } catch (error) {
+      // Storage not initialized yet (or otherwise unavailable) — treat it
+      // the same as an absent cache rather than letting the fallback chain
+      // itself fail.
+      developer.log(
+        'Storage unavailable, skipping cache read: $error',
+        name: 'ChallengeRepository',
+      );
+      return null;
+    }
+    if (raw.isEmpty) return null;
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) return null;
+      return decoded
+          .whereType<Map<String, dynamic>>()
+          .map(ChallengeProgramModel.fromJson)
+          .toList();
+    } catch (error) {
+      developer.log(
+        'Ignoring corrupt challenges cache: $error',
+        name: 'ChallengeRepository',
+      );
+      return null;
+    }
+  }
+
+  static Future<void> _writeCache(
+    List<ChallengeProgramModel> challenges,
+    String? etag,
+  ) async {
+    if (challenges.isEmpty) return;
+    try {
+      await storage.setString(
+        PrefsKeys.challengesCache,
+        jsonEncode(challenges.map((c) => c.toJson()).toList()),
+      );
+      if (etag != null && etag.isNotEmpty) {
+        await storage.setString(PrefsKeys.challengesEtag, etag);
+      }
+    } catch (error) {
+      developer.log(
+        'Failed to persist challenges cache: $error',
+        name: 'ChallengeRepository',
+      );
+    }
+  }
+
+  static Future<List<ChallengeProgramModel>> _loadBundledAsset() async {
     try {
       final jsonString = await rootBundle.loadString(
         'assets/json/challenges.json',
@@ -24,7 +152,7 @@ class ChallengeRepository {
           (decoded['exercises'] as Map<String, dynamic>?) ?? const {};
       final challenges = (decoded['challenges'] as List<dynamic>?) ?? const [];
 
-      _cached = challenges
+      return challenges
           .whereType<Map<String, dynamic>>()
           .map(
             (c) => ChallengeProgramModel.fromJson(
@@ -32,7 +160,6 @@ class ChallengeRepository {
             ),
           )
           .toList();
-      return _cached!;
     } catch (e) {
       return [];
     }

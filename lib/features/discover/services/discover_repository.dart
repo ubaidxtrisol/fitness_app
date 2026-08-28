@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer' as developer;
 
 import 'package:fitness_app/core/network/api_exception.dart';
+import 'package:fitness_app/core/network/pilates_remote_data_source.dart';
 import 'package:fitness_app/core/services/shared_prefrences/storage_services.dart';
 import 'package:fitness_app/features/discover/models/category_model.dart';
-import 'package:fitness_app/features/discover/services/pilates_remote_data_source.dart';
 import 'package:flutter/services.dart';
 
 /// Where a [DiscoverCatalogueResult]'s categories actually came from —
@@ -46,9 +46,8 @@ class DiscoverRepository {
   /// [forceRefresh] skips the `If-None-Match` short-circuit (pull-to-refresh)
   /// but still updates the cache either way.
   Future<DiscoverCatalogueResult> getCategories({bool forceRefresh = false}) async {
-    final cachedEtag = storage.getString(PrefsKeys.pilatesCategoriesEtag);
-
     try {
+      final cachedEtag = storage.getString(PrefsKeys.pilatesCategoriesEtag);
       final response = await _remote.fetchCategories(
         etag: forceRefresh || cachedEtag.isEmpty ? null : cachedEtag,
       );
@@ -111,7 +110,19 @@ class DiscoverRepository {
   }
 
   List<CategoryModel>? _readCache() {
-    final raw = storage.getString(PrefsKeys.pilatesCategoriesCache);
+    final String raw;
+    try {
+      raw = storage.getString(PrefsKeys.pilatesCategoriesCache);
+    } catch (error) {
+      // Storage not initialized yet (or otherwise unavailable) — treat it
+      // the same as an absent cache rather than letting the fallback chain
+      // itself fail.
+      developer.log(
+        'Storage unavailable, skipping cache read: $error',
+        name: 'DiscoverRepository',
+      );
+      return null;
+    }
     if (raw.isEmpty) return null;
     try {
       final decoded = jsonDecode(raw);

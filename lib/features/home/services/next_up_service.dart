@@ -4,6 +4,7 @@ import 'package:fitness_app/core/database/repositories/progress_repository.dart'
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
+import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/workout/models/program_model.dart';
 import 'package:fitness_app/features/workout/services/workout_repository.dart';
 
@@ -11,9 +12,10 @@ import 'package:fitness_app/features/workout/services/workout_repository.dart';
 class NextUpTarget {
   final NextUpSuggestion suggestion;
 
-  /// Set when the target is a program day (the common case).
-  final ProgramModel? program;
-  final PhaseModel? phase;
+  /// Set when the target is a program day (the common case). [category] is
+  /// the Programs-tab category the day came from — see
+  /// [WorkoutRepository.loadPrograms]; there is no separate "phase" concept.
+  final CategoryModel? category;
   final DayModel? day;
 
   /// Set when the most recent activity was a challenge instead.
@@ -22,8 +24,7 @@ class NextUpTarget {
 
   const NextUpTarget({
     required this.suggestion,
-    this.program,
-    this.phase,
+    this.category,
     this.day,
     this.challenge,
     this.week,
@@ -64,33 +65,26 @@ class NextUpService {
   }
 
   Future<NextUpTarget?> _resumeProgram(PlanProgressRow row) async {
-    final programs = await WorkoutRepository.loadPrograms();
-    final program = _firstWhereOrNull(programs, (p) => p.id == row.planId);
-    if (program == null) return null;
+    final categories = await WorkoutRepository.loadPrograms();
+    final category = _firstWhereOrNull(categories, (c) => c.id == row.planId);
+    if (category == null || category.workouts.isEmpty) return null;
 
-    // Walk the phases as one flat list of days so a finished phase rolls over.
-    final days = <({PhaseModel phase, DayModel day, int index})>[];
-    for (final phase in program.phases) {
-      for (var i = 0; i < phase.days.length; i++) {
-        days.add((phase: phase, day: phase.days[i], index: i));
-      }
-    }
-    if (days.isEmpty) return null;
+    final index = row.currentDayIndex.clamp(0, category.workouts.length - 1);
+    final workout = category.workouts[index];
+    final day = DayModel.fromJson(workout.toJson());
 
-    final target = days[row.currentDayIndex.clamp(0, days.length - 1)];
     return NextUpTarget(
-      program: program,
-      phase: target.phase,
-      day: target.day,
+      category: category,
+      day: day,
       suggestion: NextUpSuggestion(
-        planId: program.id,
+        planId: category.id,
         planType: PlanType.program,
-        planTitle: '${program.title} ${program.subtitle}',
-        dayTitle: target.day.title,
-        dayIndex: target.index,
-        totalDays: target.phase.days.length,
-        exerciseCount: target.day.exercises.length,
-        durationMinutes: target.day.durationMinutes,
+        planTitle: category.title,
+        dayTitle: day.title,
+        dayIndex: index,
+        totalDays: category.workouts.length,
+        exerciseCount: day.exercises.length,
+        durationMinutes: day.durationMinutes,
         isResuming: true,
       ),
     );
@@ -177,26 +171,25 @@ class NextUpService {
   }
 
   Future<NextUpTarget?> _firstProgramDay() async {
-    final programs = await WorkoutRepository.loadPrograms();
-    if (programs.isEmpty) return null;
+    final categories = await WorkoutRepository.loadPrograms();
+    if (categories.isEmpty) return null;
 
-    final program = programs.first;
-    if (program.phases.isEmpty || program.phases.first.days.isEmpty) return null;
+    final category = categories.first;
+    if (category.workouts.isEmpty) return null;
 
-    final phase = program.phases.first;
-    final day = phase.days.first;
+    final workout = category.workouts.first;
+    final day = DayModel.fromJson(workout.toJson());
 
     return NextUpTarget(
-      program: program,
-      phase: phase,
+      category: category,
       day: day,
       suggestion: NextUpSuggestion(
-        planId: program.id,
+        planId: category.id,
         planType: PlanType.program,
-        planTitle: '${program.title} ${program.subtitle}',
+        planTitle: category.title,
         dayTitle: day.title,
         dayIndex: 0,
-        totalDays: phase.days.length,
+        totalDays: category.workouts.length,
         exerciseCount: day.exercises.length,
         durationMinutes: day.durationMinutes,
         isResuming: false,

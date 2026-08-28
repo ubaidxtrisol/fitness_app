@@ -4,10 +4,12 @@
 
 * **Core Purpose:** A Flutter fitness app (Pilates/yoga focused) that takes a user
   from onboarding through a structured training plan and tracks what they
-  actually did. Four content flows feed one shared workout player: **Programs**
-  (phase → day → exercise), **Challenges** (week → day → exercise), **Body Focus**
-  (body part → workout → session → exercise) and **Discover** (category →
-  workout → exercise). Completed work is persisted locally and fed back into the
+  actually did. Four content flows feed one shared workout player: **Discover**,
+  **Programs** and **Body Focus** (all category → workout → exercise — the
+  backend's real catalogue shape, see `apis/readme-cLqG (2).md`) and
+  **Challenges** (week → day → exercise — the one flow that kept its richer
+  bundled-content shape; see **Backend shape mismatch** under Known Blockers).
+  Completed work is persisted locally and fed back into the
   Home banner ("what's next") and the Progress screen (totals, streak, history).
   All UI is implemented from a Figma file — `Fitness-App`, file key
   `DsoOQCKBfX5jXDNfnJIKZX`, designed on a 393×852 frame.
@@ -38,25 +40,37 @@
       `routes/nav_extension.dart` (`context.push(Widget)`, logs analytics).
     * `core/services/` — Firebase wrappers, `shared_prefrences/`,
       `user_info_storage.dart`.
-    * `core/models/`, `core/network/`, `core/repositories/` — **empty
-      directories**; the remote API layer has not been started.
+    * `core/network/` — `ApiClient`/`ApiEndpoints`/`ApiException`/
+      `PilatesRemoteDataSource`, the full remote API layer (see §2's
+      **Remote API integration**). `core/models/`, `core/repositories/` are
+      still empty — the remote layer's models live with the features that
+      consume them (`discover/models/category_model.dart` is now shared far
+      beyond Discover, see below).
   * `lib/features/<feature>/` — each feature owns `models/`, `services/`,
     `views/`, `widgets/`. Cross-feature reuse is deliberate and one-directional:
-    `challenges` / `body_focus` / `workout` all import from `discover`
-    (`ExerciseModel`, `ExerciseDetailScreen`, `DiscoverWorkoutCard`) and from
-    `workout` (`DayModel`, `DayStatsCard`, `WorkoutRowCard`, `WorkoutAppBar`,
-    `WorkoutHeroBanner`).
+    `challenges` imports from `discover` (`ExerciseModel`) and `workout`
+    (`DayModel`, `DayStatsCard`, `WorkoutRowCard`, `WorkoutAppBar`,
+    `WorkoutHeroBanner`) for its own richer week/day model; `body_focus` and
+    `workout` (Programs) both import `discover`'s `CategoryModel`/
+    `WorkoutModel` **directly as their own data model** — Discover, Programs
+    and Body Focus are the same shape all the way down, not just similar.
   * **Shared-component principle:** where two Figma nodes are the same component
     at a different size, the widget is parameterised rather than duplicated —
     `ChallengeCardWidget(scale:)` (113pt base × 1.5244 for the grid) and
     `DiscoverWorkoutCard(width:/height:/imageHeight:)` (224 rail vs 172.256
     grid).
-  * **Data:** bundled JSON in `assets/json/` behind static repositories
-    (`DiscoverRepository`, `WorkoutRepository`, `ChallengeRepository`,
-    `BodyFocusRepository`), each shaped like the eventual API.
-    `challenges.json` and `body_focus.json` keep a single exercise catalogue and
-    have days reference it by id, resolved at load — this keeps them at ~250 KB
-    and ~145 KB instead of megabytes.
+  * **Data:** network first (see **Remote API integration**), local cache,
+    then bundled JSON in `assets/json/` as the last-resort fallback, behind
+    static repositories (`DiscoverRepository`, `WorkoutRepository`,
+    `ChallengeRepository`, `BodyFocusRepository`) — all four never throw for
+    "the network is down". `challenges.json` and `body_focus.json` keep a
+    single exercise catalogue and have days/sessions reference it by id,
+    resolved at load — this keeps them at ~250 KB and ~145 KB instead of
+    megabytes; the *bundled-fallback* tier of `WorkoutRepository`/
+    `BodyFocusRepository` re-flattens their still-nested bundled JSON
+    (`Program → Phase → Day`, `Workout → Session → exercise_ids`) into the
+    same flat `Category → Workout → Exercise` shape the network tier already
+    returns.
 
 ## 2. Current System State
 
@@ -267,6 +281,21 @@ Implemented and verified (62 passing tests across `test/*.dart`;
     regardless of exact metrics. Once joined, the Join pill is gone
     entirely — replaced by the progress bar, then, once finished, by the
     "Completed" badge — never shown alongside either.
+* **Remote API integration.** `core/network/` (`ApiClient`, `ApiEndpoints`,
+  `ApiException`, `PilatesRemoteDataSource`) covers the full delivered
+  contract in `apis/`: every `/api/v1/pilates/*` list/detail route, the
+  admin CRUD set, `recommend`/`scan/pose`, and an HMAC-SHA256 app-signature
+  layer (`X-App-Timestamp`/`X-App-Nonce`/`X-App-Signature`) that signs every
+  request whenever `PILATES_APP_SIGNATURE_SECRET` is set — a safe no-op
+  today since the backend doesn't enforce it yet. `DiscoverRepository`
+  (Discover tab) already matched the API 1:1 and needed no adapter.
+  `WorkoutRepository` (Programs) and `BodyFocusRepository` (Body Focus) were
+  **adopted to the API's real flat shape** (see the follow-up pass below) —
+  they now also return plain `CategoryModel`/`WorkoutModel`, network → local
+  cache → bundled JSON, same as Discover, with no adapter at all.
+  `ChallengeRepository` alone keeps a `ChallengeProgramModel.fromApiCategory`
+  adapter, deliberately, because Challenges kept its richer week/day model —
+  see **Backend shape mismatch** below, now scoped to Challenges only.
 
 ### In-Progress Work
 
@@ -275,6 +304,39 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   Last commit is `18369d8 UI Completeion`, which predates both.
 
 ### Known Blockers / Bugs
+
+**Backend shape mismatch — now scoped to Challenges only**
+
+* `apis/API_REQUIREMENTS.md` asked for `Program → Phase → Day`,
+  `Challenge → Week → Day` and `BodyFocus → Category → Workout → Session`.
+  What was delivered (`apis/readme-cLqG (2).md`, `apis/api-overview-QD3j.md`)
+  is one flat `Category → Workout → Exercise` tree per tab
+  (`/api/v1/pilates/{programs,challenges,body-focus}`), tagged
+  `section_type`, identical in shape to the original Discover catalogue.
+  **Resolution (this session):** rather than keep forcing that flat data
+  into the old nested models via lossy adapters, Programs and Body Focus
+  were **adopted to the real shape** — `WorkoutRepository`/
+  `BodyFocusRepository` now return plain `CategoryModel`/`WorkoutModel`
+  (Discover's own models) with zero adapter, and the UI (`DayDetailScreen`,
+  `BodyFocusCategoryScreen`, `BodyWorkoutDetailScreen`) was simplified to
+  match — see the fifth-session entry below for the full change. This is a
+  clean, honest fit: no more thinner-than-bundled synthetic phases/sessions,
+  no more fake "Phase 1 · 0%" header. Body Focus's Home-tile-id mismatch
+  (live ids like `cat_flexibility_01` vs. the hardcoded `butt_leg`/`abs`/
+  `full_body`/`arm`) is unchanged by this — `findCategory`'s fallback still
+  papers over it, and only the backend seeding those exact ids fixes it for
+  real. **Challenges was deliberately left as-is** (explicit user choice) —
+  its week/day locking, resume-by-day and join-progress-% features are real,
+  working features with no equivalent in the flat API shape, so
+  `ChallengeRepository` keeps its `ChallengeProgramModel.fromApiCategory`
+  adapter (one synthetic week wrapping the API's workouts) and the shape gap
+  for Challenges specifically is still open — confirmed live,
+  `GET /api/v1/pilates/challenges` currently returns a single
+  `{"id":"cat_7day_core_challenge",...,"workouts":[]}`, no `weeks`, no
+  `title_lead`/`title_accent`/`days_label`/`user_count`. **Next step:** send
+  this (now Challenges-only) gap back to the backend dev if/when real
+  week/day content for Challenges is wanted from the API instead of the
+  bundled fallback.
 
 **Bugs**
 
@@ -337,8 +399,10 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   formula once weight and intensity are trusted.
 * `flutter_bloc` is a dependency but unused; state is `StatefulWidget` +
   `ValueNotifier` throughout. Decide whether to adopt it or drop it.
-* `core/models/`, `core/network/`, `core/repositories/` are empty. See
-  `API_REQUIREMENTS_FOR_PILATES.md` for the intended remote contract.
+* `core/repositories/` is still empty. `core/network/` is no longer empty —
+  see **Remote API integration** below and `apis/` for the delivered
+  contract (`apis/API_REQUIREMENTS.md` was the ask; `apis/readme-cLqG (1).md`
+  / `apis/api-overview-QD3j.md` document what was actually built).
 * Drift + `NativeDatabase` **deadlocks under `testWidgets`** — its futures
   complete on real timers the fake clock never advances. DB assertions must live
   in plain `test()` (or inside `tester.runAsync`). This is why the widget tests
@@ -360,7 +424,7 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   substitutes a square-glyph font, so text widths in tests are meaningless and
   the real Nexa typographic rhythm has never been eyeballed on device.
 
-## 3. Latest Session Summary (Updated: 2026-08-27)
+## 3. Latest Session Summary (Updated: 2026-08-28)
 
 * **What was just completed:** Challenge step-by-step locking, in-workout
   completion UI, and resumable workouts — three related pieces of the
@@ -485,3 +549,153 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   6. Surface the rest of the info-flow answers on `my_profile_screen.dart`.
   7. Delete or rewrite `test/widget_test.dart` so `flutter test` is green.
   8. Downscale the four oversized banner PNGs.
+
+* **Fourth session (2026-08-28): remote API integration.** Two passes.
+  First, rebuilt `core/network/` (`ApiClient`/`ApiEndpoints`/`ApiException`)
+  against the full delivered `apis/` contract (it was originally set up
+  against just the first-draft `apis/readme-v3Nm.md`): added the
+  Programs/Challenges/Body Focus/grouped-discover endpoints, the admin CRUD
+  set, `put`/`delete` on `ApiClient`, an HMAC-SHA256 app-signature
+  interceptor (`X-App-Timestamp`/`X-App-Nonce`/`X-App-Signature`, safe
+  no-op until `PILATES_APP_SIGNATURE_SECRET` is set), and a `code` field on
+  `ApiException` for the backend's `{"error":{"code":...}}` shape.
+  Second, wired that layer into the app: moved `PilatesRemoteDataSource`
+  from `discover/services/` into `core/network/` (it now serves four list
+  endpoints, not just Discover) and gave `WorkoutRepository`/
+  `ChallengeRepository`/`BodyFocusRepository` the same network → local
+  cache → bundled-JSON chain `DiscoverRepository` already had, via new
+  `fromApiCategory` adapters on `ProgramModel`/`ChallengeProgramModel`/
+  `BodyFocusCategoryModel`. Hit the live backend directly (`curl` + a
+  throwaway adapter smoke test, not just the docs) and found the docs
+  overstate what's implemented — see **Backend shape mismatch** under Known
+  Blockers; the adapters are knowingly lossy by the user's explicit choice
+  rather than leaving these three screens on bundled-only data. Also fixed
+  a latent bug surfaced while wiring this: `DiscoverRepository.getCategories()`
+  read `storage.getString` *before* its own try/catch, so an app run before
+  `StorageService.init()` completed would throw uncaught instead of falling
+  back — moved inside the guard and hardened `_readCache()` on all four
+  repositories to treat an uninitialized/unavailable store as "no cache"
+  rather than propagate. `flutter analyze lib test` clean, `flutter test`
+  unchanged at 77/79 (the 2 failures are the pre-existing
+  `test/widget_test.dart` counter test and a pre-existing
+  `home_hero_banner_test.dart` failure, both confirmed present on `main`
+  before this session's changes too).
+  * **Files modified:** `lib/core/network/api_client.dart`,
+    `lib/core/network/api_endpoints.dart`, `lib/core/network/api_exception.dart`,
+    `.env.example`, `pubspec.yaml` (+`.lock`, added `crypto`),
+    `lib/core/services/shared_prefrences/prefs_keys.dart`,
+    `lib/features/discover/services/discover_repository.dart`,
+    `lib/features/workout/models/program_model.dart`,
+    `lib/features/workout/services/workout_repository.dart`,
+    `lib/features/challenges/models/challenge_program_model.dart`,
+    `lib/features/challenges/services/challenge_repository.dart`,
+    `lib/features/body_focus/models/body_focus_model.dart`,
+    `lib/features/body_focus/services/body_focus_repository.dart`,
+    `docs/context.md`.
+  * **Created:** `lib/core/network/pilates_remote_data_source.dart`
+    (moved from `lib/features/discover/services/`, which is deleted).
+  * **Next immediate steps:** send the shape-mismatch writeup to the
+    backend dev (see Known Blockers); until resolved, expect Programs/
+    Challenges/Body Focus to look thinner on live network data than on the
+    bundled fallback, and all four Body Focus Home tiles to collapse onto
+    one category. Everything else from the third session's list above is
+    still outstanding too, in particular **run the app on a device** — this
+    session's network integration has only been verified by unit tests, a
+    throwaway adapter smoke test against captured live API responses, and
+    direct `curl` calls, never through the actual app UI.
+
+* **Fifth session (2026-08-28): adopt the UI to the flat API shape.**
+  Follow-up to the fourth session's lossy adapters — the user reviewed the
+  live API shape directly and asked for the UI to be adopted to match it
+  ("everything is around categories/workouts/exercises") rather than
+  bending real API data into the app's old nested models. Scoped via one
+  clarifying question: Programs and Body Focus (no locking today — a clean,
+  unambiguous fit for flattening) vs. Challenges (a real locking/resume/
+  join-progress-% feature built on week/day structure the API doesn't have)
+  — the user chose to flatten Programs + Body Focus and **leave Challenges
+  exactly as built in the fourth session**.
+  * **Research first:** an `Explore` subagent mapped every live navigation
+    path into Programs/Body Focus before any code changed. Key finding:
+    `ProgramDetailScreen` had **zero call sites anywhere in the app** — dead
+    code; the only live path into Programs was Home's Next Up banner →
+    `DayDetailScreen`. Also confirmed (via `app_database.dart`) that
+    persistence only ever writes `planId` + a flat `dayId`/`dayIndex` —
+    `PhaseModel.id` and Body Focus's session id were never persisted, so
+    removing those wrapper layers could not break history/resume/streak.
+  * **Programs:** `ProgramModel`/`PhaseModel` deleted outright.
+    `WorkoutRepository.loadPrograms()` now returns `List<CategoryModel>` —
+    Discover's own model, zero adapter (the fourth session's
+    `ProgramModel.fromApiCategory` is gone). The bundled-asset fallback tier
+    now does the flattening instead (`programs.json` still ships
+    `Program → Phase → Day`; each program's phases flatten into one category,
+    keeping the program's id so an in-progress `PlanProgressRows` row still
+    resolves). `program_detail_screen.dart` and `phase_header.dart` deleted
+    (dead code — nothing rendered `PhaseHeader`'s progress pill anyway; it
+    was permanently hardcoded to 0%, "the design ships the 0% state", per
+    the old model's own doc comment). `DayDetailScreen` kept (it's a real,
+    Figma-backed "Day N" screen, reached from Next Up) but lost its
+    `PhaseModel phase` parameter and the fake phase header block.
+    `NextUpService`/`NextUpTarget` reworked: `program`/`phase` fields
+    replaced by one `category: CategoryModel?`; `_resumeProgram`/
+    `_firstProgramDay` now index into `category.workouts` directly instead
+    of flattening `phases[].days[]`.
+  * **Body Focus:** `body_focus_model.dart` (`BodyFocusCategoryModel`/
+    `BodyWorkoutModel`) deleted outright — `BodyFocusRepository` now returns
+    `List<CategoryModel>` the same way `WorkoutRepository` does, zero
+    adapter. The bundled-asset fallback flattens `body_focus.json`'s
+    `workout.sessions[].exercise_ids` (resolved against its exercise
+    catalogue) into one `workout.exercises` list per workout. This removed
+    an entire screen: `body_session_screen.dart` (the middle "session list"
+    screen) is deleted — `BodyWorkoutDetailScreen` now shows the workout's
+    exercises directly (with its own Start button, moved in from the deleted
+    session screen) instead of a list of one fake "Session 1" wrapping them.
+    The hero's "note" line (always "Note: Image Will Change" on every
+    bundled workout — known placeholder junk, see Technical debt) is simply
+    not rendered anymore rather than faked from an API field that doesn't
+    exist. `body_focus_category_screen.dart` retargeted from
+    `BodyFocusCategoryModel`/`.card` to plain `CategoryModel`/`WorkoutModel`.
+  * **`DayModel` was kept**, deliberately narrowed to only what Challenges
+    still needs (`ChallengeWeekModel.days`, `ChallengeDayScreen`,
+    `DayStatsCard`) — `program_model.dart` now contains only `DayModel`.
+    Both `DayDetailScreen` and the rebuilt `BodyWorkoutDetailScreen` build a
+    `DayModel` inline via `DayModel.fromJson(workout.toJson())` wherever
+    they still want the "day" framing (`DayStatsCard`) — safe because
+    `WorkoutModel`/`DayModel` have always shared every field name.
+  * **Verified against real data, not just unit tests:** a throwaway test
+    (deleted after) called `WorkoutRepository.loadPrograms()` and
+    `BodyFocusRepository.loadCategories()` directly — confirmed the bundled
+    fallback correctly flattens `programs.json` (`prog_pilates_premier` → 1
+    category, 6 workouts, every workout keeps its exercises) and
+    `body_focus.json` (`butt_leg`/`abs`/`full_body`/`arm` → 4 categories, 8
+    workouts each, sessions correctly flattened to 45 exercises per
+    workout). Also re-confirmed live `/api/v1/pilates/programs` still
+    decodes cleanly through the unchanged `CategoryModel.fromJson`.
+    `flutter analyze lib test` clean (only the same pre-existing informational
+    lints as before), `flutter test` unchanged at 77/79 — same 2
+    pre-existing failures (`widget_test.dart`, `home_hero_banner_test.dart`),
+    plus one test intentionally updated (`progress_tracking_test.dart`'s
+    `target.phase` assertion → `target.category`, matching the renamed
+    `NextUpTarget` field).
+  * **Files modified:** `lib/features/workout/models/program_model.dart`
+    (now `DayModel` only), `lib/features/workout/services/workout_repository.dart`
+    (rewritten), `lib/features/workout/views/day_detail_screen.dart` (dropped
+    `phase` param), `lib/features/body_focus/services/body_focus_repository.dart`
+    (rewritten), `lib/features/body_focus/views/body_focus_category_screen.dart`,
+    `lib/features/body_focus/views/body_workout_detail_screen.dart` (rewritten
+    — exercises directly, own Start button), `lib/features/home/services/next_up_service.dart`
+    (`NextUpTarget.category` replaces `.program`/`.phase`), `lib/features/home/views/home_screen.dart`
+    (`_openNextUp` updated), `lib/core/network/pilates_remote_data_source.dart`
+    / `lib/core/services/shared_prefrences/prefs_keys.dart` (stale doc-comment
+    fixes), `test/progress_tracking_test.dart`, `docs/context.md`.
+  * **Deleted:** `lib/features/workout/models/... ProgramModel`/`PhaseModel`
+    (classes, not the file), `lib/features/workout/views/program_detail_screen.dart`,
+    `lib/features/workout/widgets/phase_header.dart`,
+    `lib/features/body_focus/models/body_focus_model.dart`,
+    `lib/features/body_focus/views/body_session_screen.dart`.
+  * **Next immediate steps:** same standing list as the fourth session
+    (device/simulator run still hasn't happened; commit; voice guidance;
+    etc.) plus: send the now-Challenges-only shape-mismatch writeup to the
+    backend dev; consider whether Programs deserves a real "browse all
+    programs" surface beyond the single-day Next Up banner (there is no
+    Figma spec for one today, so none was added this pass — Home's reach
+    into Programs is unchanged, just fed by real flat data now).

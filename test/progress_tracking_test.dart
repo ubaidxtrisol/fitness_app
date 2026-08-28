@@ -387,7 +387,7 @@ void main() {
     expect(target.suggestion.metaLabel, '6min/8 Exercise');
     expect(target.suggestion.dayIndex, 1);
     expect(target.day, isNotNull, reason: 'banner needs the day to push');
-    expect(target.phase, isNotNull);
+    expect(target.category, isNotNull);
   });
 
   test('most recent plan is what the banner resumes', () async {

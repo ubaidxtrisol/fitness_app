@@ -60,6 +60,7 @@ dependencies:
   dio: ^5.10.0
   equatable: ^2.1.0
   flutter_dotenv: ^6.0.1
+  crypto: ^3.0.7
 
 dev_dependencies:
   flutter_test:
