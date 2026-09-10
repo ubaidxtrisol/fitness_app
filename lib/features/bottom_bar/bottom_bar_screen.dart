@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
 import 'package:fitness_app/features/discover/discover_screen.dart';
@@ -5,7 +7,9 @@ import 'package:fitness_app/features/home/views/home_screen.dart';
 import 'package:fitness_app/features/profile/profile_screen.dart';
 import 'package:fitness_app/features/progress/progress_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_ads_sdk/shared_ads_sdk.dart';
 
 class BottomBarScreen extends StatefulWidget {
   const BottomBarScreen({super.key});
@@ -62,6 +66,17 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
               const ProfileScreen(),
             ],
           );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final adsConfgi = await rootBundle.loadString(
+            'assets/json/ads_config copy.json',
+          );
+          final configJson = jsonDecode(adsConfgi);
+
+          SharedAds.instance.updateConfig(AdsModel.fromJson(configJson));
+          setState(() {});
         },
       ),
       bottomNavigationBar: SafeArea(

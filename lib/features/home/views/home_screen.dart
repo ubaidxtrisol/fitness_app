@@ -1,27 +1,28 @@
-import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_extension.dart';
-import 'package:fitness_app/core/utils/app_toasts.dart';
+import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/database/repositories/joined_challenges_repository.dart';
-import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
-import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
-import 'package:fitness_app/features/home/models/home_models.dart';
-import 'package:fitness_app/features/home/widgets/body_focus_widget.dart';
-import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
+import 'package:fitness_app/core/database/repositories/progress_repository.dart';
+import 'package:fitness_app/core/utils/app_toasts.dart';
+import 'package:fitness_app/core/widgets/app_shimmer.dart';
 import 'package:fitness_app/features/body_focus/services/body_focus_repository.dart';
 import 'package:fitness_app/features/body_focus/views/body_focus_category_screen.dart';
-import 'package:fitness_app/core/database/repositories/progress_repository.dart';
-import 'package:fitness_app/core/widgets/app_shimmer.dart';
-import 'package:fitness_app/features/challenges/views/challenge_day_screen.dart';
-import 'package:fitness_app/features/home/services/next_up_service.dart';
-import 'package:fitness_app/features/workout/views/day_detail_screen.dart';
+import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
+import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
+import 'package:fitness_app/features/challenges/views/challenge_day_screen.dart';
 import 'package:fitness_app/features/challenges/views/challenge_detail_screen.dart';
 import 'package:fitness_app/features/challenges/views/challenges_screen.dart';
+import 'package:fitness_app/features/home/models/home_models.dart';
+import 'package:fitness_app/features/home/services/next_up_service.dart';
+import 'package:fitness_app/features/home/widgets/body_focus_widget.dart';
+import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
 import 'package:fitness_app/features/home/widgets/home_hero_banner.dart';
 import 'package:fitness_app/features/home/widgets/today_summary_widget.dart';
+import 'package:fitness_app/features/workout/views/day_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_ads_sdk/shared_ads_sdk.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -89,9 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final joinedRows = await _joinedRepo.all();
     final joinedAt = {for (final r in joinedRows) r.challengeId: r.joinedAt};
 
-    final inProgress = <({ChallengeProgramModel challenge, ChallengeModel card})>[];
-    final notJoined = <({ChallengeProgramModel challenge, ChallengeModel card})>[];
-    final finished = <({ChallengeProgramModel challenge, ChallengeModel card})>[];
+    final inProgress =
+        <({ChallengeProgramModel challenge, ChallengeModel card})>[];
+    final notJoined =
+        <({ChallengeProgramModel challenge, ChallengeModel card})>[];
+    final finished =
+        <({ChallengeProgramModel challenge, ChallengeModel card})>[];
 
     for (final challenge in challenges) {
       if (!joinedAt.containsKey(challenge.id)) {
@@ -229,7 +233,13 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TodaySummaryWidget(summary: _todaySummary),
             ),
             12.heightBox.sliver,
-
+            SliverToBoxAdapter(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: NativeAdWidget(placementId: "home_screen"),
+              ),
+            ),
+            6.heightBox.sliver,
             // 3. Challenges Section
             SliverToBoxAdapter(
               child: Padding(
@@ -278,7 +288,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           itemCount: 3,
-                          separatorBuilder: (context, index) => SizedBox(width: spacing),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: spacing),
                           itemBuilder: (context, index) => ShimmerBox(
                             width: cardWidth,
                             height: cardHeight,

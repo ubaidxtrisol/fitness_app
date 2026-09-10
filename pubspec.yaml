@@ -61,6 +61,10 @@ dependencies:
   equatable: ^2.1.0
   flutter_dotenv: ^6.0.1
   crypto: ^3.0.7
+  shared_ads_sdk:
+    git:
+      url: git@github.com:ubaidxtrisol/shared_ads_sdk.git
+      ref: v0.1.1
 
 dev_dependencies:
   flutter_test:

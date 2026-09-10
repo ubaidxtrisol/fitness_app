@@ -1,0 +1,295 @@
+{
+    "ads_config": {
+        "enabled": false,
+        "show_test_ads": true,
+        "version": "1.0.0",
+        "last_updated": "2026-07-02",
+        "global_controls": {
+            "global_counter_enabled": false
+        },
+        "test_units": {
+            "app_open_android": "ca-app-pub-3940256099942544/9257395921",
+            "app_open_ios": "ca-app-pub-3940256099942544/5575463023",
+            "interstitial_android": "ca-app-pub-3940256099942544/1033173712",
+            "interstitial_ios": "ca-app-pub-3940256099942544/4411468910",
+            "banner_android": "ca-app-pub-3940256099942544/6300978111",
+            "banner_ios": "ca-app-pub-3940256099942544/2934735716",
+            "native_android": "ca-app-pub-3940256099942544/2247696110",
+            "native_ios": "ca-app-pub-3940256099942544/3986624511",
+            "rewarded_android": "ca-app-pub-3940256099942544/5224354917",
+            "rewarded_ios": "ca-app-pub-3940256099942544/1712485313"
+        },
+        "app_open": {
+            "enabled": true,
+            "load_type": "on_demand",
+            "frequency": 1,
+            "first_ad_id": "",
+            "second_ad_id": ""
+        },
+        "interstitial": {
+            "enabled": true,
+            "load_type": "on_demand",
+            "frequency": 4,
+            "first_ad_id": "",
+            "second_ad_id": ""
+        },
+        "rewarded": {
+            "enabled": true,
+            "load_type": "on_demand",
+            "first_ad_id": "",
+            "second_ad_id": ""
+        },
+        "native_full_screen": {
+            "enabled": true,
+            "load_type": "pre_load",
+            "first_ad_id": "",
+            "second_ad_id": ""
+        },
+        "splash_ad": {
+            "enabled": true,
+            "show_open_app": false,
+            "load_type": "pre_load",
+            "frequency": 1,
+            "interstitial_config": {
+                "first_ad_id": "",
+                "second_ad_id": ""
+            },
+            "open_app_config": {
+                "first_ad_id": "",
+                "second_ad_id": ""
+            }
+        },
+        "onboarding_ad": {
+            "enabled": true,
+            "show_open_app": false,
+            "load_type": "on_demand",
+            "frequency": 1,
+            "interstitial_config": {
+                "first_ad_id": "",
+                "second_ad_id": ""
+            },
+            "open_app_config": {
+                "first_ad_id": "",
+                "second_ad_id": ""
+            }
+        },
+        "native_ad_types": [
+            "nativeInLine",
+            "nativeSmall",
+            "nativeMedium",
+            "nativeLarge"
+        ],
+        "placements": [
+            {
+                "id": "splash_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "onboarding",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "language_screen",
+                "enabled": true,
+                "ad_type_preference": "banner",
+                "banner_config": {
+                    "style": "collapsible",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "home_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "bottom_navigation",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "collapsible",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 1,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "backup_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "free_space_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "optimize_storage_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 2,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "free_space_review_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 2,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "all_files_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 1,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "my_cloud_files_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 1,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "settings_screen",
+                "enabled": true,
+                "ad_type_preference": "banner",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 1,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "upload_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 3,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            },
+            {
+                "id": "download_screen",
+                "enabled": true,
+                "ad_type_preference": "native",
+                "banner_config": {
+                    "style": "large_banner",
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                },
+                "native_config": {
+                    "style": 2,
+                    "first_ad_id": "",
+                    "second_ad_id": ""
+                }
+            }
+        ]
+    }
+}

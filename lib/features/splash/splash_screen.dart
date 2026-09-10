@@ -9,34 +9,8 @@ import 'package:fitness_app/features/bottom_bar/bottom_bar_screen.dart';
 import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:shared_ads_sdk/shared_ads_sdk.dart';
 import 'package:wave/wave.dart';
-
-class GeneratedWave extends StatelessWidget {
-  const GeneratedWave({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      // height: 200,
-      child: WaveWidget(
-        config: CustomConfig(
-          gradients: const [
-            [Color.fromARGB(17, 228, 88, 130), AppColors.primaryLight],
-
-            [Color(0x1EE45882), AppColors.primaryLight],
-          ],
-          durations: const [10588, 9059],
-          heightPercentages: const [0.82, 0.86],
-          gradientBegin: Alignment.bottomLeft,
-          gradientEnd: Alignment.topRight,
-        ),
-
-        size: const Size(double.infinity, double.infinity),
-        waveAmplitude: 28.0,
-      ),
-    );
-  }
-}
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -48,21 +22,47 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
   bool _isNavigating = false;
+  bool _nativeAdCompleted = false;
 
   @override
   void initState() {
     super.initState();
-    _initializeApp();
+    SharedAds.instance.service.loadSplashInterstitialAd();
   }
 
-  Future<void> _initializeApp() async {
-    final duration = Duration(seconds: 4);
-
-    _timer = Timer(duration, _onSplashTimeout);
+  void _onNativeAdFinished() {
+    if (_nativeAdCompleted || _isNavigating) return;
+    _nativeAdCompleted = true;
+    _startSplashFlow();
   }
 
-  void _onSplashTimeout() {
-    if (_isNavigating) return;
+  Future<void> _startSplashFlow() async {
+    // Wait for 500ms after Native Ad is shown/failed
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (!mounted || _isNavigating) return;
+
+    final maxWaitSeconds =
+        SharedAds.instance.service.splashInterstitialWaitTime;
+    final maxWaitDuration = Duration(seconds: maxWaitSeconds);
+
+    // Set safety timeout timer to navigate if ad doesn't load within wait time
+    _timer?.cancel();
+    _timer = Timer(maxWaitDuration, () {
+      if (!_isNavigating) {
+        _navigateToNextScreen();
+      }
+    });
+
+    final stopwatch = Stopwatch()..start();
+
+    // Poll until splash interstitial ad is ready or wait time expires
+    while (!SharedAds.instance.service.isSplashAdReady &&
+        stopwatch.elapsed < maxWaitDuration) {
+      if (!mounted || _isNavigating) return;
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+
+    if (!mounted || _isNavigating) return;
     _navigateToNextScreen();
   }
 
@@ -70,6 +70,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_isNavigating) return;
     _isNavigating = true;
     _timer?.cancel();
+
+    if (SharedAds.instance.service.isSplashAdReady) {
+      SharedAds.instance.service.showSplashInterstitialAd();
+    }
 
     // Returning users skip straight to the app; only a profile that has never
     // finished the info flow sees onboarding again.
@@ -177,11 +181,47 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                   ),
                 ),
+                12.heightBox,
               ],
             ),
           ),
           Align(alignment: Alignment(0, .7), child: GeneratedWave()),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: NativeAdWidget(
+          placementId: 'splash_screen',
+          onAdShown: (adShown, failed) {
+            _onNativeAdFinished();
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class GeneratedWave extends StatelessWidget {
+  const GeneratedWave({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      // height: 200,
+      child: WaveWidget(
+        config: CustomConfig(
+          gradients: const [
+            [Color.fromARGB(17, 228, 88, 130), AppColors.primaryLight],
+
+            [Color(0x1EE45882), AppColors.primaryLight],
+          ],
+          durations: const [10588, 9059],
+          heightPercentages: const [0.82, 0.86],
+          gradientBegin: Alignment.bottomLeft,
+          gradientEnd: Alignment.topRight,
+        ),
+
+        size: const Size(double.infinity, double.infinity),
+        waveAmplitude: 28.0,
       ),
     );
   }

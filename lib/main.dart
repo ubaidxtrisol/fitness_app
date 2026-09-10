@@ -1,10 +1,18 @@
+import 'dart:convert';
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/core/database/app_database.dart';
+import 'package:fitness_app/core/services/firebase/fa_services.dart';
 import 'package:fitness_app/core/services/shared_prefrences/storage_services.dart';
+import 'package:fitness_app/core/utils/context.dart';
+import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
+import 'package:fitness_app/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_ads_sdk/shared_ads_sdk.dart';
 
 import 'fitness_app.dart';
 
@@ -35,6 +43,43 @@ void main() async {
   } catch (e) {
     debugPrint('Firebase initialization error: $e');
   }
+
+  final adsJson = await rootBundle.loadString('assets/json/ads_config.json');
+  final adsConfig = AdsModel.fromJson(jsonDecode(adsJson));
+
+  await SharedAds.instance.initialize(
+    config: adsConfig,
+    options: AdsSdkOptions(
+      analytics: CallbackAdsAnalytics(FAServices.instance.logEvent),
+      isFirstTime: false,
+      traceAdIds: false,
+      splashInterstitialWaitTime: 8,
+      navigatorKey: Ctx.navigatorKey,
+      verboseLogging: true,
+      trackingAuthorized: true,
+      loadingOverlayBuilder: (context) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, tileMode: .clamp, sigmaY: 10),
+        child: Center(
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(child: CircularProgressIndicator()),
+          ),
+        ),
+      ),
+      routeGate: AdsRouteGate(
+        blockWhenRouteUnknown: false,
+        blockedRoutes: {
+          SplashScreen().runtimeType.toString(),
+          OnBoardingScreen().runtimeType.toString(),
+        },
+      ),
+    ),
+  );
 
   runApp(FitnessApp());
 }

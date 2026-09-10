@@ -11,6 +11,7 @@ import 'package:fitness_app/features/language/models/languages.dart';
 import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_ads_sdk/shared_ads_sdk.dart';
 
 class LanguageScreen extends StatefulWidget {
   final bool isFromSettings;
@@ -182,29 +183,35 @@ class _LanguageScreenState extends State<LanguageScreen> {
               builder: (context, activeCode, _) {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 52,
-                    child: ElevatedButton(
-                      onPressed: activeCode == null
-                          ? null
-                          : _onApplyLanguageSelection,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52,
+                        child: ElevatedButton(
+                          onPressed: activeCode == null
+                              ? null
+                              : _onApplyLanguageSelection,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            foregroundColor: Colors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(26),
+                            ),
+                          ),
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                      12.heightBox,
+                      NativeAdWidget(placementId: 'language_screen'),
+                    ],
                   ),
                 );
               },
