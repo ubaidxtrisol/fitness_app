@@ -43,7 +43,7 @@ void main() {
     expect(find.text('Day 1'), findsOneWidget);
     expect(find.text('Start Workout'), findsOneWidget);
     expect(find.text('5min/7 Exercise'), findsOneWidget);
-    expect(find.textContaining('Move Better'), findsOneWidget);
+    expect(find.textContaining('Keep Walking'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

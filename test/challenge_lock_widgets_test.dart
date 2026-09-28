@@ -1,5 +1,5 @@
 import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
-import 'package:fitness_app/features/challenges/widgets/challenge_lock_dialog.dart';
+import 'package:fitness_app/features/workout/widgets/step_lock_dialog.dart';
 import 'package:fitness_app/features/challenges/widgets/week_track.dart';
 import 'package:fitness_app/features/player/widgets/resume_session_dialog.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ void main() {
       _host(
         Builder(
           builder: (context) => ElevatedButton(
-            onPressed: () => showChallengeLockedDialog(
+            onPressed: () => showStepLockedDialog(
               context,
               currentPositionLabel: 'Week 2, Day 3',
             ),
@@ -45,7 +45,7 @@ void main() {
         Builder(
           builder: (context) => ElevatedButton(
             onPressed: () =>
-                showChallengeLockedDialog(context, currentPositionLabel: ''),
+                showStepLockedDialog(context, currentPositionLabel: ''),
             child: const Text('open'),
           ),
         ),

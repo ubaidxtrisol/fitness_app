@@ -15,13 +15,14 @@ class HomeHeroBanner extends StatelessWidget {
   /// "Day 3" for a resumed plan, "Day 1" for a fresh start.
   String get _dayLabel => nextUp?.dayTitle ?? 'Day 1';
 
-  /// Two lines: the plan being resumed, or the stock line before any history.
+  /// Two lines: the plan being resumed, or the default invite to browse the
+  /// Phases program before anything is actually started.
   String get _title {
     final next = nextUp;
-    if (next == null) return 'Move Better\nFeel Stronger';
+    if (next == null) return 'Keep Walking\nKeep Going';
     return next.isResuming
         ? 'Keep Going\n${next.dayTitle}'
-        : 'Move Better\nFeel Stronger';
+        : 'Keep Walking\nKeep Going';
   }
 
   String get _meta => nextUp?.metaLabel ?? '6min/7 Exercise';

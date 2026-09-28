@@ -19,7 +19,7 @@ import 'package:fitness_app/features/home/widgets/body_focus_widget.dart';
 import 'package:fitness_app/features/home/widgets/challenge_card_widget.dart';
 import 'package:fitness_app/features/home/widgets/home_hero_banner.dart';
 import 'package:fitness_app/features/home/widgets/today_summary_widget.dart';
-import 'package:fitness_app/features/workout/views/day_detail_screen.dart';
+import 'package:fitness_app/features/workout/views/phases_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_ads_sdk/shared_ads_sdk.dart';
@@ -368,21 +368,15 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    final category = target.category;
+    final phaseDay = target.phaseDay;
     final challenge = target.challenge;
     final week = target.week;
     final day = target.day;
 
-    if (category != null && day != null) {
-      await context.push(
-        DayDetailScreen(
-          day: day,
-          programName: target.suggestion.planTitle,
-          programId: category.id,
-          dayIndex: target.suggestion.dayIndex,
-          totalDays: target.suggestion.totalDays,
-        ),
-      );
+    if (phaseDay != null) {
+      // Always browse the Phases screen rather than jumping straight into a
+      // specific day, whether or not one is already in progress.
+      await context.push(const PhasesScreen());
     } else if (challenge != null && week != null && day != null) {
       await context.push(
         ChallengeDayScreen(

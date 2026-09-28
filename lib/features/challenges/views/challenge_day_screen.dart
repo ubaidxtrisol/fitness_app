@@ -5,7 +5,7 @@ import 'package:fitness_app/core/constants/routes/nav_extension.dart';
 import 'package:fitness_app/core/database/repositories/active_session_repository.dart';
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/widgets/challenge_hero_banner.dart';
-import 'package:fitness_app/features/challenges/widgets/challenge_lock_dialog.dart';
+import 'package:fitness_app/features/workout/widgets/step_lock_dialog.dart';
 import 'package:fitness_app/features/discover/views/exercise_detail_screen.dart';
 import 'package:fitness_app/features/player/models/player_session.dart';
 import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 ///
 /// Days beyond the user's real progress still open (browsing ahead is fine),
 /// but [isUnlocked] gates actually starting them — Start and every exercise
-/// row explain why with [showChallengeLockedDialog] instead of navigating.
+/// row explain why with [showStepLockedDialog] instead of navigating.
 class ChallengeDayScreen extends StatefulWidget {
   final ChallengeProgramModel challenge;
   final ChallengeWeekModel week;
@@ -142,7 +142,7 @@ class _ChallengeDayScreenState extends State<ChallengeDayScreen> {
     if (widget.isUnlocked) {
       action();
     } else {
-      showChallengeLockedDialog(
+      showStepLockedDialog(
         context,
         currentPositionLabel: widget.currentPositionLabel,
       );
@@ -302,7 +302,7 @@ class _ChallengeDayScreenState extends State<ChallengeDayScreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (!isUnlocked) {
-                      showChallengeLockedDialog(
+                      showStepLockedDialog(
                         context,
                         currentPositionLabel: widget.currentPositionLabel,
                       );

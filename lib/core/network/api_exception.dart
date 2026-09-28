@@ -24,15 +24,16 @@ sealed class ApiException implements Exception {
 /// No network at all — checked before the request is even sent.
 class NoInternetException extends ApiException {
   const NoInternetException([
-    String message = 'No internet connection. Please check your network and try again.',
-  ]) : super(message);
+    super.message =
+        'No internet connection. Please check your network and try again.',
+  ]);
 }
 
 /// The request took too long, in either direction.
 class RequestTimeoutException extends ApiException {
   const RequestTimeoutException([
-    String message = 'The request timed out. Please try again.',
-  ]) : super(message);
+    super.message = 'The request timed out. Please try again.',
+  ]);
 }
 
 /// 401 — missing/invalid `X-API-KEY`, or (once `ENFORCE_APP_SIGNATURE=true`
@@ -41,27 +42,27 @@ class RequestTimeoutException extends ApiException {
 /// which one from the response body; [code] carries the raw code if sent.
 class UnauthorizedException extends ApiException {
   const UnauthorizedException([
-    String message = 'Missing or invalid API key.',
+    super.message = 'Missing or invalid API key.',
     String? code,
-  ]) : super(message, code: code);
+  ]) : super(code: code);
 }
 
 /// 403 — IP temporarily blocked after too many rate-limit strikes (2 strikes
 /// → 24h IP block, per `apis/authentication-WlDp.md`).
 class ForbiddenException extends ApiException {
   const ForbiddenException([
-    String message = 'Access is temporarily blocked. Please try again later.',
+    super.message = 'Access is temporarily blocked. Please try again later.',
     String? code,
-  ]) : super(message, code: code);
+  ]) : super(code: code);
 }
 
 /// 404 — unknown category / workout / exercise / program / challenge /
 /// body-focus id.
 class NotFoundException extends ApiException {
   const NotFoundException([
-    String message = 'The requested item could not be found.',
+    super.message = 'The requested item could not be found.',
     String? code,
-  ]) : super(message, code: code);
+  ]) : super(code: code);
 }
 
 /// 422 — request body failed validation.
@@ -92,8 +93,8 @@ class ServerException extends ApiException {
 /// The response didn't parse into the shape the app expects.
 class DataParsingException extends ApiException {
   const DataParsingException([
-    String message = 'Received an unexpected response from the server.',
-  ]) : super(message);
+    super.message = 'Received an unexpected response from the server.',
+  ]);
 }
 
 /// Anything else — cancellations, bad certificates, truly unknown Dio
@@ -101,7 +102,7 @@ class DataParsingException extends ApiException {
 /// its own type.
 class UnknownApiException extends ApiException {
   const UnknownApiException([
-    String message = 'Something went wrong. Please try again.',
+    super.message = 'Something went wrong. Please try again.',
     String? code,
-  ]) : super(message, code: code);
+  ]) : super(code: code);
 }

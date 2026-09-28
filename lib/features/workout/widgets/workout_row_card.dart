@@ -114,7 +114,9 @@ class WorkoutRowCard extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: AppColors.success,
                     shape: BoxShape.circle,
-                    boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 2)],
+                    boxShadow: [
+                      BoxShadow(color: Color(0x33000000), blurRadius: 2),
+                    ],
                   ),
                   child: const Icon(
                     Icons.check_rounded,

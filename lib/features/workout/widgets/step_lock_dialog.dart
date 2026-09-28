@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 ///
 /// The day's own screen still opens (browsing ahead is allowed); only
 /// starting it is blocked, and this is what explains why.
-Future<void> showChallengeLockedDialog(
+Future<void> showStepLockedDialog(
   BuildContext context, {
   required String currentPositionLabel,
+  String? message,
 }) {
   return showDialog<void>(
     context: context,
@@ -47,10 +48,11 @@ Future<void> showChallengeLockedDialog(
         ],
       ),
       content: Text(
-        currentPositionLabel.isEmpty
-            ? "Finish the days before this one to unlock it."
-            : "You're currently on $currentPositionLabel. Complete it "
-                  "before moving ahead — that's how this challenge works.",
+        message ??
+            (currentPositionLabel.isEmpty
+                ? "Finish the days before this one to unlock it."
+                : "You're currently on $currentPositionLabel. Complete it "
+                      "before moving ahead — that's how this challenge works."),
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 13,

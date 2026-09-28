@@ -281,6 +281,38 @@ Implemented and verified (62 passing tests across `test/*.dart`;
     regardless of exact metrics. Once joined, the Join pill is gone
     entirely — replaced by the progress bar, then, once finished, by the
     "Completed" badge — never shown alongside either.
+* **The Phases program** — restores the phase concept the fifth session's
+  flattening pass deliberately dropped, but *reuses* that flattening rather
+  than reversing it: `WorkoutRepository.loadPrograms()` is unchanged (still
+  plain `CategoryModel`/`WorkoutModel`, network → cache → bundled, zero
+  adapter) and every category it returns is simply treated as one **phase**,
+  every workout inside it as one **day** — see that class's doc comment.
+  `assets/json/programs.json` is authored directly in that flat shape (one
+  array entry per phase, each with a `workouts` array of days), matching the
+  live API's real content format 1:1 rather than a separate nested one — so
+  a phase is "the next category in the list" with no adapter or parallel
+  loader needed. `ProgramsProgress` mirrors `ChallengeProgress` exactly
+  (phase ~ week, day ~ day): one flat `PlanProgressRows` row for the whole
+  program under a synthetic `phasesPlanId` (there's no single natural id
+  once phases are just array entries), phases unlock once every day in the
+  previous phase is done, days unlock the same "step by step" way weeks do.
+  One new screen, `PhasesScreen` (all phases + day lists + an overall
+  progress card, no "Join" concept — it's always the default program) —
+  tapping a day opens its exercise list *directly* via the existing
+  `DayDetailScreen` (a day's own exercises already are the "workout"; there
+  is no extra layer in between, matching the original three-node Figma flow
+  10:509 → 11:738 → 11:959). The Home hero banner now reads "Keep Walking,
+  Keep Going" as its true fresh-install default (replacing "Move Better,
+  Feel Stronger") and its CTA opens `PhasesScreen` to browse in that state;
+  once something is actually resumed, tapping still jumps straight to the
+  exact next day and the banner reads "Keep Going / Day N" as before —
+  `NextUpService`'s program branch (`_resumeProgram`/`_firstProgramDay`) was
+  rewritten against `WorkoutRepository`/`ProgramsProgress`, and
+  `NextUpTarget.category`/`.day` (programs) became `.phaseDay`. The shared
+  lock dialog moved from `challenges/widgets/challenge_lock_dialog.dart` to
+  `workout/widgets/step_lock_dialog.dart` (renamed `showStepLockedDialog`)
+  so Challenges and Phases can both use it without breaking the codebase's
+  one-directional cross-feature-import convention.
 * **Remote API integration.** `core/network/` (`ApiClient`, `ApiEndpoints`,
   `ApiException`, `PilatesRemoteDataSource`) covers the full delivered
   contract in `apis/`: every `/api/v1/pilates/*` list/detail route, the
@@ -306,6 +338,15 @@ Implemented and verified (62 passing tests across `test/*.dart`;
 ### Known Blockers / Bugs
 
 **Backend shape mismatch — now scoped to Challenges only**
+
+* **Sixth-session update:** Programs regained a phase concept (see **The
+  Phases program** above), but *without* reopening this gap — a phase is
+  just "the next `CategoryModel` in the list" `WorkoutRepository` already
+  returns from the live flat API, so Programs stays a clean 1:1 fit with no
+  adapter. `assets/json/programs.json` is authored directly in that same
+  flat shape (one array entry per phase). This is unlike Challenges, which
+  still needs a real `weeks[]`/`title_lead`/`days_label` shape the API
+  doesn't have at all.
 
 * `apis/API_REQUIREMENTS.md` asked for `Program → Phase → Day`,
   `Challenge → Week → Day` and `BodyFocus → Category → Workout → Session`.
@@ -424,7 +465,7 @@ Implemented and verified (62 passing tests across `test/*.dart`;
   substitutes a square-glyph font, so text widths in tests are meaningless and
   the real Nexa typographic rhythm has never been eyeballed on device.
 
-## 3. Latest Session Summary (Updated: 2026-08-28)
+## 3. Latest Session Summary (Updated: 2026-09-10)
 
 * **What was just completed:** Challenge step-by-step locking, in-workout
   completion UI, and resumable workouts — three related pieces of the
@@ -699,3 +740,163 @@ Implemented and verified (62 passing tests across `test/*.dart`;
     programs" surface beyond the single-day Next Up banner (there is no
     Figma spec for one today, so none was added this pass — Home's reach
     into Programs is unchanged, just fed by real flat data now).
+
+* **Sixth session (2026-09-10): the Phases program comes back.** The user
+  reported a Phases section (Phase 1..4, Day 1..30) they remembered building,
+  reachable from the Home hero banner — the fifth session's flattening pass
+  had deliberately deleted the phase concept as "no real data behind it,"
+  confirmed against the deleted code's own doc comments (`DayDetailScreen`'s
+  "Phase 1 · Gentle Beginning" header note). Two passes in this session:
+  * **First pass** built a deeper `Program → Phase → Day → Workout →
+    Exercise` model (a new bundled-only `PhaseRepository`/`PhaseProgramModel`
+    parallel to `WorkoutRepository`), based on the user's initial verbal
+    spec of named phases with an extra "workout" layer under each day.
+  * **Course-corrected same session:** the user then shared their actual
+    updated `assets/json/programs.json` — authored in the plain flat
+    `Category → Workout → Exercise` shape (matching the live API's real
+    content-authoring format, `section_type` field included), with no
+    Workout sub-layer and no wrapping "program" object — each top-level
+    array entry is meant to be one phase. This was a better, simpler fit
+    than the first pass's invented model: it meant reusing
+    `WorkoutRepository`/`CategoryModel` (already-tested, no adapter) instead
+    of a parallel loader, and dropping the extra day→workouts screen
+    entirely (a day's exercises already are the "workout"). The first
+    pass's `phase_program_model.dart`/`phase_repository.dart`/
+    `phase_progress.dart`/`phase_day_workouts_screen.dart`/
+    `phase_progress_test.dart` were deleted outright rather than kept
+    around unused. See **The Phases program** under Working Features for
+    the shipped architecture (`WorkoutRepository`/`ProgramsProgress`/
+    `PhasesScreen`), and **Backend shape mismatch** below (back to
+    Challenges-only — Programs' phases stayed a clean flat-API fit).
+    Tried the Figma link for 10:509 the user gave (both passes) — no
+    edit/dev access to the file either time, so the day-list layout follows
+    the existing Figma-verified `ChallengeDetailScreen`/`WeekTrack` pattern
+    rather than a fresh pull from Figma.
+  * **Files created:** `lib/features/workout/services/programs_progress.dart`,
+    `lib/features/workout/views/phases_screen.dart`,
+    `test/programs_progress_test.dart`.
+  * **Renamed:** `lib/features/challenges/widgets/challenge_lock_dialog.dart`
+    → `lib/features/workout/widgets/step_lock_dialog.dart`
+    (`showChallengeLockedDialog` → `showStepLockedDialog`, now takes an
+    optional `message` override) — moved so Phases and Challenges can share
+    it without breaking the one-directional cross-feature-import convention
+    (`challenges` imports from `workout`, never the reverse).
+  * **Rewritten:** `assets/json/programs.json` (now user-authored, flat
+    `Category → Workout → Exercise`, real content — no longer
+    placeholder-cycled), `lib/features/workout/services/workout_repository.dart`
+    (`_loadBundledAsset` simplified to a direct `CategoryModel.fromJson` parse
+    of that flat shape — the old nested-phase-flattening code it carried is
+    gone, matching the file it now actually reads),
+    `lib/features/home/services/next_up_service.dart` (`_resumeProgram`/
+    `_firstProgramDay` now use `WorkoutRepository`/`ProgramsProgress`;
+    `NextUpTarget.category`/`.day` for programs became `.phaseDay`, `.day`
+    kept for Challenges only), `lib/features/home/widgets/home_hero_banner.dart`
+    (default title "Move Better, Feel Stronger" → "Keep Walking, Keep
+    Going"), `lib/features/home/views/home_screen.dart` (`_openNextUp`: a
+    fresh program state opens `PhasesScreen`; a resumed one still jumps
+    straight to the exact next day via `DayDetailScreen`, unchanged).
+  * **Modified:** `lib/features/challenges/views/challenge_day_screen.dart`
+    (dialog import updated for the rename), `test/progress_tracking_test.dart`
+    (next-up assertions rewritten against the user's real content),
+    `test/home_hero_banner_test.dart` (default-title assertion),
+    `test/challenge_lock_widgets_test.dart` (dialog import/call rename),
+    `docs/context.md`.
+  * **Verified:** `flutter analyze lib test` clean (same pre-existing info
+    lints only), `flutter test` at 82 total with the same 2 pre-existing
+    failures as every prior session (`widget_test.dart`'s stock counter
+    test, `home_hero_banner_test.dart`'s "Day 3 of 3" text that was never
+    actually rendered) — no new failures.
+  * **Next immediate steps:** same standing list as the fifth session,
+    still untouched by this pass, plus: decide whether Phase locking should
+    also gate a Programs tab card/rail the way Challenges does, if one gets
+    built.
+
+* **Sixth session, follow-up pass (same day): static 4-phase structure +
+  fixed-length progress.** The user clarified the phase names/day ranges
+  are **static UI structure**, not derived from however many categories
+  happen to be in `programs.json` (Figma 11:732 "Phase n" text / 11:733
+  "Phase Name" — both marked static) — and that "Overall Days Done" (Figma
+  11:763) counts against the program's fixed 30-day length, not just
+  whatever's loaded so far. Rewired accordingly: a new
+  `phase_definitions.dart` hardcodes the 4 stages (`kPhaseDefinitions` —
+  Phase 1 "Gentle Beginning" 1-3, Phase 2 "Easy Sequences" 4-10, Phase 3
+  "Practice Basics" 11-20, Phase 4 "Build Endurance" 21-30 — and
+  `kPhasesProgramTotalDays = 30`); `ProgramsProgress` now flattens every
+  category's workouts into one ordered day list (ignoring category
+  boundaries entirely) and buckets each day into whichever fixed phase
+  range its *absolute position* falls in, rather than one phase per
+  category. A phase with nothing authored for its range yet (today, that's
+  Phases 2-4 — only "30 DAYS Phase"'s first 3 days exist) renders a "Coming
+  soon" placeholder and — deliberately — does not block the phase after it
+  from unlocking once every *loaded* day before it is done, so real phase
+  2-4 content landing later doesn't get stuck behind an empty phase.
+  `percentComplete`/`isComplete`/`overallDaysLabel` all count against the
+  fixed 30, not `_flat.length`. Confirmed via direct `curl` (with the real
+  `PILATES_API_KEY` from `.env`) that `GET /api/v1/pilates/programs` already
+  serves this exact "30 DAYS Phase" content live — `WorkoutRepository`'s
+  existing network-first chain already satisfies "load from the API" with
+  no further change needed. Also retried Figma access for 10:509 (`get_metadata`)
+  before this pass — still fails; `whoami` shows the connected Figma account
+  is on a **View-only seat** on its team, which is the actual cause (dev-mode
+  design-context/screenshot tools need edit access). The day-list layout
+  still follows the existing `ChallengeDetailScreen`/`WeekTrack` visual
+  pattern rather than a Figma pull.
+  * **Files created:** `lib/features/workout/models/phase_definitions.dart`.
+  * **Rewritten:** `lib/features/workout/services/programs_progress.dart`
+    (category-bucketed phases → fixed-range-bucketed phases; `PhaseDayRef.phase`
+    is now a `PhaseDefinition`, not a `CategoryModel`), `lib/features/workout/views/phases_screen.dart`
+    (renders `kPhaseDefinitions` directly instead of loaded categories; "Coming
+    soon" placeholder for an empty phase), `test/programs_progress_test.dart`
+    (rewritten against the real fixed-phase/fixed-30-day model),
+    `test/progress_tracking_test.dart` (`planTitle` assertion — now the
+    static "Phase 1", not the JSON category's own title), `docs/context.md`.
+  * **Verified:** `flutter analyze lib test` clean, `flutter test` at 83
+    total, same 2 pre-existing failures as every prior session.
+  * **Next immediate steps:** author real content for Phase 2-4's day
+    ranges (4-10, 11-20, 21-30) once ready — no code change needed, the
+    screen already renders whatever lands in those ranges; if pixel-exact
+    fidelity to 10:509/11:732/11:733/11:763 matters, the Figma account needs
+    an Editor (not View) seat, or the file shared with edit access directly.
+
+* **Sixth session, second follow-up pass (same day): matched a real
+  screenshot.** Still no Figma access, but the user attached an actual
+  screenshot of 10:509. Reworked the screen to match it:
+  * **Hero banner at top** — `WorkoutHeroBanner`/`assets/images/program_banner.png`
+    were already built for exactly this node (their own doc comments say
+    so: "Figma 10:509 (node 10:729)... share one image fill" and "Figma
+    10:509 / 11:738 / 11:959" for `WorkoutAppBar`), just never wired up
+    after the phase concept was deleted. Now shows a static two-line
+    "Pilates / Premier" title (`kPhasesProgramTitle`, new constant) — the
+    program's own brand name is static too, same as the phase names, not
+    derived from whatever the JSON category is titled ("30 DAYS Phase").
+    `WorkoutAppBar` now shows the favourite heart (matches the screenshot;
+    was `showFavorite: false` before).
+  * **Per-phase completion ring replaces the single "Overall Days Done"
+    card** — the screenshot shows a small ring with "0%" next to each
+    phase's own heading, not one big card at the top. Added
+    `ProgramsProgress.percentForPhase()` (a phase's own day range as the
+    denominator, with partial credit) and a `_PhaseRing` widget
+    (`CircularProgressIndicator` + centred `%` text). The lock glyph in the
+    phase header was dropped too (not in the screenshot); locked days still
+    show the same dimmed row + lock dialog on tap.
+  * Day badges are now zero-padded ("01"/"02"/"03", matching the
+    screenshot) via `.padLeft(2, '0')`, the same convention
+    `ChallengeDayScreen`'s week number already uses.
+  * **Files modified:** `lib/features/workout/models/phase_definitions.dart`
+    (`kPhasesProgramTitle` added), `lib/features/workout/services/programs_progress.dart`
+    (`percentForPhase` added), `lib/features/workout/views/phases_screen.dart`
+    (hero banner, per-phase ring, favourite heart, padded badges),
+    `lib/features/home/services/next_up_service.dart` /
+    `lib/features/home/views/home_screen.dart` (`planTitle`/`programName`
+    now `kPhasesProgramTitle` instead of the phase's own title, so a day
+    pushed from Home matches what `PhasesScreen` itself uses),
+    `test/progress_tracking_test.dart` (`planTitle` assertion),
+    `test/programs_progress_test.dart` (`percentForPhase` coverage added),
+    `docs/context.md`.
+  * **Verified:** `flutter analyze lib test` clean, `flutter test` at 84
+    total, same 2 pre-existing failures as every prior session.
+  * **Next immediate steps:** same as the previous pass — author Phase 2-4
+    content when ready; get a real Figma Editor seat (or file-level edit
+    access) if any remaining detail (exact ring stroke width/colors, exact
+    banner text size) needs to match pixel-for-pixel rather than this
+    screenshot-matched approximation.

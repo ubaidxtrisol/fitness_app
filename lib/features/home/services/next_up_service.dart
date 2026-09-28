@@ -4,30 +4,30 @@ import 'package:fitness_app/core/database/repositories/progress_repository.dart'
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
-import 'package:fitness_app/features/discover/models/category_model.dart';
+import 'package:fitness_app/features/workout/models/phase_definitions.dart';
 import 'package:fitness_app/features/workout/models/program_model.dart';
+import 'package:fitness_app/features/workout/services/programs_progress.dart';
 import 'package:fitness_app/features/workout/services/workout_repository.dart';
 
 /// The day the Home banner should offer, resolved against real progress.
 class NextUpTarget {
   final NextUpSuggestion suggestion;
 
-  /// Set when the target is a program day (the common case). [category] is
-  /// the Programs-tab category the day came from — see
-  /// [WorkoutRepository.loadPrograms]; there is no separate "phase" concept.
-  final CategoryModel? category;
-  final DayModel? day;
+  /// Set when the target is a day in the Phases program (the common case)
+  /// — see [WorkoutRepository]/[ProgramsProgress].
+  final PhaseDayRef? phaseDay;
 
   /// Set when the most recent activity was a challenge instead.
   final ChallengeProgramModel? challenge;
   final ChallengeWeekModel? week;
+  final DayModel? day;
 
   const NextUpTarget({
     required this.suggestion,
-    this.category,
-    this.day,
+    this.phaseDay,
     this.challenge,
     this.week,
+    this.day,
   });
 }
 
@@ -65,26 +65,24 @@ class NextUpService {
   }
 
   Future<NextUpTarget?> _resumeProgram(PlanProgressRow row) async {
-    final categories = await WorkoutRepository.loadPrograms();
-    final category = _firstWhereOrNull(categories, (c) => c.id == row.planId);
-    if (category == null || category.workouts.isEmpty) return null;
+    if (row.planId != phasesPlanId) return null;
 
-    final index = row.currentDayIndex.clamp(0, category.workouts.length - 1);
-    final workout = category.workouts[index];
-    final day = DayModel.fromJson(workout.toJson());
+    final phases = await WorkoutRepository.loadPrograms();
+    final progress = await ProgramsProgress.resolve(phases, _progress);
+    final ref = progress.currentTarget;
+    if (ref == null) return null;
 
     return NextUpTarget(
-      category: category,
-      day: day,
+      phaseDay: ref,
       suggestion: NextUpSuggestion(
-        planId: category.id,
+        planId: phasesPlanId,
         planType: PlanType.program,
-        planTitle: category.title,
-        dayTitle: day.title,
-        dayIndex: index,
-        totalDays: category.workouts.length,
-        exerciseCount: day.exercises.length,
-        durationMinutes: day.durationMinutes,
+        planTitle: kPhasesProgramTitle,
+        dayTitle: ref.day.title,
+        dayIndex: ref.flatIndex,
+        totalDays: progress.totalDays,
+        exerciseCount: ref.day.exercises.length,
+        durationMinutes: ref.day.durationMinutes,
         isResuming: true,
       ),
     );
@@ -170,28 +168,27 @@ class NextUpService {
     return null;
   }
 
+  /// The true fresh-install default — nothing touched yet. The banner reads
+  /// "Keep Walking, Keep Going" for this (see [HomeHeroBanner]) and its CTA
+  /// opens the Phases browsing screen rather than jumping straight into Day
+  /// 1 (that only happens once [_resumeProgram] finds real progress).
   Future<NextUpTarget?> _firstProgramDay() async {
-    final categories = await WorkoutRepository.loadPrograms();
-    if (categories.isEmpty) return null;
-
-    final category = categories.first;
-    if (category.workouts.isEmpty) return null;
-
-    final workout = category.workouts.first;
-    final day = DayModel.fromJson(workout.toJson());
+    final phases = await WorkoutRepository.loadPrograms();
+    final progress = await ProgramsProgress.resolve(phases, _progress);
+    final ref = progress.currentTarget;
+    if (ref == null) return null;
 
     return NextUpTarget(
-      category: category,
-      day: day,
+      phaseDay: ref,
       suggestion: NextUpSuggestion(
-        planId: category.id,
+        planId: phasesPlanId,
         planType: PlanType.program,
-        planTitle: category.title,
-        dayTitle: day.title,
-        dayIndex: 0,
-        totalDays: category.workouts.length,
-        exerciseCount: day.exercises.length,
-        durationMinutes: day.durationMinutes,
+        planTitle: kPhasesProgramTitle,
+        dayTitle: ref.day.title,
+        dayIndex: ref.flatIndex,
+        totalDays: progress.totalDays,
+        exerciseCount: ref.day.exercises.length,
+        durationMinutes: ref.day.durationMinutes,
         isResuming: false,
       ),
     );

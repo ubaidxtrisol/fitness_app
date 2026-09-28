@@ -5,6 +5,7 @@ import 'package:fitness_app/core/database/repositories/settings_repository.dart'
 import 'package:fitness_app/core/database/repositories/user_profile_repository.dart';
 import 'package:fitness_app/features/home/services/next_up_service.dart';
 import 'package:fitness_app/features/progress/widgets/history_month_card.dart';
+import 'package:fitness_app/features/workout/services/programs_progress.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -362,21 +363,25 @@ void main() {
     expect(target, isNotNull, reason: 'programs.json should resolve');
     expect(target!.suggestion.dayTitle, 'Day 1');
     expect(target.suggestion.isResuming, isFalse);
-    expect(target.suggestion.metaLabel, '5min/7 Exercise');
-    expect(target.suggestion.planTitle, 'Pilates Premier');
+    expect(target.suggestion.metaLabel, '20min/4 Exercise');
+    expect(
+      target.suggestion.planTitle,
+      'Pilates Premier',
+      reason: 'the program name is static UI text, not from the JSON category',
+    );
   });
 
   test('next-up rolls to day 2 once day 1 is finished', () async {
     await progress.recordSession(
-      planId: 'prog_pilates_premier',
+      planId: phasesPlanId,
       planType: PlanType.program,
       planTitle: 'Pilates Premier',
-      dayId: 'day_1',
+      dayId: 'wk_day_1_gentle_beginning',
       dayTitle: 'Day 1',
       dayIndex: 0,
       totalDays: 3,
-      exercisesCompleted: 7,
-      exercisesTotal: 7,
+      exercisesCompleted: 4,
+      exercisesTotal: 4,
       durationSeconds: 360,
       startedAt: DateTime.now(),
     );
@@ -384,10 +389,9 @@ void main() {
     final target = await NextUpService(progress).resolve();
     expect(target!.suggestion.dayTitle, 'Day 2');
     expect(target.suggestion.isResuming, isTrue);
-    expect(target.suggestion.metaLabel, '6min/8 Exercise');
+    expect(target.suggestion.metaLabel, '10min/4 Exercise');
     expect(target.suggestion.dayIndex, 1);
-    expect(target.day, isNotNull, reason: 'banner needs the day to push');
-    expect(target.category, isNotNull);
+    expect(target.phaseDay, isNotNull, reason: 'banner needs the day to push');
   });
 
   test('most recent plan is what the banner resumes', () async {

@@ -14,13 +14,11 @@ import 'package:flutter/services.dart';
 /// bundled-JSON fallback, same chain as [DiscoverRepository]. Never throws
 /// for "the network is down".
 ///
-/// The bundled `assets/json/programs.json` still ships the old
-/// `Program → Phase → Day` shape; only the *bundled-asset* fallback tier
-/// flattens each program's phases into one category (the program's own id
-/// is kept as the category id, so an in-progress `PlanProgressRows` row
-/// still resolves against it) — a program day and a workout are already the
-/// identical JSON shape, so `WorkoutModel.fromJson` parses a "day" map
-/// directly with no field remapping.
+/// The Phases program (see `PhasesScreen`/`ProgramsProgress`) treats every
+/// category returned here as one **phase** and every workout inside it as
+/// one **day** — `assets/json/programs.json` is authored in this exact flat
+/// shape (matching the live API's content-authoring format) rather than a
+/// separate nested one, so a phase is just "the next category in the list."
 class WorkoutRepository {
   static List<CategoryModel>? _cached;
   static PilatesRemoteDataSource? _remote;
@@ -136,48 +134,12 @@ class WorkoutRepository {
       );
       final dynamic decoded = jsonDecode(jsonString);
       if (decoded is! List) return [];
-      return _categoriesFromBundledPrograms(decoded);
+      return decoded
+          .whereType<Map<String, dynamic>>()
+          .map(CategoryModel.fromJson)
+          .toList();
     } catch (e) {
       return [];
     }
-  }
-
-  /// `programs.json` still ships `Program → Phase → Day`; flattens each
-  /// program's phases into one category, in order, so an existing
-  /// `PlanProgressRows.currentDayIndex` still points at the same day it
-  /// always did.
-  static List<CategoryModel> _categoriesFromBundledPrograms(
-    List<dynamic> programsJson,
-  ) {
-    final categories = <CategoryModel>[];
-
-    for (final raw in programsJson.whereType<Map<String, dynamic>>()) {
-      final title = raw['title'] as String? ?? '';
-      final subtitle = raw['subtitle'] as String? ?? '';
-      final phases = (raw['phases'] as List<dynamic>?) ?? const [];
-
-      final workouts = <WorkoutModel>[];
-      var description = '';
-      for (final phase in phases.whereType<Map<String, dynamic>>()) {
-        description = description.isEmpty
-            ? (phase['subtitle'] as String? ?? '')
-            : description;
-        final days = (phase['days'] as List<dynamic>?) ?? const [];
-        workouts.addAll(
-          days.whereType<Map<String, dynamic>>().map(WorkoutModel.fromJson),
-        );
-      }
-
-      categories.add(
-        CategoryModel(
-          id: raw['id'] as String? ?? '',
-          title: '$title $subtitle'.trim(),
-          description: description,
-          workouts: workouts,
-        ),
-      );
-    }
-
-    return categories;
   }
 }

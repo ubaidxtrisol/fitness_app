@@ -937,11 +937,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v0.1.1"
-      resolved-ref: "7e8ddf9c75705e8a0ce3d8243472726aa899008b"
+      ref: "v0.3.0"
+      resolved-ref: "09babce078f45637a6fce159b4b456efb4fc199d"
       url: "git@github.com:ubaidxtrisol/shared_ads_sdk.git"
     source: git
-    version: "0.1.1"
+    version: "0.3.0"
   shared_preferences:
     dependency: "direct main"
     description:
