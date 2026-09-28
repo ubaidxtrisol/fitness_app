@@ -83,6 +83,7 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
                 // Hero banner (11:958) — "Day 1" over the program name.
                 WorkoutHeroBanner(
                   contentPadding: const EdgeInsets.only(left: 22, top: 46),
+                  thumbnailUrl: day.thumbnailUrl,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,

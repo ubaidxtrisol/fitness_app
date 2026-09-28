@@ -75,6 +75,7 @@ class _BodyWorkoutDetailScreenState extends State<BodyWorkoutDetailScreen> {
                 // simply not shown rather than faked.
                 WorkoutHeroBanner(
                   contentPadding: const EdgeInsets.only(left: 16, top: 56),
+                  thumbnailUrl: workout.thumbnailUrl,
                   child: SizedBox(
                     width: 133,
                     // 14:342 is 42 tall — exactly two 23.8 lines.

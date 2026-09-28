@@ -10,7 +10,6 @@ import 'package:fitness_app/features/body_focus/views/body_focus_category_screen
 import 'package:fitness_app/features/challenges/models/challenge_program_model.dart';
 import 'package:fitness_app/features/challenges/services/challenge_progress.dart';
 import 'package:fitness_app/features/challenges/services/challenge_repository.dart';
-import 'package:fitness_app/features/challenges/views/challenge_day_screen.dart';
 import 'package:fitness_app/features/challenges/views/challenge_detail_screen.dart';
 import 'package:fitness_app/features/challenges/views/challenges_screen.dart';
 import 'package:fitness_app/features/home/models/home_models.dart';
@@ -379,11 +378,11 @@ class _HomeScreenState extends State<HomeScreen> {
       await context.push(const PhasesScreen());
     } else if (challenge != null && week != null && day != null) {
       await context.push(
-        ChallengeDayScreen(
-          challenge: challenge,
-          week: week,
-          day: day,
-          weekNumber: challenge.weeks.indexOf(week) + 1,
+        PhasesScreen(
+          // challenge: challenge,
+          // week: week,
+          // day: day,
+          // weekNumber: challenge.weeks.indexOf(week) + 1,
         ),
       );
     } else {

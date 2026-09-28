@@ -5,6 +5,7 @@ import 'package:fitness_app/core/database/repositories/exercise_prefs_repository
 import 'package:fitness_app/features/discover/models/category_model.dart';
 import 'package:fitness_app/features/player/models/player_session.dart';
 import 'package:fitness_app/features/player/views/exercise_player_screen.dart';
+import 'package:fitness_app/features/workout/widgets/workout_hero_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -202,12 +203,42 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
         padding: const EdgeInsets.fromLTRB(16, 11, 16, 30),
         physics: const BouncingScrollPhysics(),
         children: [
-          // Banner (16:374) — static artwork, matching the challenge/program
-          // hero banners rather than a live preview.
-          _ExerciseBanner(
-            dayLabel: widget.dayLabel,
-            title: exercise.title,
+          // Hero banner (16:374) — matching the workout/day hero banner layout.
+          WorkoutHeroBanner(
+            contentPadding: const EdgeInsets.only(left: 22, top: 46),
             thumbnailUrl: exercise.thumbnailUrl,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.52,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    widget.dayLabel,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 29.308,
+                      height: 1.1,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  6.513.heightBox,
+                  Text(
+                    exercise.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 17.91,
+                      height: 1.1,
+                      fontWeight: FontWeight.w300,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           22.heightBox,
 
@@ -282,123 +313,6 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
           ),
         ],
       ),
-    );
-  }
-}
-
-/// Static hero artwork — Figma 16:374/375/376/377.
-///
-/// 361x169, r20, `#fbe3e5` — the same banner shell as [ChallengeHeroBanner]
-/// (`assets/images/challenge_banner.png` is byte-identical to this node's
-/// background fill). The exercise's own thumbnail bleeds off the right edge
-/// in place of the bundled model shot, with the day/title copy overlaid on
-/// the left. This is deliberately static — no video plays on this screen,
-/// only inside [ExercisePlayerScreen].
-class _ExerciseBanner extends StatelessWidget {
-  final String dayLabel;
-  final String title;
-  final String thumbnailUrl;
-
-  static const double _designWidth = 361;
-  static const double _height = 169;
-
-  const _ExerciseBanner({
-    required this.dayLabel,
-    required this.title,
-    required this.thumbnailUrl,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // The photo is placed by design coordinates, so scale them if the
-        // banner is not exactly 361 wide.
-        final scale = constraints.maxWidth / _designWidth;
-
-        return Container(
-          height: _height,
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            color: const Color(0xFFFBE3E5),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(color: Color(0x0A000000), blurRadius: 4),
-            ],
-          ),
-          child: Stack(
-            children: [
-              // Decorative artwork (16:375) — 361x180 anchored one pixel
-              // above the top; shared with the challenge/program banners.
-              Positioned(
-                left: 0,
-                top: -1 * scale,
-                width: constraints.maxWidth,
-                height: 180 * scale,
-                child: Image.asset(
-                  'assets/images/challenge_banner.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-
-              // Exercise photo (16:376) — 164x170 at (190, -1), bleeding off
-              // the right edge.
-              if (thumbnailUrl.isNotEmpty)
-                Positioned(
-                  left: 190 * scale,
-                  top: -1 * scale,
-                  width: 164 * scale,
-                  height: 170 * scale,
-                  child: Image.network(
-                    thumbnailUrl,
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const SizedBox.shrink(),
-                  ),
-                ),
-
-              // Day label + title (16:377).
-              Positioned(
-                left: 24 * scale,
-                top: 58 * scale,
-                child: SizedBox(
-                  width: 160 * scale,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        dayLabel,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 29.308,
-                          height: 1.1,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      6.513.heightBox,
-                      Text(
-                        title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 17.91,
-                          height: 1.1,
-                          fontWeight: FontWeight.w300,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
